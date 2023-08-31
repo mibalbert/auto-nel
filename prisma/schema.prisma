@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id                  String                @id @default(cuid())
+  firstName           String?
+  lastName            String?
+  name                String?
+  email               String?               @unique
+  emailVerified       DateTime?
+  password            String?               @db.Text
+  image               String?
+  role                ROLE
+  accounts            Account[]
+  sessions            Session[]
+  cars                Car[] // Use "cars" instead of "Car"
+  interventionService InterventionService[]
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @db.VarChar(512)
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  token   String   @unique
+  expires DateTime
+}
+
+model Car {
+  id                  Int                   @id @default(autoincrement())
+  make                String
+  model               String
+  year                Int
+  ownerId             String // Change ownerId type to match User's id type
+  owner               User                  @relation(fields: [ownerId], references: [id])
+  specs               Json
+  picture             String
+  interventionService InterventionService[] // Use "interventionService" instead of "interventionServiceId"
+  carOperations       CarOperations?
+
+  @@index([ownerId])
+}
+
+model InterventionService {
+  id     Int    @id @default(autoincrement())
+  userId String // Change userId type to match User's id type
+  user   User   @relation(fields: [userId], references: [id])
+
+  carId           Int
+  car             Car           @relation(fields: [carId], references: [id])
+  carOperationsId Int
+  carOperations   CarOperations @relation(fields: [carOperationsId], references: [id])
+  timestamp       DateTime      @default(now())
+
+  @@index([userId])
+  @@index([carOperationsId])
+  @@index([carId])
+}
+
+model CarOperations {
+  id                  Int                   @id @default(autoincrement())
+  name                String
+  category            String
+  time                Int // Time in minutes
+  price               Float
+  carId               Int                   @unique
+  car                 Car                   @relation(fields: [carId], references: [id])
+  interventionService InterventionService[] // Use "interventionService" instead of "interventinService"
+}
