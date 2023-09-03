@@ -5,17 +5,15 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 
-import { authOptions } from './api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth'
 import { getServerSession } from "next-auth/next"
-
 
 import Providers from '@/components/provider'
 import Preline from '@/components/preline'
 import { ThemeProvider } from '@/components/theme-provider'
-import { MainNav } from '@/components/main-nav'
-import TeamSwitcher from '@/components/team-switcher'
-import { Search } from '@/components/search'
-import { UserNav } from '@/components/user-nav'
+
+import MainNav from '@/components/created/navigation/main-nav'
+import { navigationConfig } from '@/config/navigation'
 
 
 
@@ -35,21 +33,11 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers session={session}>
-          <>
-            <div className="border-b">
-              <div className="flex items-center h-16 px-4">
-                <TeamSwitcher />
-                <MainNav className="mx-6" />
-                <div className="flex items-center ml-auto space-x-4">
-                  <Search />
-                  <UserNav />
-                </div>
-              </div>
-            </div>
-          </>
           <Preline />
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>  
+            <main className="flex w-full flex-1 flex-col overflow-hidden bg-background" >
+              {children}
+            </main>
           </ThemeProvider>
         </Providers>
       </body>

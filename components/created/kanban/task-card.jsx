@@ -2,115 +2,119 @@
  * task-card.jsx
  */
 
-"use client"
+import React from "react";
+import { Draggable } from "react-beautiful-dnd";
+import Image from "next/image";
+import { FaExpandArrowsAlt } from "react-icons/fa";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-import { useState } from "react";
-import {Icons} from "@/components/ui/icons";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-
-function TaskCard({ task, deleteTask, updateTask }) {
-  const [mouseIsOver, setMouseIsOver] = useState(false);
-  const [editMode, setEditMode] = useState(true);
-
-  const {
-    setNodeRef,
-    attributes,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: task.id,
-    data: {
-      type: "Task",
-      task,
-    },
-    disabled: editMode,
-  });
-
-  const style = {
-    transition,
-    transform: CSS.Transform.toString(transform),
-  };
-
-  const toggleEditMode = () => {
-    setEditMode((prev) => !prev);
-    setMouseIsOver(false);
-  };
-
-  if (isDragging) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        className="
-        opacity-30
-      bg-mainBackgroundColor p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl border-2 border-rose-500  cursor-grab relative
-      "
-      />
-    );
-  }
-
-  if (editMode) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        {...attributes}
-        {...listeners}
-        className="bg-mainBackgroundColor p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 hover:ring-inset hover:ring-rose-500 cursor-grab relative"
-      >
-        <textarea
-          className="
-        h-[90%]
-        w-full resize-none border-none rounded bg-transparent text-white focus:outline-none
-        "
-          value={task.content}
-          autoFocus
-          placeholder="Task content here"
-          onBlur={toggleEditMode}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && e.shiftKey) {
-              toggleEditMode();
-            }
-          }}
-          onChange={(e) => updateTask(task.id, e.target.value)}
-        />
-      </div>
-    );
-  }
-
+function TaskCard({ data, index }) {
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      onClick={toggleEditMode}
-      className="bg-mainBackgroundColor p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 hover:ring-inset hover:ring-rose-500 cursor-grab relative task"
-      onMouseEnter={() => {
-        setMouseIsOver(true);
-      }}
-      onMouseLeave={() => {
-        setMouseIsOver(false);
-      }}
-    >
-      <p className="my-auto h-[90%] w-full overflow-y-auto overflow-x-hidden whitespace-pre-wrap">
-        {task.content}
-      </p>
-
-      {mouseIsOver && (
-        <button
-          onClick={() => {
-            deleteTask(task.id);
-          }}
-          className="absolute p-2 -translate-y-1/2 rounded stroke-white right-4 top-1/2 bg-columnBackgroundColor opacity-60 hover:opacity-100"
+    <Draggable index={index} draggableId={data.id.toString()}>
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          className="p-3 m-3 mt-0 bg-white dark:bg-card-darker  rounded-md last:mb-0 border border-neutral-300 dark:border-border  shadow-lg"
         >
-          <Icons.trashIcon className="w-6 h-6" />
-        </button>
+          <Dialog>
+            <DialogTrigger className="">
+              <div>
+              <label
+                className={`
+                  px-2 py-1 rounded text-white text-sm
+                  ${
+                    data.priority === 0
+                      ? "bg-blue-400"
+                      : data.priority === 1
+                      ? "bg-green-500"
+                      : "bg-red-400"
+                  }
+                `}
+              >
+                {data.priority === 0
+                  ? "Low"
+                  : data.priority === 1
+                  ? "Medium"
+                  : "High"}
+              </label>
+              <h5 className=" my-3 text-lg leading-6 text-md">{data.title}</h5>
+              <div className="flex flex-col justify-start">
+                <ul>
+                  {data?.operations?.map((el, id) => (
+                    <li key={id}>{id + 1} - {el}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex justify-between pt-5">
+                <div className="flex items-center space-x-2">
+                  <span className="flex items-center space-x-1">
+                    {/* <ChatAlt2Icon className="w-4 h-4 text-gray-500" /> */}
+                    <span>{data.chat}</span>
+                  </span>
+                  <span className="flex items-center space-x-1">
+                    {/* <PaperClipIcon className="w-4 h-4 text-gray-500" /> */}
+                    <span>{data.attachment}</span>
+                  </span>
+                </div>
+                <ul className="flex space-x-3 ">
+                  {data.assignees.map((ass, index) => (
+                    <li key={index}>
+                      <Image
+                        // src={ass.avt}
+                        src={
+                          "https://randomuser.me/api/portraits/men/67.jpg"
+                        }
+                        alt="yes"
+                        width="36"
+                        height="36"
+                        objectFit="cover"
+                        className="rounded-full "
+                      />
+                    </li>
+                  ))}
+                  <li>
+                    {/* <button className="flex items-center justify-center border border-gray-500 border-dashed rounded-full w-9 h-9"> */}
+                    <button className="flex items-center justify-center  w-9 h-9 hover:cursor-grab">
+                      <FaExpandArrowsAlt />
+                      {/* <Icons.plusSign className="w-5 h-5 text-gray-500" /> */}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              </div>  
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{data.title}</DialogTitle>
+                <DialogDescription>
+                  {/* Display more in-depth description here */}
+                  <ul>
+                  {data.operations.map((el,id)=>{
+                    return <li key={id}>{el}</li>
+                  })}
+                  </ul>
+                </DialogDescription>
+              </DialogHeader>
+              {/* Additional details about the task */}
+              <div>
+                <p>Priority: {data.priority}</p>
+                <p>Assignees: {data.assignees.join(", ")}</p>
+                {/* Add more task details as needed */}
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
       )}
-    </div>
+    </Draggable>
   );
 }
 

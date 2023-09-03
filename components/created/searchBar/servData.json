@@ -1,0 +1,247 @@
+[
+  {
+    "id": 1,
+    "href": "search?name=revizie",
+    "title": "Servicii complete de revizie",
+    "description": "Optimizăm performanța autovehiculului dumneavoastră printr-o revizie amănunțită.",
+    "alt": "Servicii complete de revizie",
+    "link": "/service/revizie"
+  },
+  {
+    "id": 2,
+    "href": "search?name=inlocuire-ulei-si-filtre",
+    "title": "Înlocuire ulei și filtre",
+    "description": "Menținem motorul în cea mai bună formă prin schimbarea uleiului și a filtrelor.",
+    "alt": "Înlocuire ulei și filtre",
+    "link": "/service/inlocuire-ulei-si-filtre"
+  },
+  {
+    "id": 3,
+    "href": "search?name=sistem-de-franare",
+    "title": "Service sistem de frânare",
+    "description": "Asigurăm siguranța pe drum prin verificarea și reparația sistemului de frânare.",
+    "alt": "Service sistem de frânare",
+    "link": "/service/sistem-de-franare"
+  },
+  {
+    "id": 4,
+    "href": "search?name=reparatii-electrice",
+    "title": "Reparații electrice",
+    "description": "Remediam eficient problemele electrice ale autovehiculului dumneavoastră.",
+    "alt": "Reparații electrice",
+    "link": "/service/reparatii-electrice"
+  },
+  {
+    "id": 5,
+    "href": "search?name=inlocuire-baterie",
+    "title": "Înlocuire baterie",
+    "description": "Asigurăm pornirea fără probleme a mașinii dvs. prin înlocuirea bateriei.",
+    "alt": "Înlocuire baterie",
+    "link": "/service/inlocuire-baterie"
+  },
+  {
+    "id": 6,
+    "href": "search?name=sistem-de-suspensie",
+    "title": "Service sistem de suspensie",
+    "description": "Vă oferim confort și stabilitate în timpul condusului prin verificarea și repararea sistemului de suspensie.",
+    "alt": "Service sistem de suspensie",
+    "link": "/service/sistem-de-suspensie"
+  },
+  {
+    "id": 7,
+    "href": "search?name=aer-conditionat",
+    "title": "Încărcare și service sistem de aer condiționat",
+    "description": "Climatizare eficientă în mașină prin reîncărcarea și service-ul aerului condiționat.",
+    "alt": "Încărcare și service sistem de aer condiționat",
+    "link": "/service/aer-conditionat"
+  },
+  {
+    "id": 8,
+    "href": "search?name=sistem-evacuare",
+    "title": "Reparații sistem evacuare",
+    "description": "Reducem emisiile poluante și asigurăm funcționarea corectă a sistemului de evacuare.",
+    "alt": "Reparații sistem evacuare",
+    "link": "/service/sistem-evacuare"
+  },
+  {
+    "id": 9,
+    "href": "search?name=geometrie-echilibrare-roti",
+    "title": "Geometrie și echilibrare roți",
+    "description": " Prevenim uzura neuniformă și vibrațiile în timpul rulării prin reglarea geometriei și echilibrarea roților.",
+    "alt": "ajksda",
+    "link": "/service/geometrie-echilibrare-roti"
+  },
+  {
+    "id": 10,
+    "href": "search?name=curele-distributie",
+    "title": "Înlocuire curele distribuție",
+    "description": "Evităm avarii majore ale motorului prin înlocuirea curelelor de distribuție.",
+    "alt": "Înlocuire curele distribuție",
+    "link": "/service/curele-distributie"
+  },
+  {
+    "id": 11,
+    "href": "search?name=montare--anvelope",
+    "title": "Montare anvelope",
+    "description": "Evităm avarii majore ale motorului prin înlocuirea curelelor de distribuție.",
+    "alt": "ajksda",
+    "link": "/service/montare-anvelope"
+  },
+  {
+    "id": 12,
+    "href": "search?name=sisteme-iluminare",
+    "title": "Reparații și înlocuiri sisteme iluminare",
+    "description": "Vizibilitate maximă în timpul condusului prin reparații și înlocuiri ale sistemelor de iluminare.",
+    "alt": "ajksda",
+    "link": "/service/sisteme-iluminare"
+  },
+  {
+    "id": 13,
+    "href": "search?name=inlocuire-placute-frana",
+    "title": "Înlocuire placute frana",
+    "description":
+      "Efectuăm înlocuirea plăcuțelor de frână pentru a asigura o oprire sigură și eficientă a autovehiculului.",
+    "alt": "ajksda",
+    "link": "/service/inlocuire-placute-frana"
+  },
+  {
+    "id": 14,
+    "href": "search?name=inlocuire-discuri-frana",
+    "title": "Înlocuire discuri de frana",
+    "description":
+      "Oferim servicii de înlocuire a discelor de frână pentru a menține performanța sistemului de frânare.",
+    "alt": "ajksda",
+    "link": "/service/inlocuire-discuri-frana"
+  },
+  {
+    "id": 15,
+    "href": "search?name=reconditionare-cutie-viteze",
+    "title": "Recondiționare cutie de viteze",
+    "description":
+      "Efectuăm recondiționarea cutiei de viteze pentru a rezolva problemele de schimbare a treptelor de viteză.",
+    "alt": "ajksda",
+    "link": "/service/reconditionare-cutie-viteze"
+  },
+  {
+    "id": 16,
+    "href": "search?name=inlocuire-ambreiaj",
+    "title": "Înlocuire ambreiaj",
+    "description":
+      "Oferim servicii de înlocuire a sistemului de ambreiaj pentru a asigura o transmitere corectă a puterii la roți.",
+    "alt": "ajksda",
+    "link": "/service/inlocuire-ambreiaj"
+  },
+  {
+    "id": 17,
+    "href": "search?name=reparatii-sistem-injectie",
+    "title": "Reparații sistem de injectie",
+    "description":
+      "Efectuăm diagnosticarea și reparația sistemului de injecție pentru o funcționare optimă a motorului.",
+    "alt": "ajksda",
+    "link": "/service/reparatii-sistem-injectie"
+  },
+  {
+    "id": 18,
+    "href": "search?name=inlocuire-amortizoare",
+    "title": "Înlocuire amortizoare",
+    "description": "Oferim servicii de înlocuire a amortizoarelor pentru a asigura confortul și stabilitatea autovehiculului.",
+    "alt": "ajksda",
+    "link": "/service/inlocuire-amortizoare"
+  },
+  {
+    "id": 19,
+    "href": "search?name=service-sistem-aprindere",
+    "title": "Service sistem de aprindere",
+    "description": "Verificăm și reparam sistemul de aprindere pentru a asigura o pornire rapidă și eficientă a motorului.",
+    "alt": "ajksda",
+    "link": "/service/service-sistem-aprindere"
+  },
+  {
+    "id": 20,
+    "href": "search?name=inlocuire-curele-accesorii",
+    "title": "Înlocuire curele accesorii",
+    "description": "Oferim servicii de înlocuire a curelelor accesorii pentru a preveni ruperea și defectarea acestora.",
+    "alt": "ajksda",
+    "link": "/service/inlocuire-curele-accesorii"
+  },
+  {
+    "id": 21,
+    "href": "search?name=reconditionare-radiator",
+    "title": "Recondiționare radiator",
+    "description": "Efectuăm recondiționarea radiatoarelor pentru a asigura o răcire eficientă a motorului.",
+    "alt": "ajksda",
+    "link": "/service/reconditionare-radiator"
+  },
+  {
+    "id": 22,
+    "href": "search?name=reparatii-sistem-directie-asistata",
+    "title": "Reparații sistem de direcție asistată",
+    "description": "Efectuăm reparații și service pentru sistemul de direcție asistată pentru o manevrabilitate ușoară și precisă.",
+    "alt": "ajksda",
+    "link": "/service/reparatii-sistem-directie-asistata"
+  },
+  {
+    "id": 23,
+    "href": "search?name=inlocuire-pompa-apa",
+    "title": "Înlocuire pompa de apă",
+    "description": "Oferim servicii de înlocuire a pompei de apă pentru a menține temperatura optimă de funcționare a motorului.",
+    "alt": "ajksda",
+    "link": "/service/inlocuire-pompa-de-apa"
+  },
+  {
+    "id": 24,
+    "href": "search?name=reparatii-sistem-suspensie-pneumatica",
+    "title": "Reparații sistem de suspensie pneumatică",
+    "description": "Efectuăm reparații și service pentru sistemele de suspensie pneumatică pentru o conducere confortabilă și sigură.",
+    "alt": "ajksda",
+    "link": "/service/reparatii-sistem-suspensie-pneumatica"
+  },
+  {
+    "id": 25,
+    "href": "search?name=montare-demontare-caroserie",
+    "title": "Montare și demontare caroserie",
+    "description": "Oferim servicii profesionale de montare și demontare a elementelor de caroserie pentru repararea sau înlocuirea acestora.",
+    "alt": "ajksda",
+    "link": "/service/montare-demontare-caroserie"
+  },
+  {
+    "id": 26,
+    "href": "search?name=reparatii-sisteme-siguranta",
+    "title": "Reparații sisteme de siguranță",
+    "description": "Efectuăm reparații și înlocuiri ale sistemelor de siguranță, cum ar fi airbagurile și centurile de siguranță.",
+    "alt": "ajksda",
+    "link": "/service/reparatii-sisteme-siguranta"
+  },
+  {
+    "id": 27,
+    "href": "search?name=service-sistem-navigație",
+    "title": "Service sistem de navigație",
+    "description": "Oferim service și actualizări pentru sistemele de navigație și multimedia ale autovehiculului.",
+    "alt": "ajksda",
+    "link": "/service/service-sistem-navigatie"
+  },
+  {
+    "id": 28,
+    "href": "search?name=montare-demontare-sistem-remorcare",
+    "title": "Montare și demontare sistem de remorcare",
+    "description": "Oferim servicii de montare și demontare a sistemelor de remorcare pentru autovehicule.",
+    "alt": "ajksda",
+    "link": "/service/montare-demontare-sistem-remorcare"
+  },
+  {
+    "id": 29,
+    "href": "search?name=service-sistem-asistenta-parcare",
+    "title": "Service sistem de asistență la parcare",
+    "description": "Verificăm și reparam sistemul de asistență la parcare pentru a asigura o parcare ușoară și sigură.",
+    "alt": "ajksda",
+    "link": "/service/service-sistem-asistenta-parcare"
+  },
+  {
+    "id": 30,
+    "href": "search?name=diagnosticare-computerizata",
+    "title": "Diagnosticare computerizată",
+    "description": " Identificăm rapid și precis problemele autovehiculului dumneavoastră cu ajutorul tehnologiei avansate.",
+    "alt": "Diagnosticare computerizată",
+    "link": "/service/diagnosticare-computerizata"
+  }
+]

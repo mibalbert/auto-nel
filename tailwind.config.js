@@ -6,7 +6,7 @@ module.exports = {
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
-	],
+  ],
   theme: {
     container: {
       center: true,
@@ -48,6 +48,7 @@ module.exports = {
         },
         card: {
           DEFAULT: "hsl(var(--card))",
+          darker: "hsl(var(--card-darker))",
           foreground: "hsl(var(--card-foreground))",
         },
       },

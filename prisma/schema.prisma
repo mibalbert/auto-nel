@@ -9,19 +9,33 @@ datasource db {
 }
 
 model User {
-  id                  String                @id @default(cuid())
-  firstName           String?
-  lastName            String?
-  name                String?
-  email               String?               @unique
-  emailVerified       DateTime?
-  password            String?               @db.Text
-  image               String?
-  role                ROLE
-  accounts            Account[]
-  sessions            Session[]
-  cars                Car[] // Use "cars" instead of "Car"
-  interventionService InterventionService[]
+  id                   String                @id @default(cuid())
+  firstName            String?
+  lastName             String?
+  name                 String?
+  email                String?               @unique
+  emailVerified        DateTime?
+  password             String?               @db.Text
+  image                String?
+  role                 ROLE
+  accounts             Account[]
+  sessions             Session[]
+  cars                 Car[]
+  interventionServices InterventionService[] // Updated field name to interventionServices
+  Task                 Task[]
+
+  @@index([email])
+}
+
+model Task {
+  id                   Int                   @id @default(autoincrement())
+  userId               String // Change userId type to match User's id type
+  user                 User                  @relation(fields: [userId], references: [id])
+  title                String
+  description          String?
+  interventionServices InterventionService[] // Updated field name to interventionServices
+
+  @@index([userId])
 }
 
 enum ROLE {
@@ -45,7 +59,7 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+  @@unique([userId, provider, providerAccountId])
   @@index([userId])
 }
 
@@ -65,23 +79,23 @@ model VerificationToken {
 }
 
 model Car {
-  id                  Int                   @id @default(autoincrement())
-  make                String
-  model               String
-  year                Int
-  ownerId             String // Change ownerId type to match User's id type
-  owner               User                  @relation(fields: [ownerId], references: [id])
-  specs               Json
-  picture             String
-  interventionService InterventionService[] // Use "interventionService" instead of "interventionServiceId"
-  carOperations       CarOperations?
+  id                   Int                   @id @default(autoincrement())
+  make                 String
+  model                String
+  year                 Int
+  ownerId              String
+  owner                User                  @relation(fields: [ownerId], references: [id])
+  specs                Json
+  picture              String
+  interventionServices InterventionService[]
+  carOperations        CarOperations?
 
   @@index([ownerId])
 }
 
 model InterventionService {
   id     Int    @id @default(autoincrement())
-  userId String // Change userId type to match User's id type
+  userId String
   user   User   @relation(fields: [userId], references: [id])
 
   carId           Int
@@ -89,6 +103,7 @@ model InterventionService {
   carOperationsId Int
   carOperations   CarOperations @relation(fields: [carOperationsId], references: [id])
   timestamp       DateTime      @default(now())
+  tasks           Task[] // Many-to-many relationship with Task model
 
   @@index([userId])
   @@index([carOperationsId])
@@ -96,12 +111,12 @@ model InterventionService {
 }
 
 model CarOperations {
-  id                  Int                   @id @default(autoincrement())
-  name                String
-  category            String
-  time                Int // Time in minutes
-  price               Float
-  carId               Int                   @unique
-  car                 Car                   @relation(fields: [carId], references: [id])
-  interventionService InterventionService[] // Use "interventionService" instead of "interventinService"
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  category             String
+  time                 Int
+  price                Float
+  carId                Int                   @unique
+  car                  Car                   @relation(fields: [carId], references: [id])
+  interventionServices InterventionService[] // Updated field name to interventionServices
 }

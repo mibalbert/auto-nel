@@ -16,7 +16,7 @@
 
 import { NextResponse } from 'next/server'
 import prisma from "@/lib/prisma"
-import { generateHash, resMessage } from "../helpers/helpers"
+import { generateHash, resMessage } from "@/lib/helpers/helpers"
 
 
 export async function POST(request) {

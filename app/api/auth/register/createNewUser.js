@@ -4,7 +4,7 @@
 
 
 import prisma from "@/lib/prisma"
-import { generateAccessToken, generateExpirationTimestamp, generateHash, generateJWT, generateRandToken, generateRandomBigIntAsString, resMessage, signJwtAccessToken } from "../helpers/helpers"
+import { generateAccessToken, generateExpirationTimestamp, generateHash, generateJWT, generateRandToken, generateRandomBigIntAsString, resMessage, signJwtAccessToken } from "@/lib/helpers/helpers"
 
 const createNewUser = async (credentials) => {
 
