@@ -3,15 +3,14 @@
  */
 
 import Hero from "@/components/created/hero/Hero";
-import MainNav from "@/components/created/navigation/main-nav";
+// import NavBar from "@/components/created/navigation/nav-bar";
+// import { navigationConfig } from "@/config/navigation";
 
-import { navigationConfig } from "@/config/navigation";
-export default  function DashboardPage() {
+export default async function DashboardPage() {
   return (
     <>
-    <MainNav items={navigationConfig.guestNav} />
-    <Hero />
-   
-   </>
-  )
+      {/* <NavBar navigationConfig={navigationConfig.guestTopNav} /> */}
+      <Hero />
+    </>
+  );
 }

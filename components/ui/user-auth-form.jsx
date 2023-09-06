@@ -1,62 +1,62 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/ui/icons"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Icons } from "@/components/ui/icons";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Mail } from "lucide-react";
 
 export function UserAuthForm({ className, ...props }) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(event) {
-    event.preventDefault()
-    setIsLoading(true)
+    event.preventDefault();
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+      setIsLoading(false);
+    }, 3000);
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn("grid gap-6 pt-6", className)} {...props}>
       <form onSubmit={onSubmit}>
-        <div className="grid gap-5">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
+        <div className="grid gap-5 ">
+          <div className="grid gap-3 ">
+            <Label className="" htmlFor="email">
               Email
             </Label>
             <Input
               id="email"
-              placeholder="name@example.com"
               type="email"
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
+              className="border border-gray-500"
             />
           </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
+          <div className="grid gap-3">
+            <Label className="" htmlFor="password">
               Password
             </Label>
             <Input
               id="password"
-              placeholder="name@example.com"
               type="password"
               autoCapitalize="none"
               autoComplete="off"
               autoCorrect="off"
               disabled={isLoading}
+              className="border border-gray-500"
             />
           </div>
-          <Button disabled={isLoading}>
+          <Button disabled={isLoading} className="mt-6">
             {isLoading && (
               <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
             )}
-            Sign In with Email
+            <Mail className="w-4 h-4 mr-3" /> Sign In with Email
           </Button>
         </div>
       </form>
@@ -79,5 +79,5 @@ export function UserAuthForm({ className, ...props }) {
         Sign In with Google
       </Button>
     </div>
-  )
+  );
 }

@@ -76,15 +76,44 @@ export const navigationConfig = {
 
     {
       title: "Overview",
-      href: "/admin/home",
+      href: "/admin/home"
     },
     {
-      title: "Kanban",
-      href: "/admin/current-workload",
+      title: "Clients",
+
+      data: [{
+        title: "View All Clients",
+        href: "/admin/view-all-clients",
+      },
+      {
+        title: "Create new Guest User",
+        href: "/admin/create-new-guest-user"
+      }
+      ],
     },
     {
-      title: "Users",
-      href: "/docs",
+      title: "Workload",
+      data: [{
+        title: "View All Jobs",
+        href: "/admin/jobs",
+      },
+      {
+        title: "Current Tasks",
+        href: "/admin/current-tasks"
+      },
+      {
+        title: "Expected Parts",
+        href: "/admin/expected-parts"
+      },
+      {
+        title: "Unpaid Parts",
+        href: "/admin/unpaid-parts"
+      },
+      {
+        title: "Insurance Co.",
+        href: "/admin/insurance-companies"
+      }
+      ],
     },
     {
       title: "Register",

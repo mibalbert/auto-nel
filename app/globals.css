@@ -86,7 +86,7 @@
 html {
   --brand-primary: rgb(138, 180, 248);
   --brand-secondary: rgb(193, 168, 226);
-  --brand-alternative: rgb(136, 186, 191);
+  --brand-alternative: rgb(63, 63, 63);
   --background-site: rgb(255, 255, 255);
   --background-code: rgb(255, 255, 255);
   --text-body: rgb(222, 222, 222);
@@ -120,7 +120,8 @@ html {
 .embla {
   --slide-spacing: 1rem;
   --slide-size: 30%;
-  --slide-height: 19rem;
+  /* --slide-height: 19rem; */
+  --slide-height: auto;
   padding: 1.6rem;
 }
 .embla__viewport {
@@ -131,6 +132,9 @@ html {
   display: flex;
   touch-action: pan-y;
   margin-left: calc(var(--slide-spacing) * -1);
+  min-height: 100%;
+  position: relative;
+  height: var(--slide-height);
 }
 .embla__slide {
   background-color: var(--brand-alternative);
@@ -139,6 +143,8 @@ html {
   padding-left: var(--slide-spacing);
   margin-right: 20px;
   position: relative;
+  /* min-height: 400px; */
+  height: var(--slide-height);
 
 }
 .embla__slide__img {
@@ -147,7 +153,7 @@ html {
   width: 100%;
   object-fit: cover;
 }
-.embla__slide__number {
+/* .embla__slide__number {
   width: 4.6rem;
   height: 4.6rem;
   z-index: 1;
@@ -178,7 +184,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-}
+} */
 .embla__progress {
   z-index: 1;
   background-color: var(--background-site);
@@ -187,7 +193,7 @@ html {
   border-radius: 0.2rem;
   left: 0;
   right: 0;
-  bottom: 2.6rem;
+  bottom: -1.6rem;
   margin-left: auto;
   margin-right: auto;
   pointer-events: none;
@@ -206,4 +212,18 @@ html {
   top: 0;
   bottom: 0;
   left: -100%;
+}
+
+
+
+@media (min-width: 400px) {
+  .embla__slide {
+    flex: 0 0 80%; /* 80% width when screen width is >= 400px */
+  }
+}
+
+@media (min-width: 700px) {
+  .embla__slide {
+    flex: 0 0 60%; /* 60% width when screen width is >= 700px */
+  }
 }

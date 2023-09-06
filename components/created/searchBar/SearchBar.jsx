@@ -2,14 +2,13 @@
  * SearchBar.js
  */
 
-
-"use client"
-
+"use client";
 
 import { useEffect, useState } from "react";
-import Link from 'next/link'
+import Link from "next/link";
 
-import servData from '@/components/created/searchBar/servData.json'
+import servData from "@/lib/servData.json";
+import { Input } from "@/components/ui/input";
 
 export default function Autocomplete() {
   const [value, setValue] = useState("");
@@ -35,7 +34,6 @@ export default function Autocomplete() {
   const selectOption = (selectedOption) => {
     setValue(selectedOption);
     setShowDropdown(false);
-    
   };
 
   const hideDropdown = () => {
@@ -47,19 +45,19 @@ export default function Autocomplete() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full z-5">
       <div
-        className="relative w-96"
+        className="relative w-full z-50"
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <input
+        <Input
           id="autocompleteInput"
-          placeholder="Select country name"
-          // className="w-full px-5 py-3 border border-gray-300 rounded-md"
-          className="block w-full p-3 bg-gray-800 border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
-          value={value }
+          placeholder="Search for a service..."
+          className="w-full  p-7 border text-xl border-zinc-400 rounded-xl"
+          // className="block w-full p-3 bg-gray-800 border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
+          value={value}
           onChange={onKeyUp}
         />
         {showDropdown && (
@@ -72,15 +70,12 @@ export default function Autocomplete() {
               // >
               //   {data.title}
               // </div>
-              <Link 
-              key={data.id}
-              href={data.href}
-              className="col-span-1 px-5 py-3 transition-colors border-b border-gray-200 cursor-pointer text-stone-600 hover:bg-slate-100"
-           
-           >
-                <span>
-                  {data.title}
-                </span>
+              <Link
+                key={data.id}
+                href={data.href}
+                className="col-span-1 px-5 py-3 transition-colors border-b border-gray-200 cursor-pointer text-stone-600 hover:bg-slate-100"
+              >
+                <span>{data.title}</span>
                 <span>
                   {data.description}
                   {/* {data.description.length > 20
@@ -95,8 +90,6 @@ export default function Autocomplete() {
     </div>
   );
 }
-
-
 
 // /**
 //  * SearchBar.js
@@ -132,7 +125,7 @@ export default function Autocomplete() {
 //           <button onClick={() => onSearch(value)}> Search </button>
 //         </div>
 //         <div className="dropdown">
-          
+
 //         </div>
 //         <div class="hs-dropdown relative inline-flex" data-hs-dropdown-auto-close="inside">
 //           <button id="hs-dropdown-item-checkbox" type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
@@ -143,7 +136,7 @@ export default function Autocomplete() {
 //           </button>
 
 //           <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700" aria-labelledby="hs-dropdown-item-checkbox">
-              
+
 //                 {/* <span class="block text-start text-sm font-semibold text-gray-800 dark:text-gray-300">Delete</span>
 //                 <span id="hs-dropdown-item-checkbox-delete-description" class="block text-sm text-gray-600 dark:text-gray-500">Notify me when this action happens.</span> */}
 //                 {data
@@ -162,16 +155,16 @@ export default function Autocomplete() {
 //               <div
 //               key={item.title}
 //                class="relative flex items-start py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-            
+
 //                 <Link
 //                 href={item.href}
 //                 onClick={() => onSearch(item.title)}
 //                 className="dropdown-row"
 //               for="hs-dropdown-item-checkbox-delete" class="ml-3.5">
-              
+
 //                 <span class="block text-start text-sm font-semibold text-gray-800 dark:text-gray-300">{item.title}</span>
 //                 <span id="hs-dropdown-item-checkbox-delete-description" class="block text-sm text-gray-600 dark:text-gray-500">{item.description}</span>
-          
+
 //               </Link>
 //             </div>
 //             ))}
@@ -181,9 +174,6 @@ export default function Autocomplete() {
 //     </div>
 //   );
 // }
-
-
-
 
 // /**
 //  * SearchBar.js
@@ -213,7 +203,6 @@ export default function Autocomplete() {
 //     }
 //   };
 
-
 //   return (
 //     <div className="flex flex-col items-center justify-center py-2">
 //       <div className="w-full max-w-2xl">
@@ -242,33 +231,6 @@ export default function Autocomplete() {
 
 // export default SearchBar
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // // /**
 // //  * SearchBar.js
 // //  */
@@ -289,8 +251,7 @@ export default function Autocomplete() {
 // //         </div>
 // //       </div>
 // //     </form>
-    
-    
+
 // //     )
 // // }
 

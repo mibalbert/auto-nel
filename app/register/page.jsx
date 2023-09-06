@@ -2,18 +2,18 @@
  * register.jsx
  */
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { UserAuthForm } from "@/components/ui/user-auth-form"
-import { Icons } from "@/components/ui/icons"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { UserAuthForm } from "@/components/ui/user-auth-form";
+import { Icons } from "@/components/ui/icons";
 
 export const metadata = {
   title: "Authentication",
   description: "Authentication forms built using the components.",
-}
+};
 
 export default function AuthenticationPage() {
   return (
@@ -36,16 +36,16 @@ export default function AuthenticationPage() {
       </div>
       <div className="container relative flex-col items-center justify-center hidden h-screen md:grid lg:max-w-none lg:grid-cols-4 lg:px-0">
         <div className="col-span-3 lg:p-8">
-        <Link
-          href="/"
-          className={cn(
-            buttonVariants({ variant: "link" }),
-            "absolute z-10 left-4 top-4 md:left-8 md:top-8 text-xl "
-          )}
-        >
-         <Icons.backArrow className="w-6 h-6"/> Auto-Nel
-        </Link>
-          <div className=" mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <Link
+            href="/"
+            className={cn(
+              buttonVariants({ variant: "link" }),
+              "absolute z-10 left-4 top-4 md:left-8 md:top-8 text-xl "
+            )}
+          >
+            <Icons.backArrow className="w-6 h-6" /> Auto-Nel
+          </Link>
+          <div className=" mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
@@ -89,5 +89,5 @@ export default function AuthenticationPage() {
         </div>
       </div>
     </>
-  )
+  );
 }

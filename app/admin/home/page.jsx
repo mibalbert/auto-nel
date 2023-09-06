@@ -1,38 +1,30 @@
+import Image from "next/image";
 
-
-import Image from "next/image"
-
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { CalendarDateRangePicker } from "@/components/date-range-picker"
-import { MainNav } from "@/components/created/navigation/links-nav"
-import { Overview } from "@/components/overview"
-import { RecentSales } from "@/components/recent-sales"
-import { Search } from "@/components/search"
-import TeamSwitcher from "@/components/team-switcher"
-import { UserNav } from "@/components/created/navigation/user-account-nav"
-
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CalendarDateRangePicker } from "@/components/date-range-picker";
+import { MainNav } from "@/components/created/navigation/links-nav";
+import { Overview } from "@/components/overview";
+import { RecentSales } from "@/components/recent-sales";
+import { Search } from "@/components/search";
+import TeamSwitcher from "@/components/team-switcher";
+import { UserNav } from "@/components/created/navigation/user-account-nav";
 
 export const metadata = {
   title: "Dashboard",
   description: "Example dashboard app built using the components.",
-}
+};
 
 const Dashboard = () => {
   return (
-    <section >
+    <section>
       {/* <Image  />     */}
       <div className="md:hidden">
         {/* <Image
@@ -50,7 +42,7 @@ const Dashboard = () => {
           className="hidden dark:block"
         /> */}
       </div>
-      <div className="flex-col hidden xl:pl-[5%] max-w-[1500px]  min-h-[800px] md:flex z-10">
+      <div className="flex-col hidden xl:pl-[5%] max-w-[95%]  min-h-[800px] md:flex z-10">
         {/* <div className="border-b">
           <div className="flex items-center h-16 px-4">
             <TeamSwitcher />
@@ -212,8 +204,8 @@ const Dashboard = () => {
           </Tabs>
         </div>
       </div>
-  </section>
-)
-}
+    </section>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
