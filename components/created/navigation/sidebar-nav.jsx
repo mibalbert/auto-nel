@@ -14,11 +14,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { getNavigationConfig } from "@/config/navigation";
 
-export function SidebarNav({ items }) {
+export function SidebarNav({ session }) {
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(true);
+
+  const { sideNav } = getNavigationConfig("ADMIN");
 
   const BigButton = ({ item }) => {
     return item.title && item.data ? (
@@ -49,11 +52,11 @@ export function SidebarNav({ items }) {
     );
   };
 
-  return items.length ? (
-    <section className="w-full h-full border-r bg-card/40">
+  return (
+    <section className="w-full h-fullbg-card/40 ">
       <div className="flex w-full px-6 py-6">
         <div className="grid w-full grid-flow-row gap-2 text-sm auto-rows-max">
-          {items.map((item, index) => (
+          {sideNav?.map((item, index) => (
             <Collapsible open={isOpen} key={index}>
               <BigButton item={item} />
               <CollapsibleContent>
@@ -87,5 +90,5 @@ export function SidebarNav({ items }) {
         </div>
       </div>
     </section>
-  ) : null;
+  );
 }

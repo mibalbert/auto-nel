@@ -19,15 +19,15 @@ model User {
   password          String?     @db.Text
   image             String?
   address           String?
-  active            Boolean?    @default(false)
+  active            Boolean?    @default(true)
   createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
+  updatedAt         DateTime?   @updatedAt
   balance           Int?
-  quotes            Quote[] // Added quotes relation
-  invoices          Invoice[] // Added invoices relation
-  payments          Payment[] // Added payments relation
+  quotes            Quote[]
+  invoices          Invoice[]
+  payments          Payment[]
   note              String?     @db.Text
-  role              ROLE
+  role              ROLE        @default(USER)
   accounts          Account[]
   sessions          Session[]
   task              Task[]
@@ -37,6 +37,11 @@ model User {
   Operation         Operation[]
 
   @@index([email])
+}
+
+enum ROLE {
+  USER
+  ADMIN
 }
 
 model TempUser {
@@ -53,17 +58,11 @@ model TempUser {
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum ROLE {
-  USER
-  ADMIN
-}
-
 model Account {
   id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
+  type              String?
+  provider          String?
+  providerAccountId String?
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -72,7 +71,8 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, provider, providerAccountId])
   @@index([userId])

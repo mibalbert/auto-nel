@@ -2,7 +2,8 @@
  * config/navigation.js
  */
 
-export const navigationConfig = {
+// Define navigation configurations
+const navigationConfig = {
   guestTopNav: [
     {
       title: "guestNav",
@@ -94,8 +95,12 @@ export const navigationConfig = {
     {
       title: "Workload",
       data: [{
+        title: "Create New Job",
+        href: "/admin/create-job",
+      },
+      {
         title: "View All Jobs",
-        href: "/admin/jobs",
+        href: "/admin/jobs"
       },
       {
         title: "Current Tasks",
@@ -112,6 +117,10 @@ export const navigationConfig = {
       {
         title: "Insurance Co.",
         href: "/admin/insurance-companies"
+      },
+      {
+        title: "Test",
+        href: "/admin/test"
       }
       ],
     },
@@ -134,5 +143,35 @@ export const navigationConfig = {
     //   href: "/dashboard/settings",
     //   icon: "settings",
     // },
+    {
+      title: "Server",
+
+      data: [{
+        title: "View All Cars",
+        href: "/admin/view-all-cars",
+      },
+      {
+        title: "Create new Car",
+        href: "/admin/create-new-car"
+      }
+      ],
+    },
   ],
+};
+
+// Export navigation configuration based on the user's role
+export function getNavigationConfig(userRole) {
+  switch (userRole) {
+    case 'ADMIN':
+      return {
+        topNav: navigationConfig.adminTopNav,
+        sideNav: navigationConfig.adminSideNav,
+      };
+    case 'USER':
+    default:
+      return {
+        topNav: navigationConfig.guestTopNav,
+        sideNav: navigationConfig.guestSideNav,
+      };
+  }
 }

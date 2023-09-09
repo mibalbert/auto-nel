@@ -29,14 +29,14 @@ export function DataTableFacetedFilter({ column, title, options }) {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <PlusCircledIcon className="w-4 h-4 mr-2" />
           {title}
           {selectedValues?.size > 0 && (
             <>
-              <Separator orientation="vertical" className="mx-2 h-4" />
+              <Separator orientation="vertical" className="h-4 mx-2" />
               <Badge
                 variant="secondary"
-                className="rounded-sm px-1 font-normal lg:hidden"
+                className="px-1 font-normal rounded-sm lg:hidden"
               >
                 {selectedValues.size}
               </Badge>
@@ -44,7 +44,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
                 {selectedValues.size > 2 ? (
                   <Badge
                     variant="secondary"
-                    className="rounded-sm px-1 font-normal"
+                    className="px-1 font-normal rounded-sm"
                   >
                     {selectedValues.size} selected
                   </Badge>
@@ -55,7 +55,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
                       <Badge
                         variant="secondary"
                         key={option.value}
-                        className="rounded-sm px-1 font-normal"
+                        className="px-1 font-normal rounded-sm"
                       >
                         {option.label}
                       </Badge>
@@ -100,11 +100,11 @@ export function DataTableFacetedFilter({ column, title, options }) {
                       <CheckIcon className={cn("h-4 w-4")} />
                     </div>
                     {option.icon && (
-                      <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                      <option.icon className="w-4 h-4 mr-2 text-muted-foreground" />
                     )}
                     <span>{option.label}</span>
                     {facets?.get(option.value) && (
-                      <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                      <span className="flex items-center justify-center w-4 h-4 ml-auto font-mono text-xs">
                         {facets.get(option.value)}
                       </span>
                     )}

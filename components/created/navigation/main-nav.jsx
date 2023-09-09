@@ -1,83 +1,128 @@
-/**
- * main-nav.jsx
- */
-
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import Link from "next/link";
-import { Icons } from "@/components/ui/icons";
-import { MobileNav } from "./mobile-nav";
-import { usePathname, useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
+
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "./theme-chooser";
+import { Icons } from "@/components/ui/icons";
+import { Badge } from "@/components/ui/badge";
+import { getNavigationConfig } from "@/config/navigation";
 
-import UserDropdownMenu from "./user-dropdown";
-import SignInModal from "./sign-in-modal";
-import { navigationConfig } from "@/config/navigation";
+export function MainNav({ session }) {
+  const pathname = usePathname();
 
-const MainNav = ({ children, className, session }) => {
-  const segment = useSelectedLayoutSegment();
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const userRole = session?.user?.role || "USER";
+  const { topNav } = getNavigationConfig(userRole);
 
-  const path = usePathname();
-  const items = navigationConfig.guestTopNav;
+  // console.log("The fucking session", session);
+
+  // console.log("The fucking TopNav", topNav);
 
   return (
-    // <section className={cn("flex items-center w-full h-14 bg-card/40",className)}>
-    <section
-      className={cn(
-        "flex items-center w-full h-14 ",
-        path.includes("search") && "bg-gray-50 dark:bg-transparent"
-      )}
-    >
-      <div className="flex items-center justify-between w-full gap-6 px-12 mx-auto md:gap-10">
-        <Link href="/" className="items-center hidden space-x-2 md:flex">
-          {/* <Icons.logo /> */}
-          <span className="hidden text-xl font-extrabold sm:inline-block">
-            Auto Nel
-          </span>
-        </Link>
-        {items?.length ? (
-          <nav className="hidden gap-6 md:flex items-center">
-            {items?.map((item, index) => (
-              <Link
-                key={index}
-                href={item.disabled ? "#" : item.href}
-                className={cn(
-                  "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 dark:text-gray-100 sm:text-sm",
-                  item.href.startsWith(`/${segment}`)
-                    ? "text-foreground"
-                    : "text-foreground/60",
-                  item.disabled && "cursor-not-allowed opacity-80"
-                )}
-              >
-                {item.title}
-              </Link>
-            ))}
-            <ModeToggle />
-            <div>
-              {!session ? (
-                <SignInModal />
-              ) : (
-                <UserDropdownMenu session={session} />
-              )}
-            </div>
-          </nav>
-        ) : null}
-        <button
-          className="flex items-center space-x-2 md:hidden"
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
+    <div className="justify-between hidden w-full mr-4 md:flex ">
+      <Link href="/" className="flex items-center mr-6 space-x-2">
+        <Icons.logo className="w-6 h-6" />
+        <span className="hidden font-bold sm:inline-block">
+          {siteConfig.name}
+        </span>
+      </Link>
+      <nav className="flex items-center space-x-6 text-sm font-medium">
+        <Link
+          href="/docs/components"
+          className={cn(
+            "transition-colors hover:text-foreground/80",
+            pathname?.startsWith("/docs/components")
+              ? "text-foreground"
+              : "text-foreground/60"
+          )}
         >
-          {showMobileMenu ? <Icons.backArrow /> : <Icons.apple />}
-          <span className="font-bold">Menu</span>
-        </button>
-        {showMobileMenu && items && (
-          <MobileNav items={items}>{children}</MobileNav>
-        )}
-      </div>
-    </section>
+          Components
+        </Link>
+      </nav>
+    </div>
   );
-};
+}
 
-export default MainNav;
+// /**
+//  * main-nav.jsx
+//  */
+// "use client";
+
+// import { useState } from "react";
+// import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+// import Link from "next/link";
+
+// import { MobileNav } from "./mobile-nav";
+// import { cn } from "@/lib/utils";
+// import { ModeToggle } from "./nav-tings/theme-chooser";
+
+// import UserDropdownMenu from "./nav-tings/user-dropdown";
+// import SignInModal from "./nav-tings/sign-in-modal";
+// import { getNavigationConfig } from "@/config/navigation";
+
+// const MainNav = ({ children, className, session }) => {
+//   const segment = useSelectedLayoutSegments();
+//   const [showMobileMenu, setShowMobileMenu] = useState(false);
+//   const path = usePathname();
+//   const userRole = session?.user?.role || "USER";
+//   const { topNav } = getNavigationConfig(userRole);
+
+//   return (
+//     <section className="relative ">
+//       <nav
+//         className={cn(
+//           " bg-card/40",
+//           path.includes("search") && "bg-gray-50 dark:bg-transparent"
+//         )}
+//       >
+//         <div className="container px-4 mx-auto md:px-6">
+//           <div className="flex items-center justify-between h-16">
+//             <div className="flex items-center space-x-4 md:space-x-6">
+//               <Link href="/" className="text-xl font-extrabold sm:inline-block">
+//                 Auto Nel
+//               </Link>
+//               {topNav?.length && (
+//                 <nav className="hidden space-x-6 md:flex">
+//                   {topNav.map((item, index) => (
+//                     <Link
+//                       key={index}
+//                       href={item.disabled ? "#" : item.href}
+//                       className={cn(
+//                         "text-lg font-medium transition-colors hover:text-foreground/80 dark:text-gray-100 sm:text-sm",
+//                         item.href.startsWith(`/${segment}`)
+//                           ? "text-foreground"
+//                           : "text-foreground/60",
+//                         item.disabled && "cursor-not-allowed opacity-80"
+//                       )}
+//                     >
+//                       {item.title}
+//                     </Link>
+//                   ))}
+//                 </nav>
+//               )}
+//             </div>
+//             <div className="flex items-center space-x-4">
+//               <ModeToggle />
+//               {!session ? (
+//                 <SignInModal />
+//               ) : (
+//                 <UserDropdownMenu session={session} />
+//               )}
+//               <button
+//                 className="md:hidden"
+//                 onClick={() => setShowMobileMenu(!showMobileMenu)}
+//               >
+//                 {showMobileMenu ? <div>X</div> : <div>Menu</div>}
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//         {showMobileMenu && <MobileNav session={session} />}
+//       </nav>
+//     </section>
+//   );
+// };
+
+// export default MainNav;

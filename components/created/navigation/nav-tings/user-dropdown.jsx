@@ -16,17 +16,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
 
-const UserNav = ({ session }) => {
+const UserDropdown = ({ session }) => {
   const { image, email, firstName, lastName, name } = session.user;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="relative h-8 w-8 rounded-full my-1.5"
-        >
-          <Avatar className="h-8 w-8">
+        <Button variant="ghost" className="relative w-8 h-8 mx-3 rounded-full">
+          <Avatar className="w-8 h-8">
             <AvatarImage src={image} alt="@shadcn" />
             <AvatarFallback>SC</AvatarFallback>
           </Avatar>
@@ -69,4 +66,4 @@ const UserNav = ({ session }) => {
   );
 };
 
-export default UserNav;
+export default UserDropdown;

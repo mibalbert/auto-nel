@@ -8,10 +8,10 @@ import { Inter } from "next/font/google";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth/next";
 
-import Providers from "@/components/provider";
+import Providers from "@/lib/provider";
 import Preline from "@/components/preline";
-import { ThemeProvider } from "@/components/theme-provider";
-import NavBar from "@/components/created/navigation/nav-bar";
+import { ThemeProvider } from "@/lib/theme-provider";
+import { SiteHeader } from "@/components/created/navigation/site-header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,14 +23,15 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
 
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <Providers session={session}>
           <Preline />
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <NavBar />
-            <main className="flex w-full flex-1 flex-col overflow-hidden bg-background">
+            <SiteHeader session={session} />
+            <main className="flex flex-col flex-1 w-full overflow-hidden bg-background">
               {children}
             </main>
           </ThemeProvider>

@@ -23,8 +23,9 @@ import { Button } from "@/components/ui/button";
 
 import { Loader2, Mail } from "lucide-react";
 import { FaGoogle } from "react-icons/fa6";
+import UserDropdown from "./user-dropdown";
 
-const SignInModal = () => {
+const SignInModal = ({ session }) => {
   const router = useRouter();
 
   const [credentialsClicked, setCredentialsClicked] = useState(false);
@@ -115,111 +116,118 @@ const SignInModal = () => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Sign In</Button>
-      </DialogTrigger>
-      {!showRegister ? (
-        <DialogContent className=" sm:max-w-[425px] py-10 px-7">
-          <div className="absolute top-0 left-0 w-full h-[30%] bg-zinc-200 dark:bg-zinc-700 rounded-t-2xl "></div>
-          <DialogHeader className="z-10 gap-3 px-5">
-            <DialogTitle className="text-2xl font-bold text-center">
-              Sign In
-            </DialogTitle>
-            <DialogDescription className="text-center">
-              {` Make changes to your profile here. Click save when you're done.`}
-            </DialogDescription>
-          </DialogHeader>
-          <form
-            className="grid gap-5 px-5 pt-16 pb-4"
-            onSubmit={(event) => submitCredentials(event)} // Use onSubmit on the form
-          >
-            <div className="grid items-center grid-cols-4 gap-3 ">
-              {error.is ? (
-                <div className="w-full col-span-4 text-sm text-center text-red-400 -top-8">
-                  {error.message}
-                </div>
-              ) : null}
-              <Label htmlFor="email" className="col-span-4 text-left">
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                name="email"
-                onChange={handleChange}
-                className="col-span-4 border-gray-500"
-              />
-            </div>
-            <div className="grid items-center grid-cols-4 gap-3">
-              <Label htmlFor="password" className="col-span-4 text-left">
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                name="password"
-                onChange={handleChange}
-                className="col-span-4 border-gray-500"
-              />
-            </div>
-            <div className="flex flex-col w-full gap-5 pt-5">
-              <Button
-                type="submit" // Use type="submit" to trigger form submission
-                disabled={credentialsClicked}
-                className="w-full px-10 py-5 mx-auto border border-zinc-500"
+    <>
+      {session?.user ? (
+        <UserDropdown session={session} />
+      ) : (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">Sign In</Button>
+          </DialogTrigger>
+          {!showRegister ? (
+            <DialogContent className=" sm:max-w-[425px] py-10 px-7">
+              <div className="absolute top-0 left-0 w-full h-[30%] bg-zinc-200 dark:bg-zinc-700 rounded-t-2xl "></div>
+              <DialogHeader className="z-10 gap-3 px-5">
+                <DialogTitle className="text-2xl font-bold text-center w-44">
+                  Sign In
+                </DialogTitle>
+                <DialogDescription className="text-center">
+                  {` Make changes to your profile here. Click save when you're done.`}
+                </DialogDescription>
+              </DialogHeader>
+              <form
+                className="grid gap-5 px-5 pt-16 pb-4"
+                onSubmit={(event) => submitCredentials(event)} // Use onSubmit on the form
               >
-                {credentialsClicked ? (
-                  <div className="flex items-center">
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Signin-in...
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center">
-                    <Mail className="w-4 h-4 mr-3" />
-                    <span>Sign In with Email</span>
-                  </div>
-                )}
-              </Button>
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t" />
+                <div className="grid items-center grid-cols-4 gap-3 ">
+                  {error.is ? (
+                    <div className="w-full col-span-4 text-sm text-center text-red-400 -top-8">
+                      {error.message}
+                    </div>
+                  ) : null}
+                  <Label htmlFor="email" className="col-span-4 text-left">
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    className="col-span-4 border-gray-500"
+                  />
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="px-2 bg-background text-muted-foreground">
-                    Or continue with
-                  </span>
+                <div className="grid items-center grid-cols-4 gap-3">
+                  <Label htmlFor="password" className="col-span-4 text-left">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    className="col-span-4 border-gray-500"
+                  />
                 </div>
-              </div>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={credentialsClicked}
-                className="w-full px-10 py-5 mx-auto border border-zinc-500"
-                onClick={() => signIn("google")}
-              >
-                {googleClicked ? (
-                  <div className="flex items-center">
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Signin-in...
+                <div className="flex flex-col w-full gap-5 pt-5">
+                  <Button
+                    type="submit" // Use type="submit" to trigger form submission
+                    disabled={credentialsClicked}
+                    className="w-full px-10 py-5 mx-auto border border-zinc-500"
+                  >
+                    {credentialsClicked ? (
+                      <div className="flex items-center">
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Signin-in...
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center">
+                        <Mail className="w-4 h-4 mr-3" />
+                        <span>Sign In with Email</span>
+                      </div>
+                    )}
+                  </Button>
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="px-2 bg-background text-muted-foreground">
+                        Or continue with
+                      </span>
+                    </div>
                   </div>
-                ) : (
-                  <div className="flex items-center justify-center gap-3">
-                    <FaGoogle />
-                    Sign In with Google
-                  </div>
-                )}
-              </Button>
-            </div>
-          </form>
-          <DialogFooter className="flex w-full sm:flex-col">
-            <div className="mx-auto text-xs text-center ">
-              Multumim ca a-ti ales Service Auto-Nel pentru Masina Dumeavoastra
-            </div>
-          </DialogFooter>
-        </DialogContent>
-      ) : null}
-    </Dialog>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={credentialsClicked}
+                    className="w-full px-10 py-5 mx-auto border border-zinc-500"
+                    onClick={() => signIn("google")}
+                  >
+                    {googleClicked ? (
+                      <div className="flex items-center">
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Signin-in...
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-3">
+                        <FaGoogle />
+                        Sign In with Google
+                      </div>
+                    )}
+                  </Button>
+                </div>
+              </form>
+              <DialogFooter className="flex w-full sm:flex-col">
+                <div className="mx-auto text-xs text-center ">
+                  Multumim ca a-ti ales Service Auto-Nel pentru Masina
+                  Dumeavoastra
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          ) : null}
+        </Dialog>
+      )}
+    </>
   );
 };
 

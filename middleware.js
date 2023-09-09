@@ -9,19 +9,18 @@ import { NextResponse } from 'next/server'
 export default withAuth(
   function middleware(req) {
 
-    if (req.nextUrl.pathname.startsWith("/red") && req.nextauth.token?.role === "ADMIN") {
-      return NextResponse.redirect(
-        new URL("/adm/dashboard", req.url)
-      );
-    }
+    if (req.nextUrl.pathname.startsWith("/admin") && req.nextauth.token?.role !== "ADMIN") {
 
-    if (req.nextUrl.pathname.startsWith("/adm") && req.nextauth.token?.role === "ADMIN") {
+
+      console.log("THERE'S SOMETHING REALLY FUCKING WRONG1")
+
       return NextResponse.redirect(
         new URL("/auth/signIn?message=You_Are_Not_Authorized!&message2=Sign_In_with_the_proper_credentials_to_gain_access", req.url)
       );
     }
 
-    if (req.nextUrl.pathname.startsWith("/usr") && req.nextauth.token?.role === "USER") {
+    if (req.nextUrl.pathname.startsWith("/user") && req.nextauth.token?.role !== "USER") {
+      console.log("not it")
       return NextResponse.redirect(
         new URL("/auth/signIn?message=You_Are_Not_Authorized!&message2=Sign_In_with_the_proper_credentials_to_gain_access", req.url)
       );
@@ -39,5 +38,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/adm/:path*", "/usr/:path*"],
+  matcher: ["/admin/:path*", "/user/:path*"],
 };

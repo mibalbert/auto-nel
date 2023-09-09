@@ -15,6 +15,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
+import { Button } from "@nextui-org/button";
 
 const Hero = () => {
   const searchParams = useSearchParams();
@@ -314,6 +315,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        <Button>Click me</Button>
 
         <div className="h-screen">lkasd</div>
       </div>

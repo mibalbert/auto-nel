@@ -9,3 +9,17 @@ export const taskSchema = z.object({
   label: z.string(),
   priority: z.string(),
 });
+
+export const carsSchema = z.object({
+  id: z.number(), // Update this line to expect a number
+  make: z.string(),
+  model: z.string(),
+  year: z.number(), // Update this line to expect a number
+  ownerId: z.string(),
+  specs: z.object({
+    color: z.string(),
+    engine: z.string(),
+    transmission: z.string(),
+  }),
+  picture: z.string(),
+});
