@@ -16,13 +16,8 @@ import { getNavigationConfig } from "@/config/navigation";
 export function MobileNav({ session }) {
   const [open, setOpen] = React.useState(false);
 
-  console.log("THE FUCKING SESSSSION", session.user.role);
-
   const userRole = session?.user?.role;
   const { topNav, sideNav } = getNavigationConfig(userRole);
-
-  console.log("TOP NAV", topNav);
-  console.log("Side NAV", sideNav);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

@@ -16,10 +16,6 @@ export function MainNav({ session }) {
   const userRole = session?.user?.role || "USER";
   const { topNav } = getNavigationConfig(userRole);
 
-  // console.log("The fucking session", session);
-
-  // console.log("The fucking TopNav", topNav);
-
   return (
     <div className="justify-between hidden w-full mr-4 md:flex ">
       <Link href="/" className="flex items-center mr-6 space-x-2">
@@ -29,17 +25,22 @@ export function MainNav({ session }) {
         </span>
       </Link>
       <nav className="flex items-center space-x-6 text-sm font-medium">
-        <Link
-          href="/docs/components"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/docs/components")
-              ? "text-foreground"
-              : "text-foreground/60"
-          )}
-        >
-          Components
-        </Link>
+        {topNav.map((el, id) => {
+          return (
+            <Link
+              key={id}
+              href={el.href}
+              className={cn(
+                "transition-colors hover:text-foreground/80",
+                pathname?.startsWith(el.href)
+                  ? "text-foreground"
+                  : "text-foreground/60"
+              )}
+            >
+              {el.title}
+            </Link>
+          );
+        })}
       </nav>
     </div>
   );

@@ -81,7 +81,6 @@ const navigationConfig = {
     },
     {
       title: "Clients",
-
       data: [{
         title: "View All Clients",
         href: "/admin/view-all-clients",
@@ -145,7 +144,6 @@ const navigationConfig = {
     // },
     {
       title: "Server",
-
       data: [{
         title: "View All Cars",
         href: "/admin/view-all-cars",
