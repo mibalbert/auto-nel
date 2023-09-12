@@ -145,7 +145,11 @@ const navigationConfig = {
     {
       title: "Server",
       data: [{
-        title: "View All Cars",
+        title: "View All Cars Registered",
+        href: "/admin/view-all-cars-registered",
+      },
+      {
+        title: "View All Cars DB",
         href: "/admin/view-all-cars",
       },
       {

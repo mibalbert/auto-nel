@@ -98,8 +98,8 @@ model Car {
   make      String
   model     String
   year      Int
-  ownerId   String
-  owner     User        @relation(fields: [ownerId], references: [id])
+  ownerId   String?
+  owner     User?       @relation(fields: [ownerId], references: [id])
   specs     Json
   picture   String
   Operation Operation[]

@@ -38,7 +38,7 @@ export default async function TaskPage() {
   const tasks = await getTasks();
 
   return (
-    <div className="flex-col flex-1 hidden h-full p-8 space-y-8 md:flex">
+    <div className="flex-col flex-1  h-full p-8 space-y-8 md:flex">
       <div className="flex items-center justify-between space-y-2">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>

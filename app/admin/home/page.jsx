@@ -28,10 +28,10 @@ export const metadata = {
 
 const Dashboard = () => {
   return (
-    <section className="w-full h-full">
-      <div className="flex-col hidden xl:pl-[5%] max-w-[95%]  min-h-[800px] md:flex z-10">
-        <div className="flex-1 p-8 pt-6 space-y-4">
-          <div className="flex items-center justify-between space-y-2">
+    <section className="w-full h-full pt-14">
+      <div className="flex-col  xl:pl-[5%] max-w-[95%]  min-h-[800px] md:flex z-10">
+        <div className="p-8 pt-6 space-y-4 ">
+          <div className="items-center flex  justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />

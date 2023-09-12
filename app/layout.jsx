@@ -23,7 +23,6 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
 
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -31,7 +30,7 @@ export default async function RootLayout({ children }) {
           <Preline />
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <SiteHeader session={session} />
-            <main className="flex flex-col flex-1 w-full overflow-hidden bg-background">
+            <main className="flex flex-col flex-1 w-full bg-background">
               {children}
             </main>
           </ThemeProvider>

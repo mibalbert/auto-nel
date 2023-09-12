@@ -1,7 +1,19 @@
-import React from "react";
+/**
+ * create-new-car.jsx
+ */
+
+import CreateNewCarForm from "@/components/created/create-new-car/create-new-car-form";
 
 const CreateNewCar = () => {
-  return <div>CreateNewCar</div>;
+  return (
+    <section className="flex-col  xl:pl-[5%] max-w-[95%]  min-h-[800px] md:flex z-10 pt-14">
+      <h1 className="text-2xl">+Add a new Car</h1>
+
+      <CreateNewCarForm />
+    </section>
+  );
 };
 
 export default CreateNewCar;
+
+////////////////////////////// MAKE SURE TO CHECK IF THE CAR IS ALREADY EXISTENT IN THE DB NOT TO HAVE DUPLICATES

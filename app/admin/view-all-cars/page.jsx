@@ -1,35 +1,58 @@
 /**
- * view-all-cars/page.jsx
+ * view-all-cars.jsx
  */
 
-import { promises as fs } from "fs";
-import path from "path";
-import { Metadata } from "next";
-import Image from "next/image";
-import { z } from "zod";
+import prisma from "@/lib/prisma";
 
 import { carColumns } from "@/components/table/columns";
 import { CarDataTable } from "@/components/table/data-table";
-import { carsSchema } from "@/components/table/data/schema";
-import prisma from "@/lib/prisma";
+import { allCarsSchema } from "@/components/table/data/schema";
+import { z } from "zod";
 
-// export const metadata = {
-//   title: "Tasks",
-//   description: "A task and issue tracker build using Tanstack Table.",
-// };
+import { ColumnsViewAllCars } from "@/components/created/new-table/column-view-all-cars";
+import DataTableViewAllCars from "@/components/created/new-table/data-table-view-all-cars";
 
-// Simulate a database read for tasks.
-async function getAllCars() {
-  const data = await prisma.car.findMany();
+const getAllCars = async () => {
+  const data = await prisma.car.findMany({
+    // where: {
+    // ownerId: {
+    //   not: null,
+    // },
+    // },
+    // include: {
+    //   owner: {
+    //     select: {
+    //       firstName: true,
+    //       lastName: true,
+    //       name: true, // Include the 'name' field from the 'owner' relation
+    //     },
+    //   },
+    // },
+  });
+
+  // clmar9vev0009urt4v24jpfd2 Mib
+  // clm6adwd00000urz8y23vfusp Bit
+  // clmar2id90001urt4kxrybbnv John
 
   // const cars = JSON.parse(data.toString());
 
-  console.log("THE DATA", data);
+  // const oo = data.map(({ specs, ...rest }) => rest);
 
-  return z.array(carsSchema).parse(data);
-}
+  const oo = data.map((car, index) => {
+    const { owner, ...restCar } = car; // Destructure 'owner' and capture the rest of the properties
+    return {
+      ...restCar,
+      id: index + 1,
+      CarId: car.id,
+    };
+  });
 
-const ViewAllCars = async () => {
+  console.log(oo);
+  // return z.array(allCarsSchema).parse(oo);
+  return oo;
+};
+
+const ViewAllCarsDB = async () => {
   const cars = await getAllCars();
 
   return (
@@ -42,9 +65,9 @@ const ViewAllCars = async () => {
           </p>
         </div>
       </div>
-      <CarDataTable data={cars} columns={carColumns} />
+
+      <DataTableViewAllCars columns={ColumnsViewAllCars} data={cars} />
     </div>
   );
 };
-
-export default ViewAllCars;
+export default ViewAllCarsDB;

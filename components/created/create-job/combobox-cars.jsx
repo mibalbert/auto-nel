@@ -21,11 +21,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function CarsCombobox({users}) {
+export function CarsCombobox({ setFormData, users }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   // const [users, setUsers] = useState([]); // Declare users state
- 
+
   // useEffect(() => {
   //   // Fetch users from the API route
   //   fetch("/api/admin/get-users", {
@@ -65,6 +65,7 @@ export function CarsCombobox({users}) {
                 key={user.id} // Use a unique key
                 onSelect={() => {
                   setValue(user.firstName); // Set value to firstName
+                  setFormData({ user: user.firstName });
                   setOpen(false);
                 }}
               >

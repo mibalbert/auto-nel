@@ -57,7 +57,7 @@ export function DataTable({ columns, data }) {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full m-0 overflow-auto">
       <DataTableToolbar table={table} />
       <div className="border rounded-md">
         <Table>
@@ -79,7 +79,7 @@ export function DataTable({ columns, data }) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="overflow-auto">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
@@ -87,7 +87,7 @@ export function DataTable({ columns, data }) {
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell className="overflow-auto" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
