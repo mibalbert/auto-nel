@@ -2,12 +2,13 @@
  * app/page.jsx
  */
 
-import Hero from "@/components/created/hero/Hero";
+import Hero2 from "@/components/created/hero/Hero2";
 
 export default async function DashboardPage() {
   return (
     <section>
-      <Hero />
+      <Hero2 />
+      <div className="h-screen">This is a nice para</div>
     </section>
   );
 }

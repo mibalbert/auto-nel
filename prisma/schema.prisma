@@ -9,29 +9,29 @@ datasource db {
 }
 
 model User {
-  id                String      @id @default(cuid())
+  id                String        @id @default(cuid())
   firstName         String?
   lastName          String?
   name              String?
-  email             String?     @unique
+  email             String?       @unique
   emailVerified     Boolean?
   emailVerifiedDate DateTime?
-  password          String?     @db.Text
+  password          String?       @db.Text
   image             String?
   address           String?
-  active            Boolean?    @default(true)
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime?   @updatedAt
+  active            Boolean?      @default(true)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime?     @updatedAt
   balance           Int?
   quotes            Quote[]
   invoices          Invoice[]
   payments          Payment[]
-  note              String?     @db.Text
-  role              ROLE        @default(USER)
+  note              String?       @db.Text
+  role              ROLE          @default(USER)
   accounts          Account[]
   sessions          Session[]
   task              Task[]
-  cars              Car[]
+  cars              CustomerCar[]
   jobs              Job[]
   tempUser          TempUser[]
   Operation         Operation[]
@@ -93,30 +93,183 @@ model VerificationToken {
   expires DateTime
 }
 
-model Car {
-  id        Int         @id @default(autoincrement())
-  make      String
-  model     String
-  year      Int
-  ownerId   String?
-  owner     User?       @relation(fields: [ownerId], references: [id])
-  specs     Json
-  picture   String
-  Operation Operation[]
-  Job       Job?
+model CustomerCar {
+  id                 String             @id @default(cuid())
+  make               String
+  model              String
+  year               Int
+  vin                String?            @unique
+  mileage            Float?
+  gearType           String?
+  color              String?
+  licensePlate       String?
+  registrationDate   DateTime?
+  insuranceCompany   String?
+  insurancePolicy    String?
+  insuranceExpiry    DateTime?
+  serviceHistory     ServiceHistory[]
+  featuresAndOptions String?
+  fuelType           String?
+  previousOwners     PreviousOwner[]
+  accidents          Accident[]
+  warrantyStart      DateTime?
+  warrantyEnd        DateTime?
+  tireInformation    TireInformation?
+  vehicleInspection  VehicleInspection?
+  specs              Json
+  picture            String
+  Operation          Operation[]
+  Job                Job?
+
+  ownerId String?
+  owner   User?   @relation(fields: [ownerId], references: [id])
 
   @@index([ownerId])
 }
 
+model ServiceHistory {
+  id          Int         @id @default(autoincrement())
+  carId       String
+  car         CustomerCar @relation(fields: [carId], references: [id])
+  serviceDate DateTime
+  description String
+  cost        Float
+
+  @@index([carId])
+}
+
+model PreviousOwner {
+  id       Int         @id @default(autoincrement())
+  carId    String
+  car      CustomerCar @relation(fields: [carId], references: [id])
+  name     String
+  contact  String
+  fromDate DateTime
+  toDate   DateTime
+
+  @@index([carId])
+}
+
+model Accident {
+  id          Int         @id @default(autoincrement())
+  carId       String
+  car         CustomerCar @relation(fields: [carId], references: [id])
+  date        DateTime
+  description String
+  repairCost  Float
+
+  @@index([carId])
+}
+
+model TireInformation {
+  id         Int         @id @default(autoincrement())
+  carId      String      @unique
+  car        CustomerCar @relation(fields: [carId], references: [id])
+  tireType   String
+  tireSize   String
+  treadDepth Float
+}
+
+model VehicleInspection {
+  id             Int         @id @default(autoincrement())
+  carId          String      @unique
+  car            CustomerCar @relation(fields: [carId], references: [id])
+  inspectionDate DateTime
+  emissionsTest  String
+  safetyCheck    String
+}
+
+model ShowcaseCar {
+  id                                String  @id @default(cuid())
+  brand                             String
+  model                             String
+  generation                        String?
+  modification                      String?
+  startOfProduction                 Int?
+  powertrainArchitecture            String?
+  bodyType                          String?
+  seats                             Int?
+  doors                             Int?
+  combinedFuelConsumption           Float?
+  co2EmissionsWLTP                  Float?
+  fuelConsumptionUrban              Float?
+  fuelConsumptionExtraUrban         Float?
+  fuelConsumptionCombined           Float?
+  fuelType                          String?
+  acceleration0to100                Float?
+  maximumSpeed                      String?
+  emissionStandard                  String?
+  weightToPowerRatio                Float?
+  weightToTorqueRatio               Float?
+  enginePower                       Int?
+  powerPerLitre                     Float?
+  torque                            Int?
+  engineLayout                      String?
+  engineModelCode                   String?
+  engineDisplacement                Float?
+  numberOfCylinders                 Int?
+  engineConfiguration               String?
+  cylinderBore                      Float?
+  pistonStroke                      Float?
+  compressionRatio                  Float?
+  fuelInjectionSystem               String?
+  engineAspiration                  String?
+  valvetrain                        String?
+  engineOilCapacity                 Float?
+  engineOilSpecification            String?
+  engineSystems                     String?
+  kerbWeight                        Float?
+  maxWeight                         Float?
+  maxLoad                           Float?
+  trunkSpaceMin                     Float?
+  trunkSpaceMax                     Float?
+  fuelTankCapacity                  Float?
+  maxRoofLoad                       Float?
+  permittedTrailerLoadWithBrakes    Float?
+  permittedTrailerLoadWithoutBrakes Float?
+  permittedTowbarDownload           Float?
+  length                            Float?
+  width                             Float?
+  widthIncludingMirrors             Float?
+  height                            Float?
+  wheelbase                         Float?
+  frontTrack                        Float?
+  rearTrack                         Float?
+  frontOverhang                     Float?
+  rearOverhang                      Float?
+  rideHeight                        Float?
+  dragCoefficient                   Float?
+  minimumTurningCircle              Float?
+  approachAngle                     Float?
+  departureAngle                    Float?
+  rampOverAngle                     Float?
+  climbAngle                        Float?
+  wadingDepth                       Float?
+  drivetrainArchitecture            String?
+  driveWheel                        String?
+  numberOfGears                     Int?
+  gearboxType                       String?
+  frontSuspension                   String?
+  rearSuspension                    String?
+  frontBrakes                       String?
+  rearBrakes                        String?
+  assistingSystems                  String?
+  steeringType                      String?
+  powerSteering                     String?
+  tiresSize                         String?
+  wheelRimsSize                     String?
+  sourceLink                        String?
+}
+
 model Operation {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  carId     Int
-  car       Car      @relation(fields: [carId], references: [id])
+  user      User        @relation(fields: [userId], references: [id])
+  carId     String      @unique
+  car       CustomerCar @relation(fields: [carId], references: [id])
   jobId     Int
-  job       Job      @relation(fields: [jobId], references: [id])
-  timestamp DateTime @default(now())
+  job       Job         @relation(fields: [jobId], references: [id])
+  timestamp DateTime    @default(now())
   tasks     Task[]
   // quotes    Quote[]
   // invoices  Invoice[]
@@ -138,6 +291,8 @@ model Task {
   jobId       Int?
 
   @@index([userId])
+  @@index([operationId])
+  @@index([jobId])
 }
 
 model Job {
@@ -146,8 +301,8 @@ model Job {
   category  String
   time      Int
   price     Float
-  carId     Int         @unique
-  car       Car         @relation(fields: [carId], references: [id])
+  carId     String      @unique
+  car       CustomerCar @relation(fields: [carId], references: [id])
   Operation Operation[]
   userId    String // A job belongs to one user
   user      User?       @relation(fields: [userId], references: [id])
@@ -157,6 +312,7 @@ model Job {
   Invoice Invoice[]
 
   @@index([carId])
+  @@index([userId])
 }
 
 model Quote {
@@ -173,6 +329,7 @@ model Quote {
   Invoice     Invoice[]
 
   @@index([userId])
+  @@index([jobId])
 }
 
 model Invoice {
@@ -190,6 +347,8 @@ model Invoice {
   jobId   Int?
 
   @@index([userId])
+  @@index([quoteId])
+  @@index([jobId])
 }
 
 model Payment {
@@ -203,6 +362,7 @@ model Payment {
   invoiceId     Int?
 
   @@index([userId])
+  @@index([invoiceId])
 }
 
 // generator client {

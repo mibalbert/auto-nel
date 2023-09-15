@@ -11,18 +11,17 @@ export default withAuth(
 
     if (req.nextUrl.pathname.startsWith("/admin") && req.nextauth.token?.role !== "ADMIN") {
 
-
-      console.log("THERE'S SOMETHING REALLY FUCKING WRONG1")
-
       return NextResponse.redirect(
-        new URL("/auth/signIn?message=You_Are_Not_Authorized!&message2=Sign_In_with_the_proper_credentials_to_gain_access", req.url)
+        // new URL("/auth/signIn?message=You_Are_Not_Authorized!&message2=Sign_In_with_the_proper_credentials_to_gain_access", req.url)
+        new URL('/', req.url)
       );
     }
 
     if (req.nextUrl.pathname.startsWith("/user") && req.nextauth.token?.role !== "USER") {
-      console.log("not it")
+
       return NextResponse.redirect(
-        new URL("/auth/signIn?message=You_Are_Not_Authorized!&message2=Sign_In_with_the_proper_credentials_to_gain_access", req.url)
+        // new URL("/auth/signIn?message=You_Are_Not_Authorized!&message2=Sign_In_with_the_proper_credentials_to_gain_access", req.url)
+        new URL('/', req.url)
       );
     }
 

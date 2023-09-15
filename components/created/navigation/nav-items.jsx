@@ -10,20 +10,14 @@ import { Icons } from "@/components/ui/icons";
 import { Badge } from "@/components/ui/badge";
 import { getNavigationConfig } from "@/config/navigation";
 
-export function MainNav({ session }) {
+export function NavItems({ session }) {
   const pathname = usePathname();
 
-  const userRole = session?.user?.role || "USER";
+  const userRole = session?.user?.role || "GUEST";
   const { topNav } = getNavigationConfig(userRole);
 
   return (
-    <div className="justify-between hidden w-full mr-4 md:flex ">
-      <Link href="/" className="flex items-center mr-6 space-x-2">
-        <Icons.logo className="w-6 h-6" />
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
-        </span>
-      </Link>
+    <div className="justify-end hidden w-full mr-4 md:flex">
       <nav className="flex items-center space-x-6 text-sm font-medium">
         {topNav.map((el, id) => {
           return (

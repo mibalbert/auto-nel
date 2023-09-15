@@ -6,11 +6,11 @@
 const navigationConfig = {
   guestTopNav: [
     {
-      title: "guestNav",
-      href: "/docs",
+      title: "Guest",
+      href: "/user/dashboard",
     },
     {
-      title: "guestNav",
+      title: "g",
       href: "/docs",
     },
     {
@@ -27,18 +27,45 @@ const navigationConfig = {
       disabled: true,
     },
   ],
-  guestSideNav: [
+  userTopNav: [
     {
-      title: "Documentation",
+      title: "Dashboard",
+      href: "/user/dashboard",
+    },
+    {
+      title: "g",
       href: "/docs",
     },
     {
-      title: "Documentation",
+      title: "guestNav",
       href: "/docs",
     },
     {
-      title: "Documentation",
+      title: "guestNav",
       href: "/docs",
+    },
+    {
+      title: "Support",
+      href: "/support",
+      disabled: true,
+    },
+  ],
+  userSideNav: [
+    {
+      title: "Home",
+      data: [{
+        title: "Dashboard",
+        href: "/user/dashboard",
+      },
+      {
+        title: "+Add a new Car",
+        href: "/user/add-new-car"
+      },
+      {
+        title: "View Current Jobs",
+        href: "/user/view-current-jobs"
+      }
+      ],
     },
     {
       title: "Documentation",
@@ -170,10 +197,14 @@ export function getNavigationConfig(userRole) {
         sideNav: navigationConfig.adminSideNav,
       };
     case 'USER':
+      return {
+        topNav: navigationConfig.userTopNav,
+        sideNav: navigationConfig.userSideNav,
+      };
+    case 'GUEST':
     default:
       return {
         topNav: navigationConfig.guestTopNav,
-        sideNav: navigationConfig.guestSideNav,
       };
   }
 }

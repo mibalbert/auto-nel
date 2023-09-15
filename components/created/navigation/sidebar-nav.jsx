@@ -16,12 +16,12 @@ import {
 } from "@/components/ui/collapsible";
 import { getNavigationConfig } from "@/config/navigation";
 
-export function SidebarNav({ session }) {
+export function SidebarNav({ className, session }) {
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(true);
 
-  const { sideNav } = getNavigationConfig("ADMIN");
+  const { sideNav } = getNavigationConfig(session.user.role);
 
   const BigButton = ({ item }) => {
     return item.title && item.data ? (
@@ -53,10 +53,10 @@ export function SidebarNav({ session }) {
   };
 
   return (
-    <section className="w-full h-fullbg-card/40 ">
+    <section className={cn("w-full h-full bg-card/40 ", className)}>
       <div className="flex w-full px-6 py-6">
         <div className="grid w-full grid-flow-row gap-2 text-sm auto-rows-max">
-          {sideNav?.map((item, index) => (
+          {sideNav.map((item, index) => (
             <Collapsible open={isOpen} key={index}>
               <BigButton item={item} />
               <CollapsibleContent>

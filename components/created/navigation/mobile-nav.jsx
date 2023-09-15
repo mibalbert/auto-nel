@@ -55,28 +55,29 @@ export function MobileNav({ session }) {
             )}
           </div>
           <div className="flex flex-col space-y-2">
-            {sideNav.map((item, index) => (
-              <div key={index} className="flex flex-col pt-6 space-y-3">
-                <h4 className="font-medium">{item.title}</h4>
-                {item?.items?.length &&
-                  item.items.map((item) => (
-                    <React.Fragment key={item.href}>
-                      {!item.disabled &&
-                        (item.href ? (
-                          <MobileLink
-                            href={item.href}
-                            onOpenChange={setOpen}
-                            className="text-muted-foreground"
-                          >
-                            {item.title}
-                          </MobileLink>
-                        ) : (
-                          item.title
-                        ))}
-                    </React.Fragment>
-                  ))}
-              </div>
-            ))}
+            {sideNav &&
+              sideNav.map((item, index) => (
+                <div key={index} className="flex flex-col pt-6 space-y-3">
+                  <h4 className="font-medium">{item.title}</h4>
+                  {item?.items?.length &&
+                    item.items.map((item) => (
+                      <React.Fragment key={item.href}>
+                        {!item.disabled &&
+                          (item.href ? (
+                            <MobileLink
+                              href={item.href}
+                              onOpenChange={setOpen}
+                              className="text-muted-foreground"
+                            >
+                              {item.title}
+                            </MobileLink>
+                          ) : (
+                            item.title
+                          ))}
+                      </React.Fragment>
+                    ))}
+                </div>
+              ))}
             <div key={123} className="flex flex-col pt-6 space-y-3">
               <h4 className="font-medium">{"Oh shit"}</h4>
               <React.Fragment key={12}>
