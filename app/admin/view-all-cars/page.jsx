@@ -4,16 +4,16 @@
 
 import prisma from "@/lib/prisma";
 
-import { carColumns } from "@/components/table/columns";
-import { CarDataTable } from "@/components/table/data-table";
-import { allCarsSchema } from "@/components/table/data/schema";
-import { z } from "zod";
+// import { carColumns } from "@/components/table/columns";
+// import { CarDataTable } from "@/components/table/data-table";
+// import { allCarsSchema } from "@/components/table/data/schema";
+// import { z } from "zod";
 
 import { ColumnsViewAllCars } from "@/components/created/new-table/column-view-all-cars";
 import DataTableViewAllCars from "@/components/created/new-table/data-table-view-all-cars";
 
 const getAllCars = async () => {
-  const data = await prisma.car.findMany({
+  const data = await prisma.customerCar.findMany({
     // where: {
     // ownerId: {
     //   not: null,
@@ -29,6 +29,8 @@ const getAllCars = async () => {
     //   },
     // },
   });
+
+  console.log(data)
 
   // clmar9vev0009urt4v24jpfd2 Mib
   // clm6adwd00000urz8y23vfusp Bit

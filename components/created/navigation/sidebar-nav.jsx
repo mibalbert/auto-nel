@@ -57,35 +57,38 @@ export function SidebarNav({ className, session }) {
       <div className="flex w-full px-6 py-6">
         <div className="grid w-full grid-flow-row gap-2 text-sm auto-rows-max">
           {sideNav.map((item, index) => (
-            <Collapsible open={isOpen} key={index}>
-              <BigButton item={item} />
-              <CollapsibleContent>
+            // <Collapsible open={isOpen} key={index}>
+            //   <BigButton item={item} />
+            //   <CollapsibleContent>
+              <div key={index}>
+                <div className="text-xl font-semibold dark:text-neutral-400 text-neutral-800">{item.title}</div>
                 {item.data && item.data.length > 0 ? (
                   <ul>
                     {item.data.map((subItem, subIndex) => (
                       // pathname === subItem.href ? setIsOpen(!isOpen) : null,
                       <li key={subIndex}>
                         <Link
-                          type="outline"
                           href={subItem.href}
                           className={cn(
-                            "flex w-full items-center rounded-md px-3 py-2 hover:outline-dashed",
-                            {
-                              "bg-neutral-100 outline dark:bg-card-darker":
-                                pathname === subItem.href,
-                            }
+                            "relative flex w-full items-center  px-3 py-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-600",
+                            // {
+                            //   " ":
+                            //     pathname === subItem.href,
+                            // }
                           )}
                           target={subItem.external ? "_blank" : ""}
                           rel={subItem.external ? "noreferrer" : ""}
                         >
+                          <div className={cn("absolute" , { "w-1 h-[70%]  left-0 rounded-md  bg-blue-600" :pathname === subItem.href})}></div>
                           {subItem.title}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 ) : null}
-              </CollapsibleContent>
-            </Collapsible>
+                </div>
+            //   </CollapsibleContent>
+            // </Collapsible>
           ))}
         </div>
       </div>

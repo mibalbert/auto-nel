@@ -9,6 +9,7 @@ export default async function DashboardPage() {
     <section>
       <Hero2 />
       <div className="h-screen">This is a nice para</div>
+      
     </section>
   );
 }
