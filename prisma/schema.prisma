@@ -181,11 +181,11 @@ model VehicleInspection {
 
 model ShowcaseCar {
   id                                String  @id @default(cuid())
-  brand                             String
+  make                              String
   model                             String
   generation                        String?
   modification                      String?
-  startOfProduction                 Int?
+  productionYears                   String?
   powertrainArchitecture            String?
   bodyType                          String?
   seats                             Int?

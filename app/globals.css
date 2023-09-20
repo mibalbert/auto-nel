@@ -1,7 +1,15 @@
+@font-face {
+  font-family: 'Ballon';
+  src: url('/font/InflateptxChrome-X3oPg.ttf') format('truetype');
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
  
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

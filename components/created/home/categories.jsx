@@ -40,16 +40,16 @@ const data = [
 
 const CardCategories = () => {
   return (
-    <section className="py-20 mx-auto border-dashed max-w-7xl border-x">
+    <section className="py-20 mx-auto border-dashed max-w-7xl border-x border-neutral-400">
       <div className="grid w-full grid-cols-3 grid-rows-2 gap-2 px-4">
         {data.map((el, idx) => {
           return (
             <Link
               key={idx}
               href={el.href}
-              className="group relative z-0 rounded-lg min-h-[330px] w-full h-full border border-dashed p-2 border-neutral-400"
+              className="group relative z-0 rounded-lg min-h-[330px] w-full h-full border border-dashed p-3 border-neutral-400 greyscale"
             >
-              <div className="relative w-full h-full px-5 py-20 border border-dashed">
+              <div className="relative w-full h-full px-5 py-20 ">
                 <div className="relative z-50 font-bold text-black text-7xl group-hover:text-white">
                   {el.title}
                 </div>
@@ -57,7 +57,7 @@ const CardCategories = () => {
                   src={el.imgSrc}
                   alt={el.title}
                   fill
-                  className="z-10 object-cover rounded-lg greyscale group-hover:grayscale-0"
+                  className="z-10 object-cover rounded-lg "
                 />
                 {/* <div className="absolute top-0 left-0 z-40 w-full h-full bg-gradient-to-b from-white/60 via-slate-50/60 to-neutral-700/30"></div> */}
                 {/* <div className="absolute top-0 left-0 z-40 w-full h-full bg-gradient-to-b from-white/60 via-slate-50/60 to-neutral-700/30"></div> */}
