@@ -9,8 +9,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/created/admin/dashboard/date-range-picker";
 // import { MainNav } from "@/components/created/navigation/links-nav";
-import { Overview } from "@/components/overview";
-import { RecentSales } from "@/components/recent-sales";
+import { Overview } from "@/components/created/admin/dashboard/overview";
+import { RecentSales } from "@/components/created/admin/dashboard/recent-sales";
 // import { Search } from "@/components/search";
 // import TeamSwitcher from "@/components/team-switcher";
 // import { UserNav } from "@/components/created/navigation/nav-tings/user-account-nav";
@@ -22,10 +22,10 @@ export const metadata = {
 
 const Dashboard = () => {
   return (
-    <section className="h-full w-full pt-14">
-      <div className="z-10  min-h-[800px] max-w-[95%]  flex-col md:flex xl:pl-[5%]">
+    <section className="h-full w-full ">
+      <div className="z-10  min-h-[800px] max-w-[95%]  flex-col md:flex ">
         <div className="space-y-4 p-8 pt-6 ">
-          <div className="flex items-center  justify-between space-y-2">
+          <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />

@@ -101,10 +101,12 @@ const navigationConfig = {
     },
   ],
   adminSideNav: [
-
     {
       title: "Overview",
-      href: "/admin/home"
+      data: [{
+        title: "Home",
+        href: "/admin/home",
+      }],
     },
     {
       title: "Clients",
@@ -182,6 +184,10 @@ const navigationConfig = {
       {
         title: "Create new Car",
         href: "/admin/create-new-car"
+      },
+      {
+        title: "Create new Service",
+        href: "/admin/create-new-service"
       }
       ],
     },

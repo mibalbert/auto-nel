@@ -8,6 +8,7 @@ import { useCarStore, useCartStore } from "@/store/store";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Services from "./services";
 
 const services = [
   { id: 1, name: "Oil Change", price: 50 },
@@ -45,6 +46,10 @@ const SearchPage = ({ carsData }) => {
   const ye = searchParams.get("years");
 
   useEffect(() => {
+    if (!mak || !mod || !ye) {
+      router.push(`/search?make=Audi&model=A4&years=2015-2020`);
+    }
+
     if (mak !== make) {
       setMake(mak);
     }

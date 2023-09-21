@@ -1,31 +1,27 @@
-import React from 'react'
-import Hero2 from './Hero2'
-import prisma from '@/lib/prisma'
+import React from "react";
+import Hero2 from "./Hero2";
+import prisma from "@/lib/prisma";
 
-
-const getCars = async ()=>{
+const getCars = async () => {
   const data = await prisma.showcaseCar.findMany({
-    select:{
+    select: {
       make: true,
       model: true,
       productionYears: true,
       sourceLink: true
     }
-  })
-  return data
-}
-
-
+  });
+  return data;
+};
 
 const Hero = async () => {
-
-  const cars = await getCars()
-
-  console.log("THE cars", cars)
+  const cars = await getCars();
 
   return (
-    <div><Hero2 carsData={cars} /></div>
-  )
-}
+    <div>
+      <Hero2 carsData={cars} />
+    </div>
+  );
+};
 
-export default Hero
+export default Hero;
