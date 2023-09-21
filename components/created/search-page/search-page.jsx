@@ -8,13 +8,78 @@ import { useCarStore, useCartStore } from "@/store/store";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Services from "./services";
 
 const services = [
-  { id: 1, name: "Oil Change", price: 50 },
-  { id: 2, name: "Brake Inspection and Repair", price: 100 },
-  { id: 3, name: "Tire Rotation and Balancing", price: 60 }
-  // Add more services from your list here
+  {
+    id: 3,
+    name: "Oil Change Service",
+    price: 50,
+    forCars: [
+      { make: "Audi", models: ["A4", "Escape"] },
+      { make: "Chevrolet", models: ["Silverado", "Malibu"] }
+    ],
+    category: "Maintenance"
+  },
+  {
+    id: 4,
+    name: "Tire Rotation and Balance",
+    price: 60,
+    forCars: [
+      { make: "Mercedes-Benz", models: ["GLE", "S-Class"] },
+      { make: "Hyundai", models: ["Elantra", "Santa Fe"] }
+    ],
+    category: "Maintenance"
+  },
+  {
+    id: 5,
+    name: "Transmission Fluid Flush",
+    price: 120,
+    forCars: [
+      { make: "BMW", models: ["3 Series", "5 Series"] },
+      { make: "Mercedes-Benz", models: ["C-Class", "E-Class"] }
+    ],
+    category: "Maintenance"
+  },
+  {
+    id: 6,
+    name: "Brake Pad Replacement",
+    price: 80,
+    forCars: [
+      { make: "Volkswagen", models: ["Jetta", "Passat"] },
+      { make: "Subaru", models: ["Outback", "Impreza"] }
+    ],
+    category: "Repair"
+  },
+  {
+    id: 7,
+    name: "Coolant Flush Service",
+    price: 70,
+    forCars: [
+      { make: "Kia", models: ["Optima", "Sorento"] },
+      { make: "Mazda", models: ["CX-5", "Mazda3"] }
+    ],
+    category: "Maintenance"
+  },
+  {
+    id: 8,
+    name: "Battery Replacement",
+    price: 100,
+    forCars: [
+      { make: "Toyota", models: ["Camry", "Corolla"] },
+      { make: "Honda", models: ["Civic", "Accord"] }
+    ],
+    category: "Repair"
+  },
+  {
+    id: 9,
+    name: "Wheel Alignment",
+    price: 70,
+    forCars: [
+      { make: "Audi", models: ["A4", "Q5"] },
+      { make: "Lexus", models: ["RX", "IS"] }
+    ],
+    category: "Maintenance"
+  }
 ];
 
 // Helper functions
@@ -35,9 +100,13 @@ const getProductionYearsForModel = (model, data) => {
 const SearchPage = ({ carsData }) => {
   const { make, model, years, setMake, setModel, setYears } = useCarStore();
 
+  const { cartItems, addToCart, removeFromCart, clearCart, getTotalCost } = useCartStore();
+
+  const [filteredServices, setFilteredServices] = useState([]);
+
   const router = useRouter();
 
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
 
   const searchParams = useSearchParams();
 
@@ -47,8 +116,12 @@ const SearchPage = ({ carsData }) => {
 
   useEffect(() => {
     if (!mak || !mod || !ye) {
+      setFilteredServices([]);
       router.push(`/search?make=Audi&model=A4&years=2015-2020`);
     }
+    // Filter services when query parameters change
+    const filtered = services.filter((service) => service.forCars.some((car) => car.make === mak && car.models.includes(mod)));
+    setFilteredServices(filtered);
 
     if (mak !== make) {
       setMake(mak);
@@ -60,8 +133,6 @@ const SearchPage = ({ carsData }) => {
       setYears(ye);
     }
   }, [mak, mod, ye, make, model, years]);
-
-  console.log(make, model, years);
 
   const makes = getMake(carsData);
   const models = getModelsForMake(make, carsData);
@@ -88,8 +159,6 @@ const SearchPage = ({ carsData }) => {
     router.replace(`/search?make=${make}&model=${model}&years=${newYears}`);
   };
 
-  const { cartItems, addToCart, removeFromCart, clearCart, getTotalCost } = useCartStore();
-
   const handleAddToCart = (service) => {
     addToCart(service);
   };
@@ -100,12 +169,16 @@ const SearchPage = ({ carsData }) => {
         <div className="grid min-h-[calc(100vh-3.5rem)] grid-cols-8 border-x border-dashed">
           <div className="col-span-6 h-full w-full px-2 ">
             <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Search Service</div>
-            <div className="mx-auto h-auto min-h-[6rem] bg-neutral-100">
+            <div className="mx-auto h-auto min-h-[6rem] bg-neutral-100 dark:bg-neutral-600">
               {!edit ? (
                 <div className="mx-auto grid max-w-[80%] grid-cols-4 gap-5 py-3 ">
                   <div className="col-span-1 flex flex-col gap-2">
-                    <label className="text-sm text-neutral-700 ">Make:</label>
-                    <select onChange={(e) => handleMakeChange(e)} value={make} className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300">
+                    <label className="text-sm text-neutral-700 dark:text-neutral-400">Make:</label>
+                    <select
+                      onChange={(e) => handleMakeChange(e)}
+                      value={make}
+                      className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
+                    >
                       <option value="">Select a Make</option>
                       {[...makes].map((el, idx) => (
                         <option key={idx} value={el}>
@@ -116,8 +189,13 @@ const SearchPage = ({ carsData }) => {
                   </div>
 
                   <div className="col-span-1 flex flex-col gap-2">
-                    <label className="text-sm text-neutral-700 ">Model:</label>
-                    <select value={model} onChange={(e) => handleModelChange(e)} className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300" disabled={!make}>
+                    <label className="text-sm text-neutral-700 dark:text-neutral-400">Model:</label>
+                    <select
+                      value={model}
+                      onChange={(e) => handleModelChange(e)}
+                      className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
+                      disabled={!make}
+                    >
                       <option value="">Select a Model</option>
                       {[...models].map((el, idx) => (
                         <option key={idx} value={el}>
@@ -128,8 +206,13 @@ const SearchPage = ({ carsData }) => {
                   </div>
 
                   <div className="col-span-1 flex flex-col gap-2">
-                    <label className="text-sm text-neutral-700 ">Years:</label>
-                    <select value={years} onChange={(e) => handleYearsChange(e)} className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300" disabled={!model}>
+                    <label className="text-sm text-neutral-700 dark:text-neutral-400">Years:</label>
+                    <select
+                      value={years}
+                      onChange={(e) => handleYearsChange(e)}
+                      className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
+                      disabled={!model}
+                    >
                       <option value="">Select years</option>
                       {[...yearsPeriod].map((el, idx) => (
                         <option key={idx} value={el}>
@@ -146,8 +229,8 @@ const SearchPage = ({ carsData }) => {
                 </div>
               ) : (
                 <div className="mx-auto flex max-w-[80%] flex-col gap-1 py-3">
-                  <div className="pl-2 text-sm text-neutral-700 ">Available services for:</div>
-                  <div className="grid grid-cols-5 gap-2 overflow-hidden whitespace-nowrap bg-white text-sm ">
+                  <div className="pl-2 text-sm text-neutral-700 dark:text-neutral-300 ">Available services for:</div>
+                  <div className="grid grid-cols-5 gap-2 overflow-hidden whitespace-nowrap bg-white text-sm dark:bg-neutral-700 ">
                     <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
                       <span>Make:</span>
                       <span className="font-semibold">{make}</span>
@@ -173,13 +256,17 @@ const SearchPage = ({ carsData }) => {
                 </div>
               )}
             </div>
-
             <div className="p-5">
-              <ul>
-                {services.map((service) => (
-                  <li key={service.id}>
-                    {service.name} - ${service.price}
-                    <button onClick={() => handleAddToCart(service)}>Add to Cart</button>
+              <ul className="divide-y divide-gray-300">
+                {filteredServices.map((service) => (
+                  <li key={service.id} className="flex items-center justify-between py-3">
+                    <div className="flex flex-col">
+                      <span className="font-semibold">{service.name}</span>
+                      <span className="text-gray-600">${service.price}</span>
+                    </div>
+                    <button onClick={() => handleAddToCart(service)} className="rounded bg-blue-500 px-4 py-1 text-white hover:bg-blue-600">
+                      Add to Cart
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -188,7 +275,7 @@ const SearchPage = ({ carsData }) => {
           <div className="relative col-span-2">
             <div className="absolute left-0 top-0 z-10 h-full w-full">
               <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Cart:</div>
-              <div className=" sticky top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white p-10 shadow-md">
+              <div className=" sticky top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white p-10 shadow-md dark:border-neutral-500 dark:bg-neutral-700">
                 <div>
                   <ul>
                     {cartItems.map((item) => (

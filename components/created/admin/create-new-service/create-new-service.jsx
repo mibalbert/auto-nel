@@ -4,20 +4,38 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useServiceStore } from "@/store/store";
+import { useEffect, useMemo, useState } from "react";
 
 const CreateNewService = ({ allCars }) => {
-  console.log("AllCars", allCars);
+  const {
+    category,
+    serviceName,
+    servicePrice,
+    availableCars,
+    selectedCars,
+    carPrices,
+    filterText,
+    sortBy,
+    sortOrder,
+    setCategory,
+    setServiceName,
+    setServicePrice,
+    setAvailableCars,
+    setSelectedCars,
+    setCarPrices,
+    setFilterText,
+    setSortBy,
+    setSortOrder,
+    selectAll,
+    setSelectAll
+  } = useServiceStore();
+  const [showServiceDetails, setShowServiceDetails] = useState(false);
 
-  const [category, setCategory] = useState("");
-  const [serviceName, setServiceName] = useState("");
-  const [servicePrice, setServicePrice] = useState("");
-  const [availableCars, setAvailableCars] = useState(allCars);
-  const [selectedCars, setSelectedCars] = useState([]);
-  const [carPrices, setCarPrices] = useState({});
-  const [filterText, setFilterText] = useState("");
-  const [sortBy, setSortBy] = useState(""); // State for sorting
-  const [sortOrder, setSortOrder] = useState("asc"); // Sorting order (asc or desc)
+  useEffect(() => {
+    // Set the available cars when the component mounts
+    setAvailableCars(allCars);
+  }, [allCars]);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -30,18 +48,22 @@ const CreateNewService = ({ allCars }) => {
   const handleServicePriceChange = (e) => {
     setServicePrice(e.target.value);
   };
-
   const handleCarSelection = (carId) => {
     // Toggle car selection
     if (selectedCars.includes(carId)) {
       setSelectedCars(selectedCars.filter((id) => id !== carId));
+      // Clear the price when deselecting
+      setCarPrices({ ...carPrices, [carId]: "" });
     } else {
       setSelectedCars([...selectedCars, carId]);
     }
   };
-
   const handleCarPriceChange = (carId, price) => {
     setCarPrices({ ...carPrices, [carId]: price });
+  };
+
+  const toggleServiceDetails = () => {
+    setShowServiceDetails(!showServiceDetails);
   };
 
   // Filter cars based on filterText
@@ -79,6 +101,14 @@ const CreateNewService = ({ allCars }) => {
     console.log("Selected Cars:", selectedCars);
     console.log("Car Prices:", carPrices);
   };
+  const handleSelectAllCars = () => {
+    if (selectAll) {
+      setSelectedCars([]); // Deselect all cars
+    } else {
+      setSelectedCars(filteredCars.map((car) => car.id)); // Select all filtered cars
+    }
+    setSelectAll(!selectAll); // Toggle the selectAll state
+  };
 
   return (
     <div className="container mx-auto mt-10 px-4 md:px-0">
@@ -95,63 +125,70 @@ const CreateNewService = ({ allCars }) => {
         <label className="block text-gray-600">Service Price:</label>
         <input type="text" value={servicePrice} onChange={handleServicePriceChange} className="w-full rounded-md border px-3 py-2 focus:border-blue-500 focus:outline-none" />
       </div>
-      <div className="mb-4">
-        <h2 className="mb-2 text-xl font-semibold">Available Cars:</h2>
-        <input
-          type="text"
-          placeholder="Search by make, model, or year"
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          className="w-full rounded-md border px-3 py-2 focus:border-blue-500 focus:outline-none"
-        />
-        <div className="overflow-x-auto">
-          <table className="mt-2 w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th className="text-left">
-                  <button className="text-blue-500 hover:text-blue-700" onClick={() => handleSort("make")}>
-                    Make
-                  </button>
-                </th>
-                <th className="text-left">
-                  <button className="text-blue-500 hover:text-blue-700" onClick={() => handleSort("model")}>
-                    Model
-                  </button>
-                </th>
-                <th className="text-left">
-                  <button className="text-blue-500 hover:text-blue-700" onClick={() => handleSort("year")}>
-                    Year
-                  </button>
-                </th>
-                <th className="text-left">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedCars.map((car) => (
-                <tr key={car.id}>
-                  <td className="text-left">
-                    <input type="checkbox" checked={selectedCars.includes(car.id)} onChange={() => handleCarSelection(car.id)} />
-                  </td>
-                  <td className="text-left">{car.make}</td>
-                  <td className="text-left">{car.model}</td>
-                  <td className="text-left">{car.productionYears}</td>
-                  <td className="text-left">
-                    <input
-                      type="text"
-                      placeholder="Price"
-                      value={carPrices[car.id] || ""}
-                      onChange={(e) => handleCarPriceChange(car.id, e.target.value)}
-                      className={`w-20 rounded-md border px-2 py-1 ${!selectedCars.includes(car.id) ? "bg-gray-200" : ""}`}
-                      disabled={!selectedCars.includes(car.id)}
-                    />
-                  </td>
+      <button onClick={toggleServiceDetails} className="mb-4 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        {showServiceDetails ? "Hide Service Details" : "Show Service Details"}
+      </button>
+      {showServiceDetails && (
+        <div className="mb-4">
+          <h2 className="mb-2 text-xl font-semibold">Available Cars:</h2>
+          <input
+            type="text"
+            placeholder="Search by make, model, or year"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            className="w-full rounded-md border px-3 py-2 focus:border-blue-500 focus:outline-none"
+          />
+          <div className="overflow-x-auto">
+            <table className="mt-2 w-full">
+              <thead>
+                <tr>
+                  <th className="text-left">
+                    <input type="checkbox" checked={selectAll} onChange={handleSelectAllCars} />
+                  </th>
+                  <th className="text-left">
+                    <button className="text-blue-500 hover:text-blue-700" onClick={() => handleSort("make")}>
+                      Make
+                    </button>
+                  </th>
+                  <th className="text-left">
+                    <button className="text-blue-500 hover:text-blue-700" onClick={() => handleSort("model")}>
+                      Model
+                    </button>
+                  </th>
+                  <th className="text-left">
+                    <button className="text-blue-500 hover:text-blue-700" onClick={() => handleSort("year")}>
+                      Year
+                    </button>
+                  </th>
+                  <th className="text-left">Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {sortedCars.map((car) => (
+                  <tr key={car.id}>
+                    <td className="text-left">
+                      <input type="checkbox" checked={selectedCars.includes(car.id)} onChange={() => handleCarSelection(car.id)} />
+                    </td>
+                    <td className="text-left">{car.make}</td>
+                    <td className="text-left">{car.model}</td>
+                    <td className="text-left">{car.productionYears}</td>
+                    <td className="text-left">
+                      <input
+                        type="text"
+                        placeholder="Price"
+                        value={carPrices[car.id] || ""}
+                        onChange={(e) => handleCarPriceChange(car.id, e.target.value)}
+                        className={`w-20 rounded-md border px-2 py-1 ${!selectedCars.includes(car.id) ? "bg-gray-200" : ""}`}
+                        disabled={!selectedCars.includes(car.id)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
       <button onClick={createService} className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600">
         Create Service
       </button>

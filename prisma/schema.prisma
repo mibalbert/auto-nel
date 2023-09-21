@@ -34,7 +34,6 @@ model User {
   cars              CustomerCar[]
   jobs              Job[]
   tempUser          TempUser[]
-  Operation         Operation[]
 
   @@index([email])
 }
@@ -118,7 +117,6 @@ model CustomerCar {
   vehicleInspection  VehicleInspection?
   specs              Json
   picture            String
-  Operation          Operation[]
   Job                Job?
 
   ownerId String?
@@ -264,14 +262,13 @@ model ShowcaseCar {
   wheelRimsSize                     String?
   sourceLink                        String?
   CustomerCar                       CustomerCar[]
+  AService                          AService?
 }
 
-model Operation {
+model AService {
   id        Int         @id @default(autoincrement())
-  userId    String
-  user      User        @relation(fields: [userId], references: [id])
   carId     String      @unique
-  car       CustomerCar @relation(fields: [carId], references: [id])
+  car       ShowcaseCar @relation(fields: [carId], references: [id])
   jobId     Int
   job       Job         @relation(fields: [jobId], references: [id])
   timestamp DateTime    @default(now())
@@ -279,38 +276,39 @@ model Operation {
   // quotes    Quote[]
   // invoices  Invoice[]
 
-  @@index([userId])
-  @@index([jobId])
   @@index([carId])
+  @@index([jobId])
 }
 
 model Task {
-  id          Int        @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   userId      String
-  user        User?      @relation(fields: [userId], references: [id])
+  user        User?     @relation(fields: [userId], references: [id])
   title       String
   description String?
-  operationId Int?
-  operation   Operation? @relation(fields: [operationId], references: [id])
-  Job         Job?       @relation(fields: [jobId], references: [id])
-  jobId       Int?
+  aserviceId  Int?
+  aservice    AService? @relation(fields: [aserviceId], references: [id])
+  jobId       Int? // Added jobId field to represent the relationship with Job
+  // Remove the index below if there's no `operationId` field
+  // @@index([operationId])
+  Job         Job?      @relation(fields: [jobId], references: [id])
 
   @@index([userId])
-  @@index([operationId])
+  @@index([aserviceId])
   @@index([jobId])
 }
 
 model Job {
-  id        Int         @id @default(autoincrement())
-  name      String
-  category  String
-  time      Int
-  price     Float
-  carId     String      @unique
-  car       CustomerCar @relation(fields: [carId], references: [id])
-  Operation Operation[]
-  userId    String // A job belongs to one user
-  user      User?       @relation(fields: [userId], references: [id])
+  id       Int         @id @default(autoincrement())
+  name     String
+  category String
+  time     Int
+  price    Float
+  carId    String      @unique
+  car      CustomerCar @relation(fields: [carId], references: [id])
+  AService AService[]
+  userId   String // A job belongs to one user
+  user     User?       @relation(fields: [userId], references: [id])
 
   tasks   Task[] // One job can have multiple tasks
   Quote   Quote[]
