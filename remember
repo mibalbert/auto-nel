@@ -521,3 +521,408 @@ const Hero = () => {
 };
 
 export default Hero;
+
+
+
+
+
+
+
+
+
+/**
+ * Hero2.jsx
+ */
+
+"use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation"; // Changed from next/navigation to next/router
+import { useSearchParams } from "next/navigation"; // Changed from next/navigation to next/router
+import { useEffect, useState } from "react";
+
+const baseCar = {
+  make: "Mercedes",
+  model: "S-Class",
+  productionYears: "2015-2020",
+};
+
+// Helper functions
+const getMake = (data) => {
+  return new Set(data.map((el) => el.make));
+};
+
+const getModelsForMake = (make, data) => {
+  const models = data
+    .filter((el) => el.make === make)
+    .map((el) => el.model);
+  return new Set(models);
+};
+
+const getProductionYearsForModel = (model, data) => {
+  const years = data
+    .filter((el) => el.model === model)
+    .map((el) => el.productionYears);
+  return new Set(years);
+};
+
+const Hero2 = ({ carsData }) => {
+  const router = useRouter();
+
+  const [make, setMake] = useState(baseCar.make);
+  const [model, setModel] = useState(baseCar.model);
+  const [years, setYears] = useState(baseCar.productionYears);
+  const [availableModels, setAvailableModels] = useState([]);
+  const [availableYears, setAvailableYears] = useState([]);
+
+  useEffect(() => {
+    setAvailableModels(Array.from(getModelsForMake(make, carsData)));
+  }, [make, carsData]);
+
+  useEffect(() => {
+    if (model) {
+      setAvailableYears(Array.from(getProductionYearsForModel(model, carsData)));
+    } else {
+      setAvailableYears([]);
+    }
+  }, [model, carsData]);
+
+  const handleMakeChange = (e) => {
+    const newMake = e.target.value;
+    setMake(newMake);
+    setModel(""); // Reset model when changing make
+    setYears(""); // Reset years when changing make
+    router.push(`/?make=${newMake}&model=undefined&years=undefined`);
+  };
+
+  const handleModelChange = (e) => {
+    const newModel = e.target.value;
+    setModel(newModel);
+    setYears(""); // Reset years when changing model
+    router.push(`/?make=${make}&model=${newModel}&years=undefined`);
+  };
+
+  const handleYearsChange = (e) => {
+    const newYears = e.target.value;
+    setYears(newYears);
+    router.push(`/?make=${make}&model=${model}&years=${newYears}`);
+  };
+
+  const makes = Array.from(getMake(carsData));
+
+  return (
+    <section className="min-h-[90vh] bg-gradient-to-b from-transparent via-transparent to-[#ecedef] dark:to-[#1c1c1c] relative overflow-hidden">
+      <div className="absolute top-[30%] left-0 z-0 text-[300px] whitespace-nowrap font-bold font-serif bg-neutral-200 dark:bg-neutral-700 text-neutral-400 dark:text-neutral-300 border-y border-dashed">AUTO-NEL AUTO-NEL</div>
+      <div className="absolute top-0 left-0 z-50 w-full h-full"><div className="z-10 w-full h-full mx-auto border-dashed max-w-7xl border-x"></div> </div>
+      <div className="absolute bottom-0 left-0 w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] h-full z-50">
+        <Image
+          src="/2019_mb_g63_amg_0000-first-side.png"
+          alt="saa"
+          width={500}
+          height={500}
+          className="z-50 object-contain w-full h-full"
+        />
+      </div>
+      <div className="relative w-full h-full">
+        <div className="z-50 w-full h-full flex flex-col items-center pt-[7%] relative">
+          <div className=" w-[95%] max-w-4xl supports-backdrop-blur:bg-[#1c1c1c]/60  bg-[#dfdfdf]/75 dark:bg-[#1c1c1c]/75 backdrop-blur px-10 pt-7 pb-10 rounded-lg shadow-lg">
+            <div className="absolute text-2xl -top-5 left-10">Search For A Service</div>
+
+            <form className="grid grid-cols-4 gap-5">
+              <div className="flex flex-col col-span-1 gap-2">
+                <label className="text-lg font-semibold text-neutral-400">Make</label>
+                <select value={baseCar.make} onChange={handleMakeChange} className="w-full p-3 rounded-lg">
+                  {makes.map((el, idx) => (
+                    <option key={idx} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex flex-col col-span-1 gap-2">
+                <label className="text-lg font-semibold text-neutral-400">Model</label>
+                <select value={model} onChange={handleModelChange} className="w-full p-3 rounded-lg" disabled={!make}>
+                  <option value={baseCar.model}>{baseCar.model}</option>
+                  {availableModels.map((el, idx) => (
+                    <option key={idx} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex flex-col col-span-1 gap-2">
+                <label className="text-lg font-semibold text-neutral-400">Years</label>
+                <select value={years} onChange={handleYearsChange} className="w-full p-3 rounded-lg" disabled={!model}>
+                  <option value={baseCar.productionYears}>{baseCar.productionYears}</option>
+                  {availableYears.map((el, idx) => (
+                    <option key={idx} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////
+/**
+ * SearchBarSearchPage.js
+ */
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
+import { FaSearch } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { Icons } from "@/components/ui/icons";
+import servData from "@/lib/servData.json";
+import Link from "next/link";
+
+import useEmblaCarousel from "embla-carousel-react";
+
+const SearchPage = () => {
+  const searchParams = useSearchParams();
+  let initialSearch = searchParams.get("name");
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (initialSearch.current !== null && initialSearch.current !== undefined) {
+      const searchResult = servData.filter((data) =>
+        data.title.toLowerCase().includes(searchRef.current.toLowerCase())
+      );
+      setSearchTerm(searchResult);
+    }
+  }, []);
+
+  const handleChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm);
+  };
+
+  useEffect(() => {
+    searchForServices(searchTerm);
+  }, [searchTerm]);
+
+  const searchForServices = (term) => {
+    const result = servData.filter((el) => el.href.includes(term));
+    setSearchResults(result);
+  };
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    dragFree: true,
+    align: "center",
+    containScroll: "trimSnaps",
+  });
+
+  const onScroll = useCallback((emblaApi) => {
+    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
+    setScrollProgress(progress * 100);
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onScroll(emblaApi);
+    emblaApi.on("reInit", onScroll);
+    emblaApi.on("scroll", onScroll);
+  }, [emblaApi, onScroll]);
+
+  return (
+    <section className="w-full min-h-screen">
+      <div className="relative flex flex-col items-center py-12 bg-gradient-to-r from-green-700 to-yellow-400">
+        <div className="absolute left-0 top-0 z-10 w-full h-full dark:mask-image:linear-gradient(white, transparent)">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#b45336] to-[#ff7575] opacity-40 dark:from-[#ff7575]/30 dark:to-[#b45336]/30 dark:opacity-100">
+            <svg
+              aria-hidden="true"
+              className="absolute inset-x-0 inset-y-[-50%] h-[200%] w-full skew-y-[-18deg] fill-black/40 stroke-black/50 mix-blend-overlay dark:fill-white/2.5 dark:stroke-white/5"
+            >
+              <defs>
+                <pattern
+                  id=":S2:"
+                  width="72"
+                  height="56"
+                  patternUnits="userSpaceOnUse"
+                  x="-12"
+                  y="4"
+                >
+                  <path d="M.5 56V.5H72" fill="none"></path>
+                </pattern>
+              </defs>
+              <rect
+                width="100%"
+                height="100%"
+                strokeWidth="0"
+                fill="url(#:S2:)"
+              ></rect>
+              <svg x="-12" y="4" className="overflow-visible">
+                <rect
+                  strokeWidth="0"
+                  width="73"
+                  height="57"
+                  x="288"
+                  y="168"
+                ></rect>
+                <rect
+                  strokeWidth="0"
+                  width="73"
+                  height="57"
+                  x="144"
+                  y="56"
+                ></rect>
+                <rect
+                  strokeWidth="0"
+                  width="73"
+                  height="57"
+                  x="504"
+                  y="168"
+                ></rect>
+                <rect
+                  strokeWidth="0"
+                  width="73"
+                  height="57"
+                  x="720"
+                  y="336"
+                ></rect>
+              </svg>
+            </svg>
+          </div>
+        </div>
+        <div className="w-full px-10">
+          <div className="relative z-10 flex max-w-2xl space-x-3 p-1.5 bg-white border rounded-xl shadow-lg shadow-gray-900/[.2] dark:bg-gray-800 dark:border-gray-500 dark:shadow-gray-900/[.2]">
+            <div className="relative w-full max-w-2xl">
+              <label
+                htmlFor="hs-search-article-1"
+                className="block text-sm font-medium text-gray-700 dark:text-white"
+              >
+                <span className="sr-only">Cauta Servicii...</span>
+              </label>
+              <div className="relative flex-[1_0_0%] z-50">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={handleChange}
+                  name="hs-search-article-1"
+                  id="hs-search-article-1"
+                  className="block w-full p-3 border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
+                  placeholder="Cauta servicii..."
+                />
+                <div className="absolute transform -translate-y-1/2 top-1/2 right-8">
+                  {isLoading ? (
+                    <Icons.spinner className="transition-all duration-500 animate-spin" />
+                  ) : (
+                    <FaSearch />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative z-50 w-full h-full pb-72">
+        {/* <div className="overflow-hidden" ref={emblaRef}> */}
+        <div className="relative embla min-h-[400px] gap-10" ref={emblaRef}>
+          {/* <div className="flex gap-10"> */}
+          <div className="px-20 embla__container">
+            {isLoading
+              ? // Show loading indicator
+              null
+              : searchResults.map((serv, id) => (
+                <motion.div
+                  key={id}
+                  initial={{ opacity: 0.3, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 * id }}
+                  className="embla__slide"
+                >
+                  {/* <Link href={serv.link} className={`w-[400px] relative flex flex-col  h-full  text-xl border bg-white gap-5 px-5 py-5 mt-10  w-2xl max-h-[400px]`}> */}
+                  <Link href={serv.link}>
+                    <div
+                      className={`absolute flex justify-center items-center w-full h-full inset-0 opacity-0 hover:opacity-100 transition-opacity`}
+                    >
+                      <p>This is an overlay</p>
+                    </div>
+                    <div>
+                      <div>{serv.title}</div>
+                      <div>{serv.description}</div>
+                    </div>
+                    <div>
+                      <p>Card Content</p>
+                    </div>
+                    <div>
+                      <p>Card Footer</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+          </div>
+          <div className="mt-20 embla__progress">
+            <div
+              className="embla__progress__bar"
+              style={{ transform: `translate3d(${scrollProgress}%,0px,0px)` }}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SearchPage;

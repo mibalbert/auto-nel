@@ -5,15 +5,9 @@
 // import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDateRangePicker } from "@/components/date-range-picker";
+import { CalendarDateRangePicker } from "@/components/created/admin/dashboard/date-range-picker";
 // import { MainNav } from "@/components/created/navigation/links-nav";
 import { Overview } from "@/components/overview";
 import { RecentSales } from "@/components/recent-sales";
@@ -23,15 +17,15 @@ import { RecentSales } from "@/components/recent-sales";
 
 export const metadata = {
   title: "Dashboard",
-  description: "Example dashboard app built using the components.",
+  description: "Example dashboard app built using the components."
 };
 
 const Dashboard = () => {
   return (
-    <section className="w-full h-full pt-14">
-      <div className="flex-col  xl:pl-[5%] max-w-[95%]  min-h-[800px] md:flex z-10">
-        <div className="p-8 pt-6 space-y-4 ">
-          <div className="items-center flex  justify-between space-y-2">
+    <section className="h-full w-full pt-14">
+      <div className="z-10  min-h-[800px] max-w-[95%]  flex-col md:flex xl:pl-[5%]">
+        <div className="space-y-4 p-8 pt-6 ">
+          <div className="flex items-center  justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />
@@ -55,10 +49,8 @@ const Dashboard = () => {
             <TabsContent value="overview" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">
-                      Total Revenue
-                    </CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -67,23 +59,19 @@ const Dashboard = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="w-4 h-4 text-muted-foreground"
+                      className="h-4 w-4 text-muted-foreground"
                     >
                       <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">$45,231.89</div>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
+                    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">
-                      Subscriptions
-                    </CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -92,7 +80,7 @@ const Dashboard = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="w-4 h-4 text-muted-foreground"
+                      className="h-4 w-4 text-muted-foreground"
                     >
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                       <circle cx="9" cy="7" r="4" />
@@ -101,13 +89,11 @@ const Dashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">+2350</div>
-                    <p className="text-xs text-muted-foreground">
-                      +180.1% from last month
-                    </p>
+                    <p className="text-xs text-muted-foreground">+180.1% from last month</p>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Sales</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +103,7 @@ const Dashboard = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="w-4 h-4 text-muted-foreground"
+                      className="h-4 w-4 text-muted-foreground"
                     >
                       <rect width="20" height="14" x="2" y="5" rx="2" />
                       <path d="M2 10h20" />
@@ -125,16 +111,12 @@ const Dashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">+12,234</div>
-                    <p className="text-xs text-muted-foreground">
-                      +19% from last month
-                    </p>
+                    <p className="text-xs text-muted-foreground">+19% from last month</p>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">
-                      Active Now
-                    </CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Active Now</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -143,16 +125,14 @@ const Dashboard = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="w-4 h-4 text-muted-foreground"
+                      className="h-4 w-4 text-muted-foreground"
                     >
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">+573</div>
-                    <p className="text-xs text-muted-foreground">
-                      +201 since last hour
-                    </p>
+                    <p className="text-xs text-muted-foreground">+201 since last hour</p>
                   </CardContent>
                 </Card>
               </div>
@@ -168,9 +148,7 @@ const Dashboard = () => {
                 <Card className="col-span-3 overflow-auto">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
-                    <CardDescription>
-                      You made 265 sales this month.
-                    </CardDescription>
+                    <CardDescription>You made 265 sales this month.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <RecentSales />

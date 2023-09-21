@@ -4,15 +4,10 @@
 
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; // Changed from next/navigation to next/router
-import { useSearchParams } from "next/navigation"; // Changed from next/navigation to next/router
-import { useEffect, useState } from "react";
 
-const baseCar = {
-  make: "Mercedes",
-  model: "S-Class",
-  productionYears: "2015-2020",
-};
+import { useCarStore } from "@/store/store";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // Helper functions
 const getMake = (data) => {
@@ -34,48 +29,29 @@ const getProductionYearsForModel = (model, data) => {
 };
 
 const Hero2 = ({ carsData }) => {
-  const router = useRouter();
+  const { make, model, years, setMake, setModel, setYears } = useCarStore();
 
-  const [make, setMake] = useState(baseCar.make);
-  const [model, setModel] = useState(baseCar.model);
-  const [years, setYears] = useState(baseCar.productionYears);
-  const [availableModels, setAvailableModels] = useState([]);
-  const [availableYears, setAvailableYears] = useState([]);
-
-  useEffect(() => {
-    setAvailableModels(Array.from(getModelsForMake(make, carsData)));
-  }, [make, carsData]);
-
-  useEffect(() => {
-    if (model) {
-      setAvailableYears(Array.from(getProductionYearsForModel(model, carsData)));
-    } else {
-      setAvailableYears([]);
-    }
-  }, [model, carsData]);
+  const makes = getMake(carsData);
+  const models = getModelsForMake(make, carsData);
+  const yearsPeriod = getProductionYearsForModel(model, carsData);
 
   const handleMakeChange = (e) => {
     const newMake = e.target.value;
     setMake(newMake);
-    setModel(""); // Reset model when changing make
-    setYears(""); // Reset years when changing make
-    router.push(`/?make=${newMake}&model=undefined&years=undefined`);
+    setModel(''); // Reset model when changing make
+    setYears(''); // Reset years when changing make
   };
 
   const handleModelChange = (e) => {
     const newModel = e.target.value;
     setModel(newModel);
-    setYears(""); // Reset years when changing model
-    router.push(`/?make=${make}&model=${newModel}&years=undefined`);
+    setYears(''); // Reset years when changing model
   };
 
   const handleYearsChange = (e) => {
     const newYears = e.target.value;
     setYears(newYears);
-    router.push(`/?make=${make}&model=${model}&years=${newYears}`);
   };
-
-  const makes = Array.from(getMake(carsData));
 
   return (
     <section className="min-h-[90vh] bg-gradient-to-b from-transparent via-transparent to-[#ecedef] dark:to-[#1c1c1c] relative overflow-hidden">
@@ -96,22 +72,24 @@ const Hero2 = ({ carsData }) => {
             <div className="absolute text-2xl -top-5 left-10">Search For A Service</div>
 
             <form className="grid grid-cols-4 gap-5">
+              
               <div className="flex flex-col col-span-1 gap-2">
-                <label className="text-lg font-semibold text-neutral-400">Make</label>
-                <select value={baseCar.make} onChange={handleMakeChange} className="w-full p-3 rounded-lg">
-                  {makes.map((el, idx) => (
-                    <option key={idx} value={el}>
-                      {el}
-                    </option>
-                  ))}
-                </select>
+              <label className="text-lg font-semibold text-neutral-400">Make</label>
+              <select onChange={(e) => handleMakeChange(e)} value={make} className="w-full p-3 rounded-lg">
+                <option value="">Select a Make</option>
+                {[...makes].map((el, idx) => (
+                  <option key={idx} value={el}>
+                    {el}
+                  </option>
+                ))} 
+              </select> 
               </div>
 
               <div className="flex flex-col col-span-1 gap-2">
                 <label className="text-lg font-semibold text-neutral-400">Model</label>
-                <select value={model} onChange={handleModelChange} className="w-full p-3 rounded-lg" disabled={!make}>
-                  <option value={baseCar.model}>{baseCar.model}</option>
-                  {availableModels.map((el, idx) => (
+                <select value={model} onChange={(e) => handleModelChange(e)} className="w-full p-3 rounded-lg" disabled={!make}>
+                  <option value="">Select a Model</option>
+                  {[...models].map((el, idx) => (
                     <option key={idx} value={el}>
                       {el}
                     </option>
@@ -121,14 +99,18 @@ const Hero2 = ({ carsData }) => {
 
               <div className="flex flex-col col-span-1 gap-2">
                 <label className="text-lg font-semibold text-neutral-400">Years</label>
-                <select value={years} onChange={handleYearsChange} className="w-full p-3 rounded-lg" disabled={!model}>
-                  <option value={baseCar.productionYears}>{baseCar.productionYears}</option>
-                  {availableYears.map((el, idx) => (
+                <select value={years} onChange={(e) => handleYearsChange(e)} className="w-full p-3 rounded-lg" disabled={!model}>
+                  <option value="">Select years</option>
+                  {[...yearsPeriod].map((el, idx) => (
                     <option key={idx} value={el}>
                       {el}
                     </option>
                   ))}
                 </select>
+              </div>
+              <div className="flex items-end col-span-1">
+                
+                  <Link href={`/search?make=${make}&model=${model}&years=${years}`} className="w-full p-2.5 font-semibold text-center text-black bg-white rounded-lg" >Search</Link>
               </div>
             </form>
           </div>
