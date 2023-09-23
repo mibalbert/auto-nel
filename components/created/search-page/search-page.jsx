@@ -97,12 +97,14 @@ const getProductionYearsForModel = (model, data) => {
   return new Set(years);
 };
 
-const SearchPage = ({ carsData }) => {
+const SearchPage = ({ carsData, services }) => {
   const { make, model, years, setMake, setModel, setYears } = useCarStore();
 
-  const { cartItems, addToCart, removeFromCart, clearCart, getTotalCost } = useCartStore();
+  const { cartItems, addToCart, removeFromCart, clearCart, getTotalCost, removeOneFromCart } = useCartStore();
 
   const [filteredServices, setFilteredServices] = useState([]);
+
+  console.log("SSSSSS", services);
 
   const router = useRouter();
 
@@ -117,11 +119,11 @@ const SearchPage = ({ carsData }) => {
   useEffect(() => {
     if (!mak || !mod || !ye) {
       setFilteredServices([]);
-      router.push(`/search?make=Audi&model=A4&years=2015-2020`);
+      router.push(`/shop-services?make=Audi&model=A4&years=2015-2020`);
     }
     // Filter services when query parameters change
-    const filtered = services.filter((service) => service.forCars.some((car) => car.make === mak && car.models.includes(mod)));
-    setFilteredServices(filtered);
+    // const filtered = services.filter((service) => service.forCars.some((car) => car.make === mak && car.models.includes(mod)));
+    // setFilteredServices(filtered);
 
     if (mak !== make) {
       setMake(mak);
@@ -143,20 +145,20 @@ const SearchPage = ({ carsData }) => {
     setMake(newMake);
     setModel(""); // Reset model when changing make
     setYears(""); // Reset years when changing make
-    router.replace(`/search?make=${newMake}&model=''&years=''`);
+    router.replace(`/shop-services?make=${newMake}&model=''&years=''`);
   };
 
   const handleModelChange = (e) => {
     const newModel = e.target.value;
     setModel(newModel);
     setYears(""); // Reset years when changing model
-    router.replace(`/search?make=${make}&model=${newModel}&years=''`);
+    router.replace(`/shop-services?make=${make}&model=${newModel}&years=''`);
   };
 
   const handleYearsChange = (e) => {
     const newYears = e.target.value;
     setYears(newYears);
-    router.replace(`/search?make=${make}&model=${model}&years=${newYears}`);
+    router.replace(`/shop-services?make=${make}&model=${model}&years=${newYears}`);
   };
 
   const handleAddToCart = (service) => {
@@ -165,9 +167,17 @@ const SearchPage = ({ carsData }) => {
 
   return (
     <section className="min-h-[calc(100vh-3.5rem)] ">
-      <div className="mx-auto h-full w-full max-w-screen-2xl ">
-        <div className="grid min-h-[calc(100vh-3.5rem)] grid-cols-8 border-x border-dashed">
-          <div className="col-span-6 h-full w-full px-2 ">
+      <div className="mx-auto mb-44 h-full w-full max-w-screen-2xl">
+        {/* <div className=" grid min-h-[calc(100vh-3.5rem)] grid-cols-12 border-x border-dashed ">
+          <div className="relative col-span-1">
+            <div className="left-0 top-0 h-full w-full">
+              <div className="absolute left-0  h-full w-full bg-gradient-to-r from-transparent via-transparent to-[#f9fafc] dark:to-[#2b2b2b]"></div>
+              <div className="absolute left-0 top-0 h-[15%] w-full bg-gradient-to-t from-transparent via-transparent to-[#FFFFFF] dark:to-[#2e2e2e]"></div>
+            </div>
+          </div>
+          <div className="col-span-8 h-full w-full  px-5"> */}
+        <div className=" grid min-h-[calc(100vh-3.5rem)] grid-cols-12 border-x border-dashed ">
+          <div className="col-span-9 h-full w-full  px-5">
             <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Search Service</div>
             <div className="mx-auto h-auto min-h-[6rem] bg-neutral-100 dark:bg-neutral-600">
               {!edit ? (
@@ -258,10 +268,13 @@ const SearchPage = ({ carsData }) => {
             </div>
             <div className="p-5">
               <ul className="divide-y divide-gray-300">
-                {filteredServices.map((service) => (
-                  <li key={service.id} className="flex items-center justify-between py-3">
-                    <div className="flex flex-col">
-                      <span className="font-semibold">{service.name}</span>
+                {/* {filteredServices.map((service) => ( */}
+                {[services].map((service, idx) => (
+                  <li key={idx} className="flex items-center justify-between py-3">
+                    <div className="flex gap-2 ">
+                      <div>{idx + 1}.</div>
+                      <span className="">{service.title}</span>
+                      {/* <span className="font-semibold">{service.name}</span> */}
                       <span className="text-gray-600">${service.price}</span>
                     </div>
                     <button onClick={() => handleAddToCart(service)} className="rounded bg-blue-500 px-4 py-1 text-white hover:bg-blue-600">
@@ -272,21 +285,46 @@ const SearchPage = ({ carsData }) => {
               </ul>
             </div>
           </div>
-          <div className="relative col-span-2">
-            <div className="absolute left-0 top-0 z-10 h-full w-full">
+          <div className="relative col-span-3">
+            <div className="absolute left-0 top-0 z-10 h-full w-full pb-20">
               <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Cart:</div>
-              <div className=" sticky top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white p-10 shadow-md dark:border-neutral-500 dark:bg-neutral-700">
+              <div className=" sticky  top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white p-10 shadow-md dark:border-neutral-500 dark:bg-neutral-700">
                 <div>
-                  <ul>
+                  <div>
+                    <div className="mb-2 font-semibold ">Car:</div>
+                    <div>
+                      {make}, {model}, {years}
+                    </div>
+                  </div>
+                  <hr className="my-3" />
+                  <div className="mb-2 font-semibold">Summary:</div>
+                  <div className="grid grid-cols-7">
+                    <div className="col-span-5">Name</div>
+                    <div className="col-span-1">Price</div>
+                    <div className="col-span-1"></div>
+                  </div>
+                  <ul className="max-h-[500px] overflow-auto">
                     {cartItems.map((item) => (
-                      <li key={item.id}>
-                        {item.name} - ${item.price}
-                        <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                      <li key={item.id} className=" my-2 bg-slate-50">
+                        <div className="grid grid-cols-7">
+                          <div className="col-span-5">{item.name}</div>
+                          <div className="col-span-1">${item.price}</div>
+                          <button className="col-span-1" onClick={() => removeOneFromCart(item.id)}>
+                            x
+                          </button>
+                        </div>
                       </li>
                     ))}
                   </ul>
-                  <p>Total: ${getTotalCost()}</p>
-                  <button onClick={clearCart}>Clear Cart</button>
+                  <div className="mt-4 flex justify-between py-3">
+                    <button onClick={clearCart} className="text-neutral-500 underline underline-offset-2">
+                      Clear
+                    </button>
+                    <p className="font-bold">Total: ${getTotalCost()}</p>
+                  </div>
+                  <Button className="mt-5 w-full" variant={cartItems.length > 0 ? "" : "outline"} disabled={!(cartItems.length > 0)}>
+                    Make Reservation
+                  </Button>
                 </div>
               </div>
             </div>

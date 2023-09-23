@@ -30,6 +30,16 @@ export const useCartStore = create((set) => ({
     }));
   },
 
+  // New function to remove one instance of an item from the cart
+  removeOneFromCart: (serviceId) => {
+    const itemIndex = useCartStore.getState().cartItems.findIndex((item) => item.id === serviceId);
+    if (itemIndex !== -1) {
+      const updatedCartItems = [...useCartStore.getState().cartItems];
+      updatedCartItems.splice(itemIndex, 1);
+      set({ cartItems: updatedCartItems });
+    }
+  },
+
   clearCart: () => {
     set({ cartItems: [] });
   },

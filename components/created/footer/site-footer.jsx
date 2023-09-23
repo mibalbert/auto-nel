@@ -2,60 +2,152 @@
  * site-footer.jsx
  */
 
+"use client";
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/ui/icons"
-// import { ModeToggle } from "@/components/mode-toggle"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export function SiteFooter({ className }) {
+const SiteFooter = () => {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/user") || pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
-    <footer className={cn("bg-background",className)}>
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          {/* <Icons.logo /> */}
-          <p className="text-center text-sm leading-loose md:text-left">
-            Built by{" "}
-            <a
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              shadcn
-            </a>
-            . Hosted on{" "}
-            <a
-              href="https://vercel.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Vercel
-            </a>
-            . Illustrations by{" "}
-            <a
-              href="https://popsy.co"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Popsy
-            </a>
-            . The source code is available on{" "}
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              GitHub
-            </a>
-            .
-          </p>
+    <div class="flex min-h-[75vh] w-full items-center justify-center bg-neutral-950 pt-20 ">
+      <div class="mx-auto flex w-full max-w-7xl flex-col px-4 text-white">
+        <div class="w-full text-3xl font-bold">
+          <h1 class="w-full md:w-2/3">How can we help you. get in touch</h1>
         </div>
-        {/* <ModeToggle /> */}
+        <div class="mt-8 flex flex-col pb-20 md:flex-row md:justify-between">
+          <p class="w-full text-neutral-400 md:w-2/3">To ensure that all Wikipedia content is verifiable, anyone may question an uncited claim. If your work has been tagged</p>
+          <div class="w-44 pt-6 md:pt-0">
+            <Link href={"/contact-us"} className="text-md  w-full  max-w-3xl rounded-lg bg-white px-5 py-2 font-semibold text-black">
+              Contact US
+            </Link>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-8 border-t border-neutral-600 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
+          <div>
+            <p class="font-medium text-neutral-400">Services</p>
+
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  1on1 Coaching
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Company Review
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Accounts Review
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  HR Consulting
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  SEO Optimisation
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-medium text-neutral-400">Company</p>
+
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  About
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Meet the Team
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Accounts Review
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-medium text-neutral-400">Helpful Links</p>
+
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Contact
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  FAQs
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Live Chat
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-medium text-neutral-400">Legal</p>
+
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Accessibility
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Returns Policy
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Refund Policy
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="text-neutral-200 transition hover:opacity-75">
+                  Hiring Statistics
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="pt-10 text-xs text-neutral-500">&copy; 2022. Company Name. All rights reserved.</p>
       </div>
-    </footer>
-  )
-}
+    </div>
+  );
+};
+
+export default SiteFooter;

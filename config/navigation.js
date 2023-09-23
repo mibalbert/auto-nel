@@ -6,25 +6,32 @@
 const navigationConfig = {
   guestTopNav: [
     {
-      title: "Guest",
-      href: "/user/dashboard",
+      title: "Home",
+      href: "/",
     },
     {
-      title: "g",
-      href: "/docs",
+      title: "About Us",
+      href: "/about",
     },
     {
-      title: "guestNav",
-      href: "/docs",
+      title: "Products",
+      href: "/products",
     },
     {
-      title: "guestNav",
-      href: "/docs",
+      title: "Services",
+      href: "/services",
     },
     {
-      title: "Support",
-      href: "/support",
-      disabled: true,
+      title: "Contact Us",
+      href: "/contact",
+    },
+    {
+      title: "Blog",
+      href: "/blog",
+    },
+    {
+      title: "FAQ",
+      href: "/faq",
     },
   ],
   userTopNav: [
@@ -33,21 +40,20 @@ const navigationConfig = {
       href: "/user/dashboard",
     },
     {
-      title: "g",
-      href: "/docs",
+      title: "Profile",
+      href: "/user/profile",
     },
     {
-      title: "guestNav",
-      href: "/docs",
+      title: "Cart",
+      href: "/cart",
     },
     {
-      title: "guestNav",
-      href: "/docs",
+      title: "Settings",
+      href: "/user/settings",
     },
     {
-      title: "Support",
-      href: "/support",
-      disabled: true,
+      title: "Logout",
+      href: "/user/logout",
     },
   ],
   userSideNav: [

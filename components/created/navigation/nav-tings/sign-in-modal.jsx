@@ -8,15 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -36,14 +28,14 @@ const SignInModal = ({ session }) => {
 
   const [formValues, setFormValues] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -72,7 +64,7 @@ const SignInModal = ({ session }) => {
     } else if (formValues.password.length < 5) {
       setError({
         message: "Password must be at least 5 characters long!",
-        is: true,
+        is: true
       });
       return;
     }
@@ -83,22 +75,19 @@ const SignInModal = ({ session }) => {
       // Try to sign in with credentials here...
       const result = await signIn("credentials", {
         ...formValues,
-        redirect: false, // Set redirect to false to prevent redirection
+        redirect: false // Set redirect to false to prevent redirection
       });
 
-      if (
-        result &&
-        result.error === "Error: Email already in use by Signing in with Google"
-      ) {
+      if (result && result.error === "Error: Email already in use by Signing in with Google") {
         setShowRegister(true);
         setError({
           message: "Error: Email already in use by Signing in with Google",
-          is: true,
+          is: true
         });
       } else if (result && result.error === "User not in db") {
         setError({
           message: "User not in db",
-          is: true,
+          is: true
         });
       }
 
@@ -122,66 +111,48 @@ const SignInModal = ({ session }) => {
       ) : (
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline">Sign In</Button>
+            <Button variant="outline" className="w-28">
+              Sign In
+            </Button>
           </DialogTrigger>
           {!showRegister ? (
-            <DialogContent className=" sm:max-w-[425px] py-10 px-7">
-              <div className="absolute top-0 left-0 w-full h-[30%] bg-zinc-200 dark:bg-zinc-700 rounded-t-2xl "></div>
+            <DialogContent className=" px-7 py-10 sm:max-w-[425px]">
+              <div className="absolute left-0 top-0 h-[30%] w-full rounded-t-2xl bg-zinc-200 dark:bg-zinc-700 "></div>
               <DialogHeader className="z-10 gap-3 px-5">
-                <DialogTitle className="text-2xl font-bold text-center w-44">
-                  Sign In
-                </DialogTitle>
-                <DialogDescription className="text-center">
-                  {` Make changes to your profile here. Click save when you're done.`}
-                </DialogDescription>
+                <DialogTitle className="w-44 text-center text-2xl font-bold">Sign In</DialogTitle>
+                <DialogDescription className="text-center">{` Make changes to your profile here. Click save when you're done.`}</DialogDescription>
               </DialogHeader>
               <form
-                className="grid gap-5 px-5 pt-16 pb-4"
+                className="grid gap-5 px-5 pb-4 pt-16"
                 onSubmit={(event) => submitCredentials(event)} // Use onSubmit on the form
               >
-                <div className="grid items-center grid-cols-4 gap-3 ">
-                  {error.is ? (
-                    <div className="w-full col-span-4 text-sm text-center text-red-400 -top-8">
-                      {error.message}
-                    </div>
-                  ) : null}
+                <div className="grid grid-cols-4 items-center gap-3 ">
+                  {error.is ? <div className="-top-8 col-span-4 w-full text-center text-sm text-red-400">{error.message}</div> : null}
                   <Label htmlFor="email" className="col-span-4 text-left">
                     Email
                   </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    className="col-span-4 border-gray-500"
-                  />
+                  <Input id="email" type="email" name="email" onChange={handleChange} className="col-span-4 border-gray-500" />
                 </div>
-                <div className="grid items-center grid-cols-4 gap-3">
+                <div className="grid grid-cols-4 items-center gap-3">
                   <Label htmlFor="password" className="col-span-4 text-left">
                     Password
                   </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    className="col-span-4 border-gray-500"
-                  />
+                  <Input id="password" type="password" name="password" onChange={handleChange} className="col-span-4 border-gray-500" />
                 </div>
-                <div className="flex flex-col w-full gap-5 pt-5">
+                <div className="flex w-full flex-col gap-5 pt-5">
                   <Button
                     type="submit" // Use type="submit" to trigger form submission
                     disabled={credentialsClicked}
-                    className="w-full px-10 py-5 mx-auto border border-zinc-500"
+                    className="mx-auto w-full border border-zinc-500 px-10 py-5"
                   >
                     {credentialsClicked ? (
                       <div className="flex items-center">
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Signin-in...
                       </div>
                     ) : (
                       <div className="flex items-center justify-center">
-                        <Mail className="w-4 h-4 mr-3" />
+                        <Mail className="mr-3 h-4 w-4" />
                         <span>Sign In with Email</span>
                       </div>
                     )}
@@ -191,21 +162,13 @@ const SignInModal = ({ session }) => {
                       <span className="w-full border-t" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                      <span className="px-2 bg-background text-muted-foreground">
-                        Or continue with
-                      </span>
+                      <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
                     </div>
                   </div>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    disabled={credentialsClicked}
-                    className="w-full px-10 py-5 mx-auto border border-zinc-500"
-                    onClick={() => signIn("google")}
-                  >
+                  <Button type="button" variant="secondary" disabled={credentialsClicked} className="mx-auto w-full border border-zinc-500 px-10 py-5" onClick={() => signIn("google")}>
                     {googleClicked ? (
                       <div className="flex items-center">
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Signin-in...
                       </div>
                     ) : (
@@ -218,10 +181,7 @@ const SignInModal = ({ session }) => {
                 </div>
               </form>
               <DialogFooter className="flex w-full sm:flex-col">
-                <div className="mx-auto text-xs text-center ">
-                  Multumim ca a-ti ales Service Auto-Nel pentru Masina
-                  Dumeavoastra
-                </div>
+                <div className="mx-auto text-center text-xs ">Multumim ca a-ti ales Service Auto-Nel pentru Masina Dumeavoastra</div>
               </DialogFooter>
             </DialogContent>
           ) : null}

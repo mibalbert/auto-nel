@@ -182,7 +182,7 @@ model VehicleInspection {
 }
 
 model ShowcaseCar {
-  id                                String        @id @default(cuid())
+  id                                String             @id @default(cuid())
   make                              String
   model                             String
   generation                        String?
@@ -262,36 +262,41 @@ model ShowcaseCar {
   wheelRimsSize                     String?
   sourceLink                        String?
   CustomerCar                       CustomerCar[]
-  AService                          AService?
+  availableServices                 AvailableService[] @relation("CarServices")
 }
 
-model AService {
-  id        Int         @id @default(autoincrement())
-  carId     String      @unique
-  car       ShowcaseCar @relation(fields: [carId], references: [id])
-  jobId     Int
-  job       Job         @relation(fields: [jobId], references: [id])
-  timestamp DateTime    @default(now())
-  tasks     Task[]
+model AvailableService {
+  id                  Int           @id @default(autoincrement())
+  category            String
+  title               String
+  price               Int?
+  duration            Int?
+  dificulty           String?
+  active              Boolean?      @default(true)
+  availableForAllCars Boolean?      @default(true)
+  jobId               Int?
+  job                 Job?          @relation(fields: [jobId], references: [id])
+  timestamp           DateTime      @default(now())
+  tasks               Task[]
   // quotes    Quote[]
   // invoices  Invoice[]
+  ShowcaseCar         ShowcaseCar[] @relation("CarServices")
 
-  @@index([carId])
   @@index([jobId])
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
+  id          Int                @id @default(autoincrement())
   userId      String
-  user        User?     @relation(fields: [userId], references: [id])
+  user        User?              @relation(fields: [userId], references: [id])
   title       String
   description String?
   aserviceId  Int?
-  aservice    AService? @relation(fields: [aserviceId], references: [id])
+  services    AvailableService[] // Define a relation to available services
   jobId       Int? // Added jobId field to represent the relationship with Job
   // Remove the index below if there's no `operationId` field
   // @@index([operationId])
-  Job         Job?      @relation(fields: [jobId], references: [id])
+  Job         Job?               @relation(fields: [jobId], references: [id])
 
   @@index([userId])
   @@index([aserviceId])
@@ -299,16 +304,16 @@ model Task {
 }
 
 model Job {
-  id       Int         @id @default(autoincrement())
-  name     String
-  category String
-  time     Int
-  price    Float
-  carId    String      @unique
-  car      CustomerCar @relation(fields: [carId], references: [id])
-  AService AService[]
-  userId   String // A job belongs to one user
-  user     User?       @relation(fields: [userId], references: [id])
+  id               Int                @id @default(autoincrement())
+  name             String
+  category         String
+  time             Int
+  price            Float
+  carId            String             @unique
+  car              CustomerCar        @relation(fields: [carId], references: [id])
+  AvailableService AvailableService[]
+  userId           String // A job belongs to one user
+  user             User?              @relation(fields: [userId], references: [id])
 
   tasks   Task[] // One job can have multiple tasks
   Quote   Quote[]
