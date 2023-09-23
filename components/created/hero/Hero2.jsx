@@ -25,7 +25,11 @@ const getProductionYearsForModel = (model, data) => {
 };
 
 const Hero2 = ({ carsData }) => {
-  const { make, model, years, setMake, setModel, setYears } = useCarStore();
+  const { make, model, years, carImage, setMake, setModel, setYears, setCarImage } = useCarStore();
+
+  setMake("");
+  setModel("");
+  setYears("");
 
   const makes = getMake(carsData);
   const models = getModelsForMake(make, carsData);
@@ -34,14 +38,14 @@ const Hero2 = ({ carsData }) => {
   const handleMakeChange = (e) => {
     const newMake = e.target.value;
     setMake(newMake);
-    setModel(""); // Reset model when changing make
-    setYears(""); // Reset years when changing make
+    setModel("");
+    setYears("");
   };
 
   const handleModelChange = (e) => {
     const newModel = e.target.value;
     setModel(newModel);
-    setYears(""); // Reset years when changing model
+    setYears("");
   };
 
   const handleYearsChange = (e) => {
@@ -55,10 +59,11 @@ const Hero2 = ({ carsData }) => {
         AUTO-NEL AUTO-NEL
       </div>
       <div className="absolute left-0 top-0 z-50 h-full w-full">
-        <div className="z-10 mx-auto h-full w-full max-w-7xl border-x border-dashed"></div>{" "}
+        <div className="z-10 mx-auto h-full w-full max-w-7xl border-x border-dashed"></div>
       </div>
       <div className="absolute bottom-0 left-0 z-50 h-full w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]">
-        <Image src="/2019_mb_g63_amg_0000-first-side.png" alt="saa" width={500} height={500} className="z-50 h-full w-full object-contain" />
+        {/* <Image src="/2019_mb_g63_amg_0000-first-side.png" alt="saa" width={500} height={500} className="z-50 object-contain w-full h-full" /> */}
+        <Image src={carImage} alt="carImage" width={500} height={500} className="z-50 h-full w-full object-contain" />
       </div>
       <div className="relative h-full w-full">
         <div className="relative z-50 flex h-full w-full flex-col items-center pt-[7%]">

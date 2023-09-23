@@ -9,9 +9,11 @@ export const useCarStore = create((set) => ({
   make: '',
   model: '',
   years: '',
+  carImage: '/2019_mb_g63_amg_0000-first-side.png',
   setMake: (newMake) => set({ make: newMake }),
   setModel: (newModel) => set({ model: newModel }),
   setYears: (newYears) => set({ years: newYears }),
+  setCarImage: (newCarImage) => set({ carImage: newCarImage }),
 }));
 
 

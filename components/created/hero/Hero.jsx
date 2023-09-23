@@ -1,4 +1,7 @@
-import React from "react";
+/**
+ * Hero.jsx
+ */
+
 import Hero2 from "./Hero2";
 import prisma from "@/lib/prisma";
 

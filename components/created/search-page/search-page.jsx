@@ -8,79 +8,8 @@ import { useCarStore, useCartStore } from "@/store/store";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const services = [
-  {
-    id: 3,
-    name: "Oil Change Service",
-    price: 50,
-    forCars: [
-      { make: "Audi", models: ["A4", "Escape"] },
-      { make: "Chevrolet", models: ["Silverado", "Malibu"] }
-    ],
-    category: "Maintenance"
-  },
-  {
-    id: 4,
-    name: "Tire Rotation and Balance",
-    price: 60,
-    forCars: [
-      { make: "Mercedes-Benz", models: ["GLE", "S-Class"] },
-      { make: "Hyundai", models: ["Elantra", "Santa Fe"] }
-    ],
-    category: "Maintenance"
-  },
-  {
-    id: 5,
-    name: "Transmission Fluid Flush",
-    price: 120,
-    forCars: [
-      { make: "BMW", models: ["3 Series", "5 Series"] },
-      { make: "Mercedes-Benz", models: ["C-Class", "E-Class"] }
-    ],
-    category: "Maintenance"
-  },
-  {
-    id: 6,
-    name: "Brake Pad Replacement",
-    price: 80,
-    forCars: [
-      { make: "Volkswagen", models: ["Jetta", "Passat"] },
-      { make: "Subaru", models: ["Outback", "Impreza"] }
-    ],
-    category: "Repair"
-  },
-  {
-    id: 7,
-    name: "Coolant Flush Service",
-    price: 70,
-    forCars: [
-      { make: "Kia", models: ["Optima", "Sorento"] },
-      { make: "Mazda", models: ["CX-5", "Mazda3"] }
-    ],
-    category: "Maintenance"
-  },
-  {
-    id: 8,
-    name: "Battery Replacement",
-    price: 100,
-    forCars: [
-      { make: "Toyota", models: ["Camry", "Corolla"] },
-      { make: "Honda", models: ["Civic", "Accord"] }
-    ],
-    category: "Repair"
-  },
-  {
-    id: 9,
-    name: "Wheel Alignment",
-    price: 70,
-    forCars: [
-      { make: "Audi", models: ["A4", "Q5"] },
-      { make: "Lexus", models: ["RX", "IS"] }
-    ],
-    category: "Maintenance"
-  }
-];
+import Image from "next/image";
+import StoreCategoryCards from "./store-category-cards";
 
 // Helper functions
 const getMake = (data) => {
@@ -170,16 +99,25 @@ const SearchPage = ({ carsData, services }) => {
       <div className="mx-auto mb-44 h-full w-full max-w-screen-2xl">
         {/* <div className=" grid min-h-[calc(100vh-3.5rem)] grid-cols-12 border-x border-dashed ">
           <div className="relative col-span-1">
-            <div className="left-0 top-0 h-full w-full">
+            <div className="top-0 left-0 w-full h-full">
               <div className="absolute left-0  h-full w-full bg-gradient-to-r from-transparent via-transparent to-[#f9fafc] dark:to-[#2b2b2b]"></div>
               <div className="absolute left-0 top-0 h-[15%] w-full bg-gradient-to-t from-transparent via-transparent to-[#FFFFFF] dark:to-[#2e2e2e]"></div>
             </div>
-          </div>
-          <div className="col-span-8 h-full w-full  px-5"> */}
+          </div>w-full flex-col items-center justify-center md:h-[25%] md:w-[90%] md:flex-row
+          <div className="w-full h-full col-span-8 px-5"> */}
         <div className=" grid min-h-[calc(100vh-3.5rem)] grid-cols-12 border-x border-dashed ">
-          <div className="col-span-9 h-full w-full  px-5">
-            <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Search Service</div>
-            <div className="mx-auto h-auto min-h-[6rem] bg-neutral-100 dark:bg-neutral-600">
+          <div className="relative col-span-9 h-full max-h-[20%] w-full px-5">
+            <div className="flex h-full w-full ">
+              <div className="flex h-full w-2/3 justify-center pt-10">
+                <div className="font-serif text-3xl">Search Service</div>
+              </div>
+              <div className="h-full w-1/3">
+                <div className="relative h-full w-full">
+                  <Image src="/2019_mb_g63_amg_0000-first-side.png" alt="asdasd" fill className="h-full w-full scale-x-[-1] transform object-cover" />
+                </div>
+              </div>
+            </div>
+            <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] bg-neutral-100/70 backdrop-blur dark:bg-neutral-600">
               {!edit ? (
                 <div className="mx-auto grid max-w-[80%] grid-cols-4 gap-5 py-3 ">
                   <div className="col-span-1 flex flex-col gap-2">
@@ -267,6 +205,7 @@ const SearchPage = ({ carsData, services }) => {
               )}
             </div>
             <div className="p-5">
+              <StoreCategoryCards />
               <ul className="divide-y divide-gray-300">
                 {/* {filteredServices.map((service) => ( */}
                 {[services].map((service, idx) => (
@@ -297,7 +236,7 @@ const SearchPage = ({ carsData, services }) => {
                     </div>
                   </div>
                   <hr className="my-3" />
-                  <div className="mb-2 font-semibold">Summary:</div>
+                  <div className="mb-2 text-center font-semibold">Summary</div>
                   <div className="grid grid-cols-7">
                     <div className="col-span-5">Name</div>
                     <div className="col-span-1">Price</div>
@@ -305,10 +244,10 @@ const SearchPage = ({ carsData, services }) => {
                   </div>
                   <ul className="max-h-[500px] overflow-auto">
                     {cartItems.map((item) => (
-                      <li key={item.id} className=" my-2 bg-slate-50">
+                      <li key={item.id} className="my-2 bg-slate-50">
                         <div className="grid grid-cols-7">
-                          <div className="col-span-5">{item.name}</div>
-                          <div className="col-span-1">${item.price}</div>
+                          <div className="col-span-5 overflow-hidden text-sm">{item.title}</div>
+                          <div className="col-span-1 text-sm">${item.price}</div>
                           <button className="col-span-1" onClick={() => removeOneFromCart(item.id)}>
                             x
                           </button>

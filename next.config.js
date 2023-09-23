@@ -15,7 +15,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["randomuser.me", "api.carsxe.com"]
+    domains: ["randomuser.me", "api.carsxe.com", "img.favpng.com"]
   }
 }
 
