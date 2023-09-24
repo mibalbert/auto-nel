@@ -91,6 +91,7 @@
 }
 
 
+
 html {
   --brand-primary: rgb(138, 180, 248);
   --brand-secondary: rgb(193, 168, 226);
@@ -125,10 +126,9 @@ html {
   --admonition-warning-rgb-value: 253, 186, 116;
   --admonition-danger-rgb-value: 220, 38, 38;
 }
-.embla {
+/* .embla {
   --slide-spacing: 1rem;
   --slide-size: 30%;
-  /* --slide-height: 19rem; */
   --slide-height: auto;
   padding: 1.6rem;
 }
@@ -143,24 +143,25 @@ html {
   min-height: 100%;
   position: relative;
   height: var(--slide-height);
-}
-.embla__slide {
-  background-color: var(--brand-alternative);
-  flex: 0 0 var(--slide-size);
-  min-width: 0;
-  padding-left: var(--slide-spacing);
-  margin-right: 20px;
-  position: relative;
+} */
+/* .embla__slide { */
+  /* background-color: var(--brand-alternative); */
+  /* flex: 0 0 var(--slide-size); */
+  /* min-width: 0; */
+  /* padding-left: var(--slide-spacing); */
+  /* margin-right: 20px; */
+  /* position: relative; */
   /* min-height: 400px; */
-  height: var(--slide-height);
+  /* height: var(--slide-height); */
 
-}
-.embla__slide__img {
+/* } */
+/* .embla__slide__img {
   display: block;
   height: var(--slide-height);
   width: 100%;
   object-fit: cover;
-}
+} */
+
 /* .embla__slide__number {
   width: 4.6rem;
   height: 4.6rem;
@@ -193,7 +194,7 @@ html {
   right: 0;
   bottom: 0;
 } */
-.embla__progress {
+/* .embla__progress {
   z-index: 1;
   background-color: var(--background-site);
   position: absolute;
@@ -220,7 +221,7 @@ html {
   top: 0;
   bottom: 0;
   left: -100%;
-}
+} */
 
 
 

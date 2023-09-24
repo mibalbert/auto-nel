@@ -2,14 +2,14 @@
  * current-workload/page.jsx
  */
 
-import Kanban from "@/components/created/kanb/kanban";
-import KanbanBoard from "@/components/created/kanban/kanban-board";
+// import Kanban from "@/components/created/kanb/kanban";
+// import KanbanBoard from "@/components/created/kanban/kanban-board";
 
 const CurrentWorkload = () => {
   return (
-    <div className="z-10 flex-col mx-auto">
+    <div className="z-10 mx-auto flex-col">
       <div className="flex-1 ">{/* <KanbanBoard /> */}</div>
-      <Kanban />
+      {/* <Kanban /> */}
     </div>
   );
 };

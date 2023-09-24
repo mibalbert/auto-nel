@@ -17,7 +17,7 @@ export function NavItems({ session }) {
   const { topNav } = getNavigationConfig(userRole);
 
   return (
-    <div className="justify-end hidden w-full mr-4 md:flex">
+    <div className="justify-end hidden w-full mr-4 lg:flex">
       <nav className="flex items-center space-x-6 text-sm font-medium">
         {topNav.map((el, id) => {
           return (

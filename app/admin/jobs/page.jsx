@@ -1,56 +1,64 @@
-/**
- * view-all-clients/page.jsx
- */
+import React from "react";
 
-import { promises as fs } from "fs";
-import path from "path";
-import Image from "next/image";
-import { z } from "zod";
-
-import { columns } from "@/components/table/columns";
-import { DataTable } from "@/components/table/data-table";
-import { taskSchema } from "@/components/table/data/schema";
-import prisma from "@/lib/prisma";
-
-export const metadata = {
-  title: "Tasks",
-  description: "A task and issue tracker build using Tanstack Table.",
+const page = () => {
+  return <div>page</div>;
 };
 
-const getData = async () => {
-  const result = await prisma.job.findMany();
-  return result;
-};
+export default page;
 
-// Simulate a database read for tasks.
-async function getTasks() {
-  const datas = await getData();
+// /**
+//  * view-all-clients/page.jsx
+//  */
 
-  console.log("THE DATAS", datas);
+// import { promises as fs } from "fs";
+// import path from "path";
+// import Image from "next/image";
+// import { z } from "zod";
 
-  const data = await fs.readFile(
-    path.join(process.cwd(), "/components/table/data/task.json")
-  );
+// import { columns } from "@/components/table/columns";
+// import { DataTable } from "@/components/table/data-table";
+// import { taskSchema } from "@/components/table/data/schema";
+// import prisma from "@/lib/prisma";
 
-  const tasks = JSON.parse(data.toString());
+// export const metadata = {
+//   title: "Tasks",
+//   description: "A task and issue tracker build using Tanstack Table.",
+// };
 
-  return z.array(taskSchema).parse(tasks);
-}
+// const getData = async () => {
+//   const result = await prisma.job.findMany();
+//   return result;
+// };
 
-export default async function TaskPage() {
-  const tasks = await getTasks();
+// // Simulate a database read for tasks.
+// async function getTasks() {
+//   const datas = await getData();
 
-  return (
-    <div className="flex-col flex-1 hidden h-full p-8 space-y-8 md:flex">
-      <div className="flex items-center justify-between space-y-2">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
-          <p className="text-muted-foreground">
-            Here&apos;s a list of your tasks for this month!
-          </p>
-        </div>
-      </div>
-      <DataTable data={tasks} columns={columns} />
-    </div>
-  );
-}
+//   console.log("THE DATAS", datas);
+
+//   const data = await fs.readFile(
+//     path.join(process.cwd(), "/components/table/data/task.json")
+//   );
+
+//   const tasks = JSON.parse(data.toString());
+
+//   return z.array(taskSchema).parse(tasks);
+// }
+
+// export default async function TaskPage() {
+//   const tasks = await getTasks();
+
+//   return (
+//     <div className="flex-col flex-1 hidden h-full p-8 space-y-8 md:flex">
+//       <div className="flex items-center justify-between space-y-2">
+//         <div>
+//           <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
+//           <p className="text-muted-foreground">
+//             Here&apos;s a list of your tasks for this month!
+//           </p>
+//         </div>
+//       </div>
+//       <DataTable data={tasks} columns={columns} />
+//     </div>
+//   );
+// }

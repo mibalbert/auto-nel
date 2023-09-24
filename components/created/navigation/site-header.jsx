@@ -12,17 +12,15 @@ import { siteConfig } from "@/config/site";
 
 export async function SiteHeader({ session }) {
   return (
-    <header>
-      <div className="mx-auto flex h-14  max-w-screen-2xl justify-between px-[2%] lg:gap-0">
-        {/* <div className="xl:pl-[20%] 2xl:pl-[50%] pr-6 relative h-full flex items-center"> */}
-        {/* <div className="w-auto md:w-[200px] xl:w-[300px] 2xl:w-[400px] relative h-full  flex items-center"> */}
+    <header className="flex h-14 w-full justify-center">
+      <div className="flex w-full max-w-screen-2xl justify-between px-2 xl:px-[1%] 2xl:px-[3%]">
         <div className="relative flex h-full w-auto items-center">
-          <Link href="/" className="flex w-full items-center justify-end space-x-2 pl-5">
+          <Link href="/" className="flex w-full items-center justify-end space-x-2 pl-3">
             <Icons.logo className="h-5 w-5" />
             <span className="whitespace-nowrap font-bold sm:inline-block">{siteConfig.name}</span>
           </Link>
         </div>
-        <div className="flex h-full items-center justify-end gap-3 ">
+        <div className="flex h-full items-center justify-end gap-3">
           <NavItems session={session} />
           <MobileNav session={session} />
           <ModeToggle />

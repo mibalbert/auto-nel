@@ -2,23 +2,33 @@
  * user/dashboard/page.jsx
  */
 
-"use client";
-import UserDashboardCard from "@/components/created/user/user-dashboard-card";
-import { useSession } from "next-auth/react";
+import UserDashboard from "@/components/created/user/dashboard/user-dashboard";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
-const Dashboard = () => {
-  const session = useSession();
+const getData = async (email) => {
+  const data = await fetch("http://localhost:3000/api/user/get-user-full-data", {
+    method: "POST",
+    headers: {
+      // Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    // body: JSON.stringify(email)
+    body: JSON.stringify({ email: email })
+  });
 
-  console.log(session);
+  return await data.json();
+};
+const Dashboard = async () => {
+  const session = await getServerSession(authOptions);
+
+  const { userData } = await getData(session.user.email);
+
+  // console.log("dddddddddddd", data);
 
   return (
-    <section className="h-full w-full">
-      <div className="">
-        <div className="text-lg font-semibold">Hi, {session.data.user.name}!</div>
-      </div>
-      <UserDashboardCard />
-
-      <div>aslansldnl</div>
+    <section>
+      <UserDashboard data={userData} session={session} />
     </section>
   );
 };

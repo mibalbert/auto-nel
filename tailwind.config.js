@@ -21,6 +21,10 @@ module.exports = {
       },
     },
     extend: {
+      scale: {
+        '98': '0.98',
+        '103': '1.03'
+      },
       fontFamily: {
         ballon: ['Ballon']
       },

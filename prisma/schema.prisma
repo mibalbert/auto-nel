@@ -94,9 +94,9 @@ model VerificationToken {
 
 model CustomerCar {
   id                 String             @id @default(cuid())
-  make               String
-  model              String
-  year               Int
+  make               String?
+  model              String?
+  year               Int?
   vin                String?            @unique
   mileage            Float?
   gearType           String?
@@ -115,8 +115,8 @@ model CustomerCar {
   warrantyEnd        DateTime?
   tireInformation    TireInformation?
   vehicleInspection  VehicleInspection?
-  specs              Json
-  picture            String
+  specs              Json?
+  picture            String?
   Job                Job?
 
   ownerId String?
@@ -134,8 +134,8 @@ model ServiceHistory {
   carId       String
   car         CustomerCar @relation(fields: [carId], references: [id])
   serviceDate DateTime
-  description String
-  cost        Float
+  description String?
+  cost        Float?
 
   @@index([carId])
 }
@@ -260,9 +260,29 @@ model ShowcaseCar {
   powerSteering                     String?
   tiresSize                         String?
   wheelRimsSize                     String?
-  sourceLink                        String?
+  image                             Image[]
   CustomerCar                       CustomerCar[]
   availableServices                 AvailableService[] @relation("CarServices")
+}
+
+model Image {
+  id              Int          @id @default(autoincrement())
+  make            String?
+  model           String?
+  yearsProduction String?
+  filename        String?
+  carPose         POSE         @default(FRONT)
+  car             ShowcaseCar? @relation(fields: [carId], references: [id])
+  carId           String?
+  url             String?
+
+  @@index([carId])
+}
+
+enum POSE {
+  FRONT
+  SIDE
+  BACK
 }
 
 model AvailableService {

@@ -6,34 +6,42 @@ import SearchPage from "@/components/created/search-page/search-page";
 import prisma from "@/lib/prisma";
 
 const getCarsData = async () => {
-  const res = await prisma.showcaseCar.findMany({
+  const data = await prisma.showcaseCar.findMany({
     select: {
       make: true,
       model: true,
       productionYears: true,
       availableServices: {
         select: {
+          id: true,
           category: true,
           title: true
+        }
+      },
+      image: {
+        select: {
+          filename: true,
+          carPose: true,
+          url: true
         }
       }
     }
   });
 
-  let services = {};
-  res.forEach((car) => {
+  let services = [];
+  data.forEach((car) => {
     car.availableServices.forEach((service) => {
-      services = {
-        ...services,
-        category: service.category,
-        title: service.title
-      };
+      services.push(service);
     });
   });
 
-  console.log("services", services);
-
-  return { carsData: res, services };
+  let images = [];
+  data.forEach((el) => {
+    el.image.forEach((img) => {
+      images.push(img);
+    });
+  });
+  return { data, services, images };
 };
 
 const ShopServices = async () => {
@@ -41,7 +49,7 @@ const ShopServices = async () => {
 
   return (
     <div>
-      <SearchPage carsData={data.carsData} services={data.services} />
+      <SearchPage carsData={data.data} services={data.services} />
     </div>
   );
 };

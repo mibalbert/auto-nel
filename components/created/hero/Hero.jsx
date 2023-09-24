@@ -11,10 +11,23 @@ const getCars = async () => {
       make: true,
       model: true,
       productionYears: true,
-      sourceLink: true
+      image: {
+        select: {
+          filename: true,
+          carPose: true,
+          url: true
+        }
+      }
     }
   });
-  return data;
+
+  let images = [];
+  data.forEach((el) => {
+    el.image.forEach((img) => {
+      images.push(img);
+    });
+  });
+  return { data, images };
 };
 
 const Hero = async () => {
