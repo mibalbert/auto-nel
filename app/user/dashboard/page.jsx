@@ -21,10 +21,7 @@ const getData = async (email) => {
 };
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
-
   const { userData } = await getData(session.user.email);
-
-  // console.log("dddddddddddd", data);
 
   return (
     <section>

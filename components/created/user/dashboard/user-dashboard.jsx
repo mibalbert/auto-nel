@@ -69,14 +69,14 @@ const UserDashboard = ({ data, session }) => {
           </div>
         ) : (
           // <div className={cn(`grid min-h-[200px]  gap-10`, `grid-cols-${cars.length + 1}`)}>
-          <div className="relative h-full w-full overflow-hidden py-5">
-            <div className="embla relative flex h-full w-full gap-10" ref={emblaRef}>
-              <div className="embla__container relative mx-2 flex h-full min-h-fit touch-pan-y items-center gap-16 py-10">
+          <div className="relative h-auto w-full overflow-hidden py-5">
+            <div className="embla relative flex h-auto w-full gap-10" ref={emblaRef}>
+              <div className="embla__container relative mx-2 flex h-auto touch-pan-y items-center gap-16 py-10 pb-32">
                 {cars.map((el, idx) => (
                   <Link
                     key={idx}
-                    href={`/`}
-                    className="embla__slide group relative h-full min-h-[180px] w-full min-w-[180px] max-w-[40%] rounded-lg border border-dashed border-neutral-300  hover:cursor-pointer  active:cursor-grabbing"
+                    href={`/user/car/${el.id}+${el.make}+${el.model}`}
+                    className="embla__slide group relative h-auto min-h-[200px] w-full min-w-[180px] max-w-[40%] rounded-lg border border-dashed border-neutral-300  hover:cursor-pointer  active:cursor-grabbing"
                   >
                     <div className="absolute -top-16 left-0 flex h-full w-full ">
                       <Image
@@ -88,13 +88,18 @@ const UserDashboard = ({ data, session }) => {
                       />
                     </div>
                     <div className="absolute -bottom-14 left-0 z-50 h-full w-full transform p-3 duration-300 group-hover:scale-105">
-                      <div className="supports-backdrop-blur:bg-neutral-700/80 h-full w-full rounded-lg border p-5 backdrop-blur-md">
-                        <div className="h-full w-full rounded-lg bg-white/70 px-4 py-2 dark:bg-neutral-800">
+                      <div className="supports-backdrop-blur:bg-neutral-700/80 h-auto w-full rounded-lg border backdrop-blur-md ">
+                        {/* <div className="flex flex-col w-full h-auto gap-3 px-4 py-2 rounded-lg supports-backdrop-blur:bg-neutral-700/80 bg-white/50 backdrop-blur-lg dark:bg-neutral-800/50 "> */}
+                        <div className="flex h-auto w-full flex-col gap-3 rounded-lg bg-gradient-to-b from-neutral-300/60 from-20% via-transparent to-transparent p-8 dark:from-neutral-800/60">
                           <div className="flex text-2xl font-bold text-neutral-900 dark:text-neutral-300">
                             {el.make} {el.model}
                           </div>
-                          <div>
+                          <div className="grid grid-cols-2 grid-rows-3">
                             <div>CP:116</div>
+                            <div>Engine:1995cm3</div>
+                            <div>Engine:1995cm3</div>
+                            <div>Engine:1995cm3</div>
+                            <div>Engine:1995cm3</div>
                             <div>Engine:1995cm3</div>
                           </div>
                         </div>

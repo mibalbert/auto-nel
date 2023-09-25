@@ -64,7 +64,7 @@ const createNewUser = async (credentials) => {
       provider: 'credentials',
       providerAccountId: user.id,
       access_token: generateAccessToken(),
-      expires_at: generateExpirationTimestamp(),
+      expires_at: new Date.now(),
       token_type: 'Bearer',
       id_token: generateRandToken()
     },

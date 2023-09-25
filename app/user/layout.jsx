@@ -14,7 +14,7 @@ export default async function DashboardLayout({ children }) {
     <div className="mx-auto w-full max-w-screen-2xl ">
       <div className="flex-1 grid-cols-[230px_minmax(0,1fr)] items-start md:grid md:gap-0">
         <aside className="fixed z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 lg:sticky lg:block">
-          <ScrollArea className="relative h-full px-2 pt-10 xl:px-6">
+          <ScrollArea className="relative h-full px-2 pt-3 xl:px-6">
             <div className="absolute right-0 top-0 h-full w-[50%] bg-gradient-to-r from-transparent via-transparent to-[#F9FAFC] dark:to-[#2b2b2b]"></div>
             <div className="absolute right-0 top-0 h-[15%] w-full bg-gradient-to-t from-transparent via-transparent to-[#FFFFFF] dark:to-[#2e2e2e]"></div>
             <SidebarNav session={session} className="relative z-50" />

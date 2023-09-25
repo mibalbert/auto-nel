@@ -16,6 +16,15 @@ export const useCarStore = create((set) => ({
   setCarImage: (newCarImage) => set({ carImage: newCarImage }),
 }));
 
+export const useAddCustomerCarStore = create((set) => ({
+  make: '',
+  model: '',
+  years: '',
+  setMake: (newMake) => set({ make: newMake }),
+  setModel: (newModel) => set({ model: newModel }),
+  setYears: (newYears) => set({ years: newYears }),
+}));
+
 
 export const useCartStore = create((set) => ({
   cartItems: [],
