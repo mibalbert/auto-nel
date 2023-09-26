@@ -11,13 +11,14 @@ const getData = async () => {
 
 const AddNewCar = async () => {
   const data = await getData();
-
-  console.log("FFFF", data);
   return (
+    ///TO-DO add a multi step form
     <section>
       <div className="text-2xl">+Add a New Car</div>
-
-      <AddNewCarForm data={data.showcaseCarData} />
+      <div className="grid grid-cols-5">
+        <AddNewCarForm className="col-span-3" data={data.showcaseCarData} />
+        <div>Instructions</div>
+      </div>
     </section>
   );
 };

@@ -1119,3 +1119,175 @@ export default SearchPage;
 
 //   @@index([userId])
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+/**
+ * add-new-car-form.jsx
+ */
+
+"use client";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { useAddCustomerCarStore } from "@/store/store";
+
+const AddNewCarForm = ({ data }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
+  const { make, model, years, setMake, setModel, setYears } = useAddCustomerCarStore();
+
+  const handleMakeChange = (e) => {
+    const newMake = e.target.value;
+    setMake(newMake);
+    setModel(""); // Reset model when changing make
+    setYears(""); // Reset years when changing make
+  };
+
+  const handleModelChange = (e) => {
+    const newModel = e.target.value;
+    setModel(newModel);
+    setYears(""); // Reset years when changing model
+  };
+
+  const handleYearsChange = (e) => {
+    const newYears = e.target.value;
+    setYears(newYears);
+  };
+
+  const makes = [...new Set(data.map((el) => el.make))];
+  const models = data.filter((el) => el.make === make).map((el) => el.model);
+  const yearsPeriod = [...new Set(data.filter((el) => el.model === model).map((el) => el.productionYears))];
+
+  const onSubmit = (data) => {
+    /// Add the check for the VIN befor submitting, and return error if there isn't any
+
+    console.log(data);
+  };
+  const onVinSubmit = (data) => {
+    /// Add the check for the VIN befor submitting, and return error if there isn't any
+
+    console.log(data);
+  };
+
+  return (
+    <section>
+      <div>Form</div>
+
+      <form onSubmit={handleSubmit(onVinSubmit)} className="flex flex-col py-8 space-y-8">
+        <div className="flex flex-col ">
+          <label>Input VIN number</label>
+          <input {...register("vin")} className="px-2 py-1 border border-gray-300 rounded" />
+        </div>{" "}
+        <Button type="submit">Submit</Button>
+      </form>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col py-8 space-y-8">
+        <div className="flex flex-col ">
+          <div className="flex flex-col ">
+            <label>Input VIN number</label>
+            <input {...register("vin")} className="px-2 py-1 border border-gray-300 rounded" />
+          </div>
+
+          <label for="make">Make</label>
+          <select name="make" {...register("make")} onChange={handleMakeChange}>
+            <option>Select a Make</option>
+            {makes.map((el, idx) => (
+              <option key={idx} value={el}>
+                {el}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col ">
+          <label>Model</label>
+          <select {...register("model")} onChange={handleModelChange}>
+            <option>Select a Model</option>
+            {models.map((el, idx) => (
+              <option key={idx} value={el}>
+                {el}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col ">
+          <label>Production Years</label>
+          <select {...register("productionYears")} onChange={handleYearsChange}>
+            <option>Select a Year Period</option>
+            {yearsPeriod.map((el, idx) => (
+              <option key={idx} value={el}>
+                {el}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col ">
+          <input defaultValue="test" {...register("example")} className="px-2 py-1 border border-gray-300 rounded" />
+        </div>
+        <div className="flex flex-col ">
+          <input {...register("example123", { required: true })} className="px-2 py-1 border border-gray-300 rounded" />
+          {errors.example123 && <span className="text-red-600">This field is required</span>}
+        </div>
+        <div className="flex flex-col ">
+          <input {...register("exampleRequired", { required: true })} className="px-2 py-1 border border-gray-300 rounded" />
+          {errors.exampleRequired && <span className="text-red-600">This field is required</span>}
+        </div>
+        <Button type="submit">Submit</Button>
+      </form>
+    </section>
+  );
+};
+
+export default AddNewCarForm;
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

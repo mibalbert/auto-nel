@@ -108,23 +108,11 @@ const navigationConfig = {
   ],
   adminSideNav: [
     {
-      title: "Overview",
+      title: "Home",
       data: [{
-        title: "Home",
+        title: "Dashboard",
         href: "/admin/home",
       }],
-    },
-    {
-      title: "Clients",
-      data: [{
-        title: "View All Clients",
-        href: "/admin/view-all-clients",
-      },
-      {
-        title: "Create new Guest User",
-        href: "/admin/create-new-guest-user"
-      }
-      ],
     },
     {
       title: "Workload",
@@ -155,6 +143,18 @@ const navigationConfig = {
       {
         title: "Test",
         href: "/admin/test"
+      }
+      ],
+    },
+    {
+      title: "Clients",
+      data: [{
+        title: "View Clients",
+        href: "/admin/clients",
+      },
+      {
+        title: "+Create User",
+        href: "/admin/create-user"
       }
       ],
     },

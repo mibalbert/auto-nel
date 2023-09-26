@@ -3,6 +3,9 @@
 const webpack = require('webpack');
 
 const nextConfig = {
+  experimental: {
+    serverActions: true,
+  },
   reactStrictMode: false,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(

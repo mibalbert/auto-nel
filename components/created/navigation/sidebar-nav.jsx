@@ -18,11 +18,15 @@ export function SidebarNav({ className, session }) {
   const [isOpen, setIsOpen] = useState(true);
 
   const { sideNav } = getNavigationConfig(session.user.role);
-
+  const [padding, setPadding] = useState(true);
   const [oo, setOo] = useState(false);
   const [op, setOp] = useState(null);
 
   useEffect(() => {
+    if (pathname.startsWith("/admin")) {
+      setPadding(false);
+    }
+
     if (pathname.startsWith("/user/car")) {
       let pp = pathname.split("/");
       console.log(pp);
@@ -46,7 +50,7 @@ export function SidebarNav({ className, session }) {
           ) : (
             <></>
           )}
-          <div className="absolute left-0 top-10 h-full w-full">
+          <div className={cn("absolute left-0 h-full w-full", padding ? "top-10" : "top-0")}>
             {sideNav.map((item, index) => (
               <div key={index}>
                 <div className="text-xl font-semibold text-neutral-800 dark:text-neutral-400">{item.title}</div>

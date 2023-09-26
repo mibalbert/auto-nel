@@ -23,7 +23,7 @@ export const metadata = {
 const Dashboard = () => {
   return (
     <section className="h-full w-full ">
-      <div className="z-10  min-h-[800px] max-w-[95%]  flex-col md:flex ">
+      <div className="z-10  min-h-[800px] flex-col md:flex ">
         <div className="space-y-4 p-8 pt-6 ">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>

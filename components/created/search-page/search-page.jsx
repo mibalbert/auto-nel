@@ -28,7 +28,7 @@ const getProductionYearsForModel = (model, data) => {
 
 const getCarImage = (data, make, model, productionYears) => {
   console.log("first", data);
-// 
+  //
   const oo = data.filter((el) => el.make === make && el.model === model && el.productionYears === productionYears);
 
   // const oo = data.filter((el) => "Audi" === make);
@@ -105,121 +105,130 @@ const SearchPage = ({ carsData, services }) => {
   console.log("CartItems", cartItems);
 
   return (
-    <section className="relative mx-auto mb-32 grid h-full min-h-[calc(100vh-3.5rem)] max-w-screen-2xl grid-cols-12 border-x border-dashed ">
-      <div className="relative w-full h-full col-span-9 px-10 ">
-        <div className="flex h-full max-h-[180px] w-full">
-          <div className="flex justify-center w-2/3 h-full pt-10">
-            <div className="font-serif text-3xl">Search Service...</div>
-          </div>
-          <div className="relative flex items-end w-1/3 h-full">
-            <div className="relative w-full h-full">
-              <Image src={carImage || "/2019_mb_g63_amg_0000-first-side.png"} alt="asdasd" width={500} height={500} priority className="h-full w-full scale-x-[-1] transform object-cover" />
-            </div>
-          </div>
-        </div>
-        <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] bg-neutral-100/70 backdrop-blur dark:bg-neutral-600">
-          {!edit ? (
-            <div className="mx-auto grid max-w-[80%] grid-cols-4 gap-5 py-3 ">
-              <div className="flex flex-col col-span-1 gap-2">
-                <label className="text-sm text-neutral-700 dark:text-neutral-400">Make:</label>
-                <select
-                  onChange={(e) => handleMakeChange(e)}
-                  value={make}
-                  className="w-full p-1 border rounded-lg border-neutral-600 bg-neutral-50 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
-                >
-                  <option value="">Select a Make</option>
-                  {[...makes].map((el, idx) => (
-                    <option key={idx} value={el}>
-                      {el}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex flex-col col-span-1 gap-2">
-                <label className="text-sm text-neutral-700 dark:text-neutral-400">Model:</label>
-                <select
-                  value={model}
-                  onChange={(e) => handleModelChange(e)}
-                  className="w-full p-1 border rounded-lg border-neutral-600 bg-neutral-50 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
-                  disabled={!make}
-                >
-                  <option value="">Select a Model</option>
-                  {[...models].map((el, idx) => (
-                    <option key={idx} value={el}>
-                      {el}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex flex-col col-span-1 gap-2">
-                <label className="text-sm text-neutral-700 dark:text-neutral-400">Years:</label>
-                <select
-                  value={years}
-                  onChange={(e) => handleYearsChange(e)}
-                  className="w-full p-1 border rounded-lg border-neutral-600 bg-neutral-50 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
-                  disabled={!model}
-                >
-                  <option value="">Select years</option>
-                  {[...yearsPeriod].map((el, idx) => (
-                    <option key={idx} value={el}>
-                      {el}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex items-end col-span-1">
-                <Button variant="link" onClick={() => setEdit(!edit)}>
-                  Save
-                </Button>
+    <section className="relative mx-auto mb-32 grid h-full min-h-[calc(100vh-3.5rem)] max-w-screen-2xl grid-cols-12 border-x border-dashed  ">
+      <div className="relative col-span-9 h-full w-full px-10">
+        <div className="h-full w-full bg-gradient-to-b from-transparent via-neutral-100 to-transparent ">
+          <div className="flex h-full max-h-[180px] w-full">
+            <div className="flex h-full w-2/3 pt-10">
+              <div className="mx-auto flex h-full w-1/2 flex-col ">
+                <div className="font-serif text-3xl">Search Service...</div>
+                <div className="font-serif text-sm">We offer over 300 services to choose from:</div>
               </div>
             </div>
-          ) : (
-            <div className="mx-auto flex max-w-[80%] flex-col gap-1 py-3">
-              <div className="pl-2 text-sm text-neutral-700 dark:text-neutral-300 ">Available services for:</div>
-              <div className="grid grid-cols-5 gap-2 overflow-hidden text-sm bg-white whitespace-nowrap dark:bg-neutral-700 ">
-                <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
-                  <span>Make:</span>
-                  <span className="font-semibold">{make}</span>
+            <div className="relative flex h-full w-1/3 items-end">
+              <div className="relative h-full w-full">
+                <Image src={carImage || "/2019_mb_g63_amg_0000-first-side.png"} alt="asdasd" width={500} height={500} priority className="h-full w-full scale-x-[-1] transform object-contain" />
+              </div>
+            </div>
+          </div>
+          {/* <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] bg-neutral-100/70 backdrop-blur dark:bg-neutral-600"> */}
+          <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] rounded-lg bg-gradient-to-r from-neutral-900 via-neutral-900/80 to-neutral-900/30  pb-4 pt-2  backdrop-blur dark:bg-neutral-100/70">
+            {!edit ? (
+              <div className="mx-auto grid max-w-[80%] grid-cols-4 gap-5 py-3 ">
+                <div className="col-span-1 flex flex-col gap-2">
+                  <label className="text-sm text-neutral-700 dark:text-neutral-400">Make:</label>
+                  <select
+                    onChange={(e) => handleMakeChange(e)}
+                    value={make}
+                    className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
+                  >
+                    <option value="">Select a Make</option>
+                    {[...makes].map((el, idx) => (
+                      <option key={idx} value={el}>
+                        {el}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
-                  <span>Model:</span>
-                  <span className="font-semibold">{model}</span>
+
+                <div className="col-span-1 flex flex-col gap-2">
+                  <label className="text-sm text-neutral-700 dark:text-neutral-400">Model:</label>
+                  <select
+                    value={model}
+                    onChange={(e) => handleModelChange(e)}
+                    className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
+                    disabled={!make}
+                  >
+                    <option value="">Select a Model</option>
+                    {[...models].map((el, idx) => (
+                      <option key={idx} value={el}>
+                        {el}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
-                  <span>Variant:</span>
-                  <span className="font-semibold">{years}</span>
+
+                <div className="col-span-1 flex flex-col gap-2">
+                  <label className="text-sm text-neutral-700 dark:text-neutral-400">Years:</label>
+                  <select
+                    value={years}
+                    onChange={(e) => handleYearsChange(e)}
+                    className="w-full rounded-lg border border-neutral-600 bg-neutral-50 p-1 disabled:bg-neutral-300 dark:bg-neutral-400 dark:disabled:bg-neutral-800"
+                    disabled={!model}
+                  >
+                    <option value="">Select years</option>
+                    {[...yearsPeriod].map((el, idx) => (
+                      <option key={idx} value={el}>
+                        {el}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
-                  <span>Years:</span>
-                  <span className="font-semibold">{years}</span>
-                </div>
-                <div className="flex items-center justify-center col-span-1">
-                  <Button variant="link" className="" onClick={() => setEdit(!edit)}>
-                    X Modify
+                <div className="col-span-1 flex items-end">
+                  <Button variant="link" onClick={() => setEdit(!edit)}>
+                    Save
                   </Button>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-        <div className="px-10 ">
-          <StoreCategoryCards data={services} />
-        </div>
-        <div className="flex h-full max-h-[250px] w-full">
-          <div className="relative flex items-end w-1/3 h-full">
-            <div className="relative w-full h-full">
-              <Image src={carImage || "/2019_mb_g63_amg_0000-first-side.png"} alt="asdasd" width={500} height={500} priority className="object-cover w-full h-full transform" />
-            </div>
+            ) : (
+              <div className="mx-auto flex max-w-[80%] flex-col gap-1 py-3">
+                <div className="pl-2 text-sm text-neutral-200 dark:text-neutral-800 ">Available services for:</div>
+                <div className="grid grid-cols-5 gap-2 overflow-hidden whitespace-nowrap bg-white text-sm dark:bg-neutral-700 ">
+                  <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
+                    <span>Make:</span>
+                    <span className="font-semibold">{make}</span>
+                  </div>
+                  <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
+                    <span>Model:</span>
+                    <span className="font-semibold">{model}</span>
+                  </div>
+                  <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
+                    <span>Variant:</span>
+                    <span className="font-semibold">{years}</span>
+                  </div>
+                  <div className="col-span-1 flex items-center justify-center gap-1.5 overflow-hidden">
+                    <span>Years:</span>
+                    <span className="font-semibold">{years}</span>
+                  </div>
+                  <div className="col-span-1 flex items-center justify-center">
+                    <Button variant="link" className="" onClick={() => setEdit(!edit)}>
+                      X Modify
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-          <div className="flex justify-center w-2/3 h-full pt-10">
-            <div className="font-serif text-3xl">Search Service...</div>
+          <div className="px-10 ">
+            <StoreCategoryCards data={services} />
+          </div>
+          <div className="flex h-full max-h-[250px] w-full">
+            <div className="relative flex h-full w-1/3 items-end">
+              <div className="relative h-full w-full">
+                <Image src={carImage || "/2019_mb_g63_amg_0000-first-side.png"} alt="asdasd" width={500} height={500} priority className="h-full w-full transform object-contain" />
+              </div>
+            </div>
+            <div className="flex h-full w-2/3 justify-center pt-10">
+              <div className="flex h-1/2 w-1/2 flex-col justify-between">
+                <div className="font-serif text-3xl">Search Service...</div>
+                <Button>Contact-Us </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="relative h-full col-span-3">
-        <div className="absolute top-0 left-0 z-10 w-full h-full pb-20">
+      <div className="relative col-span-3 h-full">
+        <div className="absolute left-0 top-0 z-10 h-full w-full pb-20">
           <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Cart:</div>
           <div className=" sticky  top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white  p-10 shadow-md dark:border-neutral-500 dark:bg-neutral-700">
             <div>
@@ -230,7 +239,7 @@ const SearchPage = ({ carsData, services }) => {
                 </div>
               </div>
               <hr className="my-3" />
-              <div className="mb-2 font-semibold text-center">Summary</div>
+              <div className="mb-2 text-center font-semibold">Summary</div>
               <div className="grid grid-cols-7">
                 <div className="col-span-5">Name</div>
                 <div className="col-span-1">Price</div>
@@ -249,19 +258,20 @@ const SearchPage = ({ carsData, services }) => {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between py-3 mt-4">
-                <button onClick={clearCart} className="underline text-neutral-500 underline-offset-2">
+              <div className="mt-4 flex justify-between py-3">
+                <button onClick={clearCart} className="text-neutral-500 underline underline-offset-2">
                   Clear
                 </button>
                 <p className="font-bold">Total: ${getTotalCost()}</p>
               </div>
-              <Button className="w-full mt-5" variant={cartItems.length > 0 ? "" : "outline"} disabled={!(cartItems.length > 0)}>
+              <Button className="mt-5 w-full" variant={cartItems.length > 0 ? "" : "outline"} disabled={!(cartItems.length > 0)}>
                 Make Reservation
               </Button>
             </div>
           </div>
         </div>
-        <div className="absolute left-0 right-0 h-full w-[50%] bg-gradient-to-l from-transparent via-transparent to-[#f9fafc] dark:to-[#2b2b2b]"></div>
+        {/* <div className="absolute left-0 right-0 h-full w-[50%] bg-gradient-to-l from-transparent via-transparent to-[#f9fafc] dark:to-[#2b2b2b]"></div> */}
+        <div className="absolute left-0 right-0 h-full w-[50%] bg-gradient-to-l from-transparent via-transparent to-[#f3f3f3] dark:to-[#2b2b2b]"></div>
         <div className="absolute right-0 top-0 h-[15%] w-full bg-gradient-to-t from-transparent via-transparent to-[#FFFFFF] dark:to-[#2e2e2e]"></div>
         <div className="absolute bottom-0 right-0 h-[15%] w-full bg-gradient-to-b from-transparent via-transparent to-[#FFFFFF] dark:to-[#2e2e2e]"></div>
       </div>

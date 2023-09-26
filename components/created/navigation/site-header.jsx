@@ -1,6 +1,7 @@
 /**
  * site-header.jsx
  */
+import { headers } from "next/headers";
 
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { NavItems } from "./nav-items";
@@ -11,6 +12,12 @@ import { Icons } from "@/components/ui/icons";
 import { siteConfig } from "@/config/site";
 
 export async function SiteHeader({ session }) {
+  const headersList = headers();
+  const domain = headersList.get("host") || "";
+  const fullUrl = headersList.get("referer") || "";
+  // if (fullUrl.includes("/admin")) {
+
+  // }
   return (
     <header className="flex h-14 w-full justify-center">
       <div className="flex w-full max-w-screen-2xl justify-between px-2 xl:px-[1%] 2xl:px-[3%]">
