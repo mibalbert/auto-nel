@@ -27,7 +27,7 @@ export function SidebarNav({ className, session }) {
       setPadding(false);
     }
 
-    if (pathname.startsWith("/user/car")) {
+    if (pathname.startsWith("/user/cars/")) {
       let pp = pathname.split("/");
       console.log(pp);
       pp = pp[pp.length - 1].split("+");

@@ -41,8 +41,6 @@ const getCarImage = (data, make, model, productionYears) => {
 const Hero2 = ({ carsData }) => {
   const { make, model, years, carImage, setMake, setModel, setYears, setCarImage } = useCarStore();
 
-  console.log(carImage);
-
   useEffect(() => {
     setMake("");
     setModel("");
@@ -74,8 +72,6 @@ const Hero2 = ({ carsData }) => {
     const img = getCarImage(carsData.images, make, model, years);
     setCarImage(img);
   };
-
-  console.log(carsData);
 
   return (
     <section className="relative min-h-[90vh] overflow-hidden bg-gradient-to-b from-transparent via-transparent to-[#ecedef] dark:to-[#1c1c1c]">

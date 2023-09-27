@@ -1,12 +1,12 @@
 /**
- * clients/page.jsx
+ * jobs.jsx
  */
 
 import prisma from "@/lib/prisma";
 
-const Clients = async () => {
+const Services = async () => {
   try {
-    const data = await prisma.user.findMany();
+    const data = await prisma.availableService.findMany();
 
     if (!data || data.length === 0) {
       // Handle the case where no quote was found
@@ -27,10 +27,10 @@ const Clients = async () => {
     // Handle the error gracefully, e.g., show an error message
     return (
       <div>
-        <p>There was an error fetching clients.</p>
+        <p>There was an error fetching services.</p>
       </div>
     );
   }
 };
 
-export default Clients;
+export default Services;

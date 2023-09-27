@@ -1,10 +1,10 @@
 /**
- * clients/page.jsx
+ * parts/page.jsx
  */
 
 import prisma from "@/lib/prisma";
 
-const Clients = async () => {
+const Parts = async () => {
   try {
     const data = await prisma.user.findMany();
 
@@ -12,7 +12,7 @@ const Clients = async () => {
       // Handle the case where no quote was found
       return (
         <div>
-          <p>No data found.</p>
+          <p>No parts found.</p>
         </div>
       );
     }
@@ -27,10 +27,10 @@ const Clients = async () => {
     // Handle the error gracefully, e.g., show an error message
     return (
       <div>
-        <p>There was an error fetching clients.</p>
+        <p>There was an error fetching parts.</p>
       </div>
     );
   }
 };
 
-export default Clients;
+export default Parts;

@@ -40,7 +40,6 @@ const getCarImage = (data, make, model, productionYears) => {
 };
 
 const SearchPage = ({ carsData, services }) => {
-  console.log(carsData);
   const { make, model, years, carImage, setMake, setModel, setYears, setCarImage } = useCarStore();
 
   const { cartItems, addToCart, clearCart, getTotalCost, removeOneFromCart } = useCartStore();
@@ -102,12 +101,12 @@ const SearchPage = ({ carsData, services }) => {
     router.replace(`/shop-services?make=${make}&model=${model}&years=${newYears}`);
   };
 
-  console.log("CartItems", cartItems);
+  /////// To-do, make the cart into a button or add it to the nav-bar when smaller in size and
 
   return (
-    <section className="relative mx-auto mb-32 grid h-full min-h-[calc(100vh-3.5rem)] max-w-screen-2xl grid-cols-12 border-x border-dashed  ">
-      <div className="relative col-span-9 h-full w-full px-10">
-        <div className="h-full w-full bg-gradient-to-b from-transparent via-neutral-100 to-transparent ">
+    <section className="relative mx-auto grid h-full min-h-[calc(100vh-3.5rem)] max-w-screen-2xl grid-cols-12 border-x border-dashed  ">
+      <div className="relative col-span-12 h-full w-full p-2 xl:col-span-9 xl:px-10">
+        <div className="h-full w-full bg-gradient-to-b from-transparent via-neutral-200 to-transparent dark:via-neutral-700 ">
           <div className="flex h-full max-h-[180px] w-full">
             <div className="flex h-full w-2/3 pt-10">
               <div className="mx-auto flex h-full w-1/2 flex-col ">
@@ -122,7 +121,7 @@ const SearchPage = ({ carsData, services }) => {
             </div>
           </div>
           {/* <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] bg-neutral-100/70 backdrop-blur dark:bg-neutral-600"> */}
-          <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] rounded-lg bg-gradient-to-r from-neutral-900 via-neutral-900/80 to-neutral-900/30  pb-4 pt-2  backdrop-blur dark:bg-neutral-100/70">
+          <div className="supports-backdrop-blur:bg-neutral-100/60 relative -top-10 mx-auto h-auto min-h-[6rem] rounded-t-lg bg-gradient-to-r from-neutral-700 via-neutral-700/80 to-neutral-700/30  pb-4 pt-2  backdrop-blur dark:bg-neutral-100/70">
             {!edit ? (
               <div className="mx-auto grid max-w-[80%] grid-cols-4 gap-5 py-3 ">
                 <div className="col-span-1 flex flex-col gap-2">
@@ -227,10 +226,10 @@ const SearchPage = ({ carsData, services }) => {
           </div>
         </div>
       </div>
-      <div className="relative col-span-3 h-full">
+      <div className="relative col-span-12 h-full xl:col-span-3">
         <div className="absolute left-0 top-0 z-10 h-full w-full pb-20">
           <div className="mx-auto w-full max-w-[90%] py-5 text-lg font-semibold">Cart:</div>
-          <div className=" sticky  top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white  p-10 shadow-md dark:border-neutral-500 dark:bg-neutral-700">
+          <div className=" sticky  top-10 mx-auto w-full max-w-[90%] rounded-lg border border-neutral-300 bg-white px-5 py-10 shadow-md dark:border-neutral-500 dark:bg-neutral-700 xl:px-10 xl:py-10">
             <div>
               <div>
                 <div className="mb-2 font-semibold ">Car:</div>
@@ -249,9 +248,9 @@ const SearchPage = ({ carsData, services }) => {
                 {cartItems.map((item) => (
                   <div key={item.id} className="my-2 bg-slate-50 dark:bg-neutral-800 dark:text-white">
                     <div className="grid grid-cols-7">
-                      <div className="col-span-5 overflow-hidden text-sm">{item.title}</div>
-                      <div className="col-span-1 text-sm">${item.price}</div>
-                      <button className="col-span-1" onClick={() => removeOneFromCart(item.id)}>
+                      <div className="col-span-5 flex items-center  overflow-hidden px-2 py-1 text-sm">{item.title}</div>
+                      <div className="col-span-1 flex  items-center  justify-center py-1 text-sm">${item.price}</div>
+                      <button className="col-span-1  flex items-center justify-center py-1" onClick={() => removeOneFromCart(item.id)}>
                         x
                       </button>
                     </div>

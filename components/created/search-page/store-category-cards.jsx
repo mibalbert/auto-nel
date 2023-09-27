@@ -34,21 +34,21 @@ const StoreCategoryCards = ({ data }) => {
   const handleAddToCart = (service) => {
     const smallUUID = generateSmallUUID();
 
-    addToCart({ ...service, id: smallUUID.slice(0, 5), realId: service.id });
+    console.log("service", service);
 
-    console.log(cartItems);
+    addToCart({ ...service, id: smallUUID.slice(0, 5), realId: service.id });
   };
 
   return (
     <section className="mx-auto flex flex-col gap-10 pb-20 ">
-      <div className="relative h-full w-full overflow-hidden rounded-lg border border-neutral-200 bg-white px-7 py-9">
+      <div className="relative h-full w-full overflow-hidden rounded-lg border border-neutral-200 bg-white px-7 py-9 dark:border-neutral-800 dark:bg-neutral-700">
         <div className="embla relative gap-10 " ref={emblaRef}>
           <div className="embla__container relative mx-2 flex h-full touch-pan-y gap-5 ">
             {[data.category].map((data, id) => (
               <div
                 key={id}
                 className={cn(
-                  "embla__slide min-h-[180px] min-w-[180px] max-w-[20%] rounded-lg border border-dashed  border-neutral-500 bg-neutral-200  hover:cursor-pointer  active:cursor-grabbing",
+                  "embla__slide min-h-[180px] min-w-[180px] max-w-[20%] rounded-lg border border-dashed  border-neutral-700 bg-neutral-50 hover:cursor-pointer active:cursor-grabbing  dark:border-neutral-500  dark:bg-neutral-600",
                   selectedCategory === id && " outline"
                 )}
                 onClick={(e) => {
@@ -70,16 +70,16 @@ const StoreCategoryCards = ({ data }) => {
         <div>ASd</div>
         {data.map((service, idx) => {
           return (
-            <div key={idx} className="flex justify-between gap-10 rounded-lg border border-neutral-300 bg-white p-7 ">
+            <div key={idx} className="flex justify-between gap-10 rounded-lg border border-neutral-300 bg-white p-7 dark:border-neutral-600 dark:bg-neutral-600 ">
               <div className="flex-1">
                 <div className="flex h-10 space-x-4">
-                  <div className="flex h-full w-1/3 w-full items-center justify-start">
+                  <div className="flex h-full w-1/3 items-center justify-start">
                     <h4 className="text-md font-medium leading-none">
                       {idx + 1}. {service.title}
                     </h4>
                   </div>
                   <Separator orientation="vertical" />
-                  <div className="flex h-full w-2/3 w-full items-center justify-start">
+                  <div className="max-w-2/3 flex h-full w-full items-center justify-start">
                     <p className="text-sm text-muted-foreground">An open-source UI component library.</p>
                   </div>
                 </div>

@@ -11,7 +11,8 @@ export default async function DashboardLayout({ children }) {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="mx-auto w-full max-w-[90%] ">
+    //max-w-[90%]
+    <div className="max-w mx-auto w-full">
       <div className="flex-1 grid-cols-[250px_minmax(0,1fr)]  items-start md:grid md:gap-0">
         <aside className="fixed z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 lg:sticky lg:block">
           <ScrollArea className="relative h-full px-2 pt-3 xl:px-4">
@@ -20,7 +21,8 @@ export default async function DashboardLayout({ children }) {
             <SidebarNav session={session} className="relative z-50" />
           </ScrollArea>
         </aside>
-        <div className="px-10 py-5">{children}</div>
+        {/* <div className="px-10 py-5">{children}</div> */}
+        <div className="">{children}</div>
       </div>
     </div>
   );

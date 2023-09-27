@@ -41,7 +41,7 @@ const UserDashboard = ({ data, session }) => {
             {cars.slice(0, 2).map((el, idx) => (
               <Link key={idx} href={`/`} className="group relative h-full w-full rounded-lg border border-dashed border-neutral-300">
                 <div className="absolute -top-16 left-0 h-full w-full">
-                  <Image src={el.ShowcaseCar.image[0]?.url || "/2019_mb_g63_amg_0000-first-side.png"} alt="" priority fill className="group-hover:scale-98 transform object-contain duration-400" />
+                  <Image src={el.ShowcaseCar.image[0]?.url || "/2019_mb_g63_amg_0000-first-side.png"} alt="" priority fill className="transform object-contain duration-400 group-hover:scale-98" />
                 </div>
                 <div className="absolute -bottom-14 left-0 z-50 h-full w-full transform p-3 duration-300 group-hover:scale-105">
                   <div className="supports-backdrop-blur:bg-neutral-700/80 h-full w-full rounded-lg border p-5 backdrop-blur-md">
@@ -75,7 +75,7 @@ const UserDashboard = ({ data, session }) => {
                 {cars.map((el, idx) => (
                   <Link
                     key={idx}
-                    href={`/user/car/${el.id}+${el.make}+${el.model}`}
+                    href={`/user/cars/${el.id}+${el.make}+${el.model}`}
                     className="embla__slide group relative h-auto min-h-[200px] w-full min-w-[180px] max-w-[40%] rounded-lg border border-dashed border-neutral-300  hover:cursor-pointer  active:cursor-grabbing"
                   >
                     <div className="absolute -top-16 left-0 flex h-full w-full ">
@@ -84,7 +84,7 @@ const UserDashboard = ({ data, session }) => {
                         alt={el.ShowcaseCar?.image[0]?.title || "Car Image"}
                         priority
                         fill
-                        className="group-hover:scale-98 h-full w-full transform object-contain object-bottom duration-400"
+                        className="h-full w-full transform object-contain object-bottom duration-400 group-hover:scale-98"
                       />
                     </div>
                     <div className="absolute -bottom-14 left-0 z-50 h-full w-full transform p-3 duration-300 group-hover:scale-105">

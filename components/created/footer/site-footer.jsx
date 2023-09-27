@@ -11,12 +11,15 @@ const SiteFooter = () => {
   const pathname = usePathname();
 
   if (pathname.startsWith("/shop-services")) {
-    return (
-      <div className="h-14 bg-neutral-900 font-serif text-white">
-        <div className="flex h-full w-full items-center justify-center">@Licence Auto-Nel</div>
-      </div>
-    );
+    return null;
   }
+  // if (pathname.startsWith("/shop-services")) {
+  //   return (
+  //     <div className="h-14 bg-neutral-900 font-serif text-white">
+  //       <div className="flex h-full w-full items-center justify-center">@Licence Auto-Nel</div>
+  //     </div>
+  //   );
+  // }
 
   if (pathname.startsWith("/user") || pathname.startsWith("/admin")) {
     return null;

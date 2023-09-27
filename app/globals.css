@@ -9,7 +9,6 @@
 @tailwind utilities;
  
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -90,6 +89,32 @@
   }
 }
 
+/* Scrollbar Track */
+::-webkit-scrollbar {
+  width: 8px; 
+  background-color: #454545;
+}
+
+/* Scrollbar Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* border-radius: 6px; */
+}
+
+/* Scrollbar Track on hover */
+/* ::-webkit-scrollbar:hover { */
+  /* width: 15px;  */
+/* } */
+
+/* Scrollbar Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #797979;
+}
+
+/* Scrollbar Track when dragging */
+::-webkit-scrollbar-thumb:active {
+  background: #606060;
+}
 
 
 html {

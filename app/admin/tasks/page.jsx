@@ -1,18 +1,18 @@
 /**
- * clients/page.jsx
+ * tasks/page.jsx
  */
 
 import prisma from "@/lib/prisma";
 
-const Clients = async () => {
+const Tasks = async () => {
   try {
-    const data = await prisma.user.findMany();
+    const data = await prisma.task.findMany();
 
     if (!data || data.length === 0) {
       // Handle the case where no quote was found
       return (
         <div>
-          <p>No data found.</p>
+          <p>No tasks found.</p>
         </div>
       );
     }
@@ -27,10 +27,10 @@ const Clients = async () => {
     // Handle the error gracefully, e.g., show an error message
     return (
       <div>
-        <p>There was an error fetching clients.</p>
+        <p>There was an error fetching tasks.</p>
       </div>
     );
   }
 };
 
-export default Clients;
+export default Tasks;

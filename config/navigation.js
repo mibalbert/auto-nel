@@ -63,38 +63,61 @@ const navigationConfig = {
         title: "Dashboard",
         href: "/user/dashboard",
       },
+      ]
+    },
+    {
+      title: "Jobs",
+      data: [{
+        title: "Jobs",
+        href: "/user/jobs",
+      },
+      {
+        title: "+Create Job",
+        href: "/user/create-job"
+      },
+      ],
+    },
+    {
+      title: "Cars",
+      data: [{
+        title: "Cars",
+        href: "/user/cars",
+      },
       {
         title: "+Add a new Car",
         href: "/user/add-new-car"
       },
-      {
-        title: "View Current Jobs",
-        href: "/user/view-current-jobs"
-      }
       ],
     },
     {
-      title: "Documentation",
-      href: "/docs",
+      title: "Documents",
+      data: [{
+        title: "Quotes",
+        href: "/user/quotes",
+      },
+      {
+        title: "Invoices",
+        href: "/user/invoices"
+      },
+      {
+        title: "Payments",
+        href: "/user/payments"
+      }
+      ]
     },
     {
       title: "Support",
-      href: "/support",
-      disabled: true,
+      data: [{
+        title: "Help Desk",
+        href: "/user/help",
+      },
+      ]  // disabled: true,
     },
   ],
   adminTopNav: [
     {
       title: "Overview",
       href: "/admin/home",
-    },
-    {
-      title: "Kanban",
-      href: "/admin/current-workload",
-    },
-    {
-      title: "Documentation",
-      href: "/docs",
     },
     {
       title: "Documentation",
@@ -121,46 +144,39 @@ const navigationConfig = {
         href: "/admin/create-job",
       },
       {
-        title: "View All Jobs",
+        title: "Jobs",
         href: "/admin/jobs"
       },
       {
-        title: "Current Tasks",
-        href: "/admin/current-tasks"
+        title: "Tasks",
+        href: "/admin/tasks"
       },
       {
-        title: "Expected Parts",
-        href: "/admin/expected-parts"
-      },
-      {
-        title: "Unpaid Parts",
-        href: "/admin/unpaid-parts"
+        title: "Parts",
+        href: "/admin/parts"
       },
       {
         title: "Insurance Co.",
-        href: "/admin/insurance-companies"
-      },
-      {
-        title: "Test",
-        href: "/admin/test"
+        href: "/admin/insurance-co"
       }
       ],
     },
     {
       title: "Clients",
-      data: [{
-        title: "View Clients",
-        href: "/admin/clients",
-      },
-      {
-        title: "+Create User",
-        href: "/admin/create-user"
-      }
+      data: [
+        {
+          title: "+Create User",
+          href: "/admin/create-user"
+        },
+        {
+          title: "Clients",
+          href: "/admin/clients",
+        },
+        {
+          title: "Clients Cars",
+          href: "/admin/clients-cars"
+        }
       ],
-    },
-    {
-      title: "Register",
-      href: "/docs",
     },
     // {
     //   title: "Posts",
@@ -179,22 +195,23 @@ const navigationConfig = {
     // },
     {
       title: "Server",
-      data: [{
-        title: "View Customers Cars",
-        href: "/admin/view-customers-cars",
-      },
-      {
-        title: "View Showcase Cars",
-        href: "/admin/view-showcase-cars",
-      },
-      {
-        title: "+ Create new Car",
-        href: "/admin/create-new-car"
-      },
-      {
-        title: "Create new Service",
-        href: "/admin/create-new-service"
-      }
+      data: [
+        {
+          title: "S Cars",
+          href: "/admin/showcase-cars",
+        },
+        {
+          title: "+S Car",
+          href: "/admin/create-showcase-car"
+        },
+        {
+          title: "Services",
+          href: "/admin/services"
+        },
+        {
+          title: "+Service",
+          href: "/admin/create-service"
+        }
       ],
     },
   ],
