@@ -48,7 +48,7 @@ const ShopServices = async () => {
   const data = await getCarsData();
 
   return (
-    <div className="">
+    <div >
       <SearchPage carsData={data.data} services={data.services} />
     </div>
   );

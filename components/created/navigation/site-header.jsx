@@ -10,6 +10,7 @@ import SignInModal from "./nav-tings/sign-in-modal";
 import Link from "next/link";
 import { Icons } from "@/components/ui/icons";
 import { siteConfig } from "@/config/site";
+import Cart from "./nav-tings/cart";
 
 export async function SiteHeader({ session }) {
   const headersList = headers();
@@ -30,7 +31,8 @@ export async function SiteHeader({ session }) {
         <div className="flex h-full items-center justify-end gap-3">
           <NavItems session={session} />
           <MobileNav session={session} />
-          <ModeToggle />
+          {/* <ModeToggle /> */}
+          <Cart />
           <SignInModal session={session} />
         </div>
       </div>

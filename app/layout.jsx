@@ -29,7 +29,7 @@ export default async function RootLayout({ children }) {
         <Providers session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <SiteHeader session={session} />
-            <main className="flex w-full flex-1 flex-col bg-background">{children}</main>
+            <main>{children}</main>
             <SiteFooter />
           </ThemeProvider>
         </Providers>

@@ -48,7 +48,7 @@ const StoreCategoryCards = ({ data }) => {
               <div
                 key={id}
                 className={cn(
-                  "embla__slide min-h-[180px] min-w-[180px] max-w-[20%] rounded-lg border border-dashed  border-neutral-700 bg-neutral-50 hover:cursor-pointer active:cursor-grabbing  dark:border-neutral-500  dark:bg-neutral-600",
+                  "embla__slide min-h-[80px] min-w-[180px] max-w-[20%] rounded-lg border border-dashed  border-neutral-700 bg-white hover:cursor-pointer active:cursor-grabbing  dark:border-neutral-500  dark:bg-neutral-600",
                   selectedCategory === id && " outline"
                 )}
                 onClick={(e) => {
@@ -60,7 +60,7 @@ const StoreCategoryCards = ({ data }) => {
                   }
                 }}
               >
-                <div className="p-10">{data}</div>
+                <div className="py-4 text-4xl font-bold text-neutral-200 ">Service {data}</div>
               </div>
             ))}
           </div>
